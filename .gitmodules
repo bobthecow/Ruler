@@ -1,0 +1,3 @@
+[submodule "vendor/pimple"]
+	path = vendor/pimple
+	url = https://github.com/fabpot/Pimple.git

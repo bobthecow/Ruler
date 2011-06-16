@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./tests/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="Ruler Test Suite">
+            <directory suffix="Test.php">./tests/Ruler/Test/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Ruler/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
