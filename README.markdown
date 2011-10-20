@@ -10,7 +10,7 @@ Ruler uses a pretty straightforward DSL provided by the RuleBuilder:
 
 $rb = new RuleBuilder();
 $rule = $rb->create(
-    $rb->logicalOr(
+    $rb->logicalAnd(
         $rb['minNumPeople']->lessThanOrEqualTo($rb['actualNumPeople']),
         $rb['maxNumPeople']->greaterThanOrEqualTo($rb['actualNumPeople'])
     ),
