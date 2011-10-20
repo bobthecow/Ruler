@@ -38,10 +38,10 @@ Of course, if you're not into the whole brevity thing, you can use it without a 
 
 $actualNumPeople = new Variable('actualNumPeople');
 $rule = new Rule(
-    new Operator\LogicalAnd(
+    new Operator\LogicalAnd(array(
         new Operator\LessThanOrEqualTo(new Variable('minNumPeople'), $actualNumPeople),
         new Operator\GreaterThanOrEqualTo(new Variable('maxNumPeople'), $actualNumPeople)
-    ),
+    )),
     function() {
         echo 'YAY!';
     }
