@@ -31,8 +31,8 @@ class Variable
     /**
      * Variable class constructor.
      *
-     * @param string $name Variable name (default: null)
-     * @param mixed $value Default Variable value (default: null)
+     * @param string $name  Variable name (default: null)
+     * @param mixed  $value Default Variable value (default: null)
      */
     public function __construct($name = null, $value = null)
     {
@@ -53,7 +53,7 @@ class Variable
     /**
      * Set the default Variable value.
      *
-     * @param mixed $value
+     * @param mixed $value The default Variable value
      */
     public function setValue($value)
     {
@@ -73,7 +73,8 @@ class Variable
     /**
      * Prepare a Value for this Variable given the current Context.
      *
-     * @param  Context $context
+     * @param Context $context The current Context
+     *
      * @return Value
      */
     public function prepareValue(Context $context)
@@ -90,7 +91,8 @@ class Variable
     /**
      * Fluent interface helper to create a GreaterThan comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\GreaterThan
      */
     public function greaterThan($variable)
@@ -101,7 +103,8 @@ class Variable
     /**
      * Fluent interface helper to create a GreaterThanOrEqualTo comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\GreaterThanOrEqualTo
      */
     public function greaterThanOrEqualTo($variable)
@@ -112,7 +115,8 @@ class Variable
     /**
      * Fluent interface helper to create a LessThan comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\LessThan
      */
     public function lessThan($variable)
@@ -123,7 +127,8 @@ class Variable
     /**
      * Fluent interface helper to create a LessThanOrEqualTo comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\LessThanOrEqualTo
      */
     public function lessThanOrEqualTo($variable)
@@ -134,7 +139,8 @@ class Variable
     /**
      * Fluent interface helper to create a EqualTo comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\EqualTo
      */
     public function equalTo($variable)
@@ -145,7 +151,8 @@ class Variable
     /**
      * Fluent interface helper to create a NotEqualTo comparison operator.
      *
-     * @param  mixed $variable Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
+     *
      * @return Operator\NotEqualTo
      */
     public function notEqualTo($variable)
@@ -156,7 +163,8 @@ class Variable
     /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
-     * @param  mixed $variable
+     * @param mixed $variable Variable instance or value
+     *
      * @return Variable
      */
     private function asVariable($variable)

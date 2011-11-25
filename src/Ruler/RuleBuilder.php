@@ -22,7 +22,7 @@ use Ruler\Variable;
  * The RuleBuilder provides a DSL and fluent interface for constructing
  * Rules.
  *
- * @author     Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @implements ArrayAccess
  */
 class RuleBuilder implements \ArrayAccess
@@ -40,8 +40,9 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a Rule with the given propositional condition.
      *
-     * @param  Proposition $condition
-     * @param  callback $action (default: null)
+     * @param Proposition $condition Propositional condition for this Rule
+     * @param callback    $action    Action (callable) to take upon successful Rule execution (default: null)
+     *
      * @return Rule
      */
     public function create(Proposition $condition, $action = null)
@@ -52,7 +53,8 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical AND operator proposition.
      *
-     * @param  Proposition $prop One or more Propositions
+     * @param Proposition $prop One or more Propositions
+     *
      * @return Operator\LogicalAnd
      */
     public function logicalAnd(Proposition $prop)
@@ -63,7 +65,8 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical OR operator proposition.
      *
-     * @param  Proposition $prop One or more Propositions
+     * @param Proposition $prop One or more Propositions
+     *
      * @return Operator\LogicalOr
      */
     public function logicalOr(Proposition $prop)
@@ -74,7 +77,8 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical NOT operator proposition.
      *
-     * @param  Proposition $prop Exactly one Proposition
+     * @param Proposition $prop Exactly one Proposition
+     *
      * @return Operator\LogicalNot
      */
     public function logicalNot(Proposition $prop)
@@ -85,7 +89,8 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical XOR operator proposition.
      *
-     * @param  Proposition $prop One or more Propositions
+     * @param Proposition $prop One or more Propositions
+     *
      * @return Operator\LogicalXor
      */
     public function logicalXor(Proposition $prop)
@@ -96,20 +101,24 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Check whether a Variable is already set.
      *
-     * @param  string $name The Variable name
+     * @param string $name The Variable name
+     *
      * @return boolean
      */
-    public function offsetExists($name) {
+    public function offsetExists($name)
+    {
         return isset($this->variables[$name]);
     }
 
     /**
      * Retrieve a Variable by name.
      *
-     * @param  string $name The Variable name
+     * @param string $name The Variable name
+     *
      * @return Variable
      */
-    public function offsetGet($name) {
+    public function offsetGet($name)
+    {
         if (!isset($this->variables[$name])) {
             $this->variables[$name] = new Variable($name);
         }
@@ -120,11 +129,13 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Set the default value of a Variable.
      *
-     * @param  string $name The Variable name
-     * @param  mixed $value The Variable default value
+     * @param string $name  The Variable name
+     * @param mixed  $value The Variable default value
+     *
      * @return Variable
      */
-    public function offsetSet($name, $value) {
+    public function offsetSet($name, $value)
+    {
         $this->offsetGet($name)->setValue($value);
     }
 
@@ -133,7 +144,8 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name The Variable name
      */
-    public function offsetUnset($name) {
+    public function offsetUnset($name)
+    {
         unset($this->variables[$name]);
     }
 }

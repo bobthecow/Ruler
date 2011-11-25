@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * A LessThanOrEqualTo comparison operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
 class LessThanOrEqualTo extends ComparisonOperator
@@ -24,7 +24,8 @@ class LessThanOrEqualTo extends ComparisonOperator
     /**
      * Evaluate whether the left variable is less than or equal to the right in the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this ComparisonOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

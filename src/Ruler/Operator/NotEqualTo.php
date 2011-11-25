@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * A NotEqualTo comparison operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
 class NotEqualTo extends ComparisonOperator
@@ -24,7 +24,8 @@ class NotEqualTo extends ComparisonOperator
     /**
      * Evaluate whether the given variables are not equal in the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this ComparisonOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

@@ -18,7 +18,7 @@ use Ruler\Variable;
  * Abstract Comparison Operator class.
  *
  * @abstract
- * @author     Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @implements Proposition
  */
 abstract class ComparisonOperator implements Proposition
@@ -29,8 +29,8 @@ abstract class ComparisonOperator implements Proposition
     /**
      * Comparison Operator constrcutor.
      *
-     * @param Variable $left
-     * @param Variable $right
+     * @param Variable $left  Left side of comparison
+     * @param Variable $right Right side of comparison
      */
     public function __construct(Variable $left, Variable $right)
     {

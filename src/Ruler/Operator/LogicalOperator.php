@@ -19,7 +19,7 @@ use Ruler\Proposition;
  * Logical Operators represent propositional operations: AND, OR, NOT and XOR.
  *
  * @abstract
- * @author     Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @implements Proposition
  */
 abstract class LogicalOperator implements Proposition
@@ -43,7 +43,7 @@ abstract class LogicalOperator implements Proposition
     /**
      * Add a Proposition to the Operator.
      *
-     * @param Proposition $prop
+     * @param Proposition $prop Proposition to add to this Operator
      */
     public function addProposition(Proposition $prop)
     {

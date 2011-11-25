@@ -17,7 +17,7 @@ use Ruler\Proposition;
 /**
  * A logical NOT operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
 class LogicalNot extends LogicalOperator
@@ -30,7 +30,8 @@ class LogicalNot extends LogicalOperator
      * Logical NOT is unable to process multiple child Propositions, so passing an array with
      * more than one Proposition will result in a LogicException.
      *
-     * @param  array $props Child Proposition (default:null)
+     * @param array $props Child Proposition (default:null)
+     *
      * @throws LogicException
      */
     public function __construct(array $props = null)
@@ -50,7 +51,8 @@ class LogicalNot extends LogicalOperator
      * Logical NOT is unable to process multiple child Propositions, so calling addProposition
      * if a Proposition has already been set will result in a LogicException.
      *
-     * @param  Proposition $prop
+     * @param Proposition $prop Child Proposition
+     *
      * @throws LogicException
      */
     public function addProposition(Proposition $prop)
@@ -65,7 +67,8 @@ class LogicalNot extends LogicalOperator
     /**
      * Evaluate whether the child Proposition evaluates to false given the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this LogicalOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

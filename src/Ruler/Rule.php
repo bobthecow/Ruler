@@ -20,7 +20,7 @@ use Ruler\Context;
  * A Rule is a conditional Proposition with an (optional) action which is
  * executed upon successful evaluation.
  *
- * @author     Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @implements Proposition
  */
 class Rule implements Proposition
@@ -31,8 +31,8 @@ class Rule implements Proposition
     /**
      * Rule constructor.
      *
-     * @param Proposition $condition
-     * @param callback $action (default: null)
+     * @param Proposition $condition Propositional condition for this Rule
+     * @param callback    $action    Action (callable) to take upon successful Rule execution (default: null)
      */
     public function __construct(Proposition $condition, $action = null)
     {
@@ -43,7 +43,8 @@ class Rule implements Proposition
     /**
      * Evaluate the Rule with the given Context.
      *
-     * @param Context $context
+     * @param Context $context Context with which to evaluate this Rule
+     *
      * @return boolean
      */
     public function evaluate(Context $context)
@@ -57,7 +58,7 @@ class Rule implements Proposition
      * The Rule will be evaluated, and if successful, will execute its
      * $action callback.
      *
-     * @param Context $context
+     * @param Context $context Context with which to execute this Rule
      */
     public function execute(Context $context)
     {

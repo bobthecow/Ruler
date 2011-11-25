@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * An EqualTo comparison operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
 class EqualTo extends ComparisonOperator
@@ -24,7 +24,8 @@ class EqualTo extends ComparisonOperator
     /**
      * Evaluate whether the given variables are equal in the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this ComparisonOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

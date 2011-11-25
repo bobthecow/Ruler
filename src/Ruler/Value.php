@@ -29,7 +29,7 @@ class Value
      * A Value object is immutable, and is used by Variables for comparing their default
      * values or facts from the current Context.
      *
-     * @param mixed $value
+     * @param mixed $value Immutable value represented by this Value object
      */
     public function __construct($value)
     {
@@ -49,7 +49,8 @@ class Value
     /**
      * Equal To comparison.
      *
-     * @param  Value $value
+     * @param Value $value Value object to compare against
+     *
      * @return boolean
      */
     public function equalTo(Value $value)
@@ -60,7 +61,8 @@ class Value
     /**
      * Greater Than comparison.
      *
-     * @param  Value $value
+     * @param Value $value Value object to compare against
+     *
      * @return boolean
      */
     public function greaterThan(Value $value)
@@ -71,7 +73,8 @@ class Value
     /**
      * Less Than comparison.
      *
-     * @param  Value $value
+     * @param Value $value Value object to compare against
+     *
      * @return boolean
      */
     public function lessThan(Value $value)

@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * A logical OR operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
 class LogicalOr extends LogicalOperator
@@ -24,7 +24,8 @@ class LogicalOr extends LogicalOperator
     /**
      * Evaluate whether any child Proposition evaluates to true given the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this ComparisonOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

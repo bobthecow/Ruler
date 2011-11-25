@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * A logical AND operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
 class LogicalAnd extends LogicalOperator
@@ -24,7 +24,8 @@ class LogicalAnd extends LogicalOperator
     /**
      * Evaluate whether all child Propositions evaluate to true given the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this LogicalOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)

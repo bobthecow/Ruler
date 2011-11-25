@@ -39,7 +39,7 @@ class RuleSet
      *
      * Adding duplicate Rules to the RuleSet will have no effect.
      *
-     * @param Rule $rule
+     * @param Rule $rule Rule to add to the set
      */
     public function addRule(Rule $rule)
     {
@@ -49,7 +49,7 @@ class RuleSet
     /**
      * Execute all Rules in the RuleSet.
      *
-     * @param Context $context
+     * @param Context $context Context with which to execute each Rule
      */
     public function executeRules(Context $context)
     {

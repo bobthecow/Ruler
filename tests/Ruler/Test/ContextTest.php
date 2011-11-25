@@ -17,7 +17,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         );
 
         $context = new Context($facts);
-        
+
         $this->assertTrue(isset($context['name']));
         $this->assertEquals('Mint Chip', $context['name']);
 

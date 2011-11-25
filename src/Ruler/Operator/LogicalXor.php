@@ -16,7 +16,7 @@ use Ruler\Context;
 /**
  * A logical XOR operator.
  *
- * @author  Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
 class LogicalXor extends LogicalOperator
@@ -24,7 +24,8 @@ class LogicalXor extends LogicalOperator
     /**
      * Evaluate whether exactly one child Proposition evaluates to true given the current Context.
      *
-     * @param  Context $context
+     * @param Context $context Context with which to evaluate this ComparisonOperator
+     *
      * @return boolean
      */
     public function evaluate(Context $context)
