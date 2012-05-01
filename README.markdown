@@ -3,6 +3,8 @@ Ruler
 
 Ruler is a simple stateless production rules engine for PHP 5.3.
 
+[![Build Status](https://secure.travis-ci.org/bobthecow/Ruler.png?branch=master)](http://travis-ci.org/bobthecow/Ruler)
+
 Ruler uses a pretty straightforward DSL provided by the RuleBuilder:
 
 ``` php
