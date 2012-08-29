@@ -98,24 +98,24 @@ $a->notEqualTo($b);           // true if $a != $b
 ```php
 <?php
 
-// create a rule with an $a == $b condition
+// Create a rule with an $a == $b condition
 $aEqualsB = $rb->create($a->equalTo($b));
 
-// create another rule with an $a != $b condition
+// Create another rule with an $a != $b condition
 $aDoesNotEqualB = $rb->create($a->notEqualTo($b));
 
-// now combine them for a tautology!
-// (because Rules are also Propositions, they can be combined to make MEGARULES)
+// Now combine them for a tautology!
+// (Because Rules are also Propositions, they can be combined to make MEGARULES)
 $eitherOne = $rb->create($rb->logicalOr($aEqualsB, $aDoesNotEqualB));
 
-// just to mix things up, we'll populate our evaluation context with completely
+// Just to mix things up, we'll populate our evaluation context with completely
 // random variables...
 $context = new Context(array(
     'a' => rand(),
     'b' => rand(),
 ));
 
-// hint: this is always true!
+// Hint: this is always true!
 $eitherOne->evaluate($context);
 ```
 
@@ -124,10 +124,10 @@ $eitherOne->evaluate($context);
 ```php
 <?php
 
-$rb->logicalNot($aEqualsB);                  // the same as $aDoesNotEqualB :)
-$rb->logicalAnd($aEqualsB, $aDoesNotEqualB); // true if both conditions are true
-$rb->logicalOr($aEqualsB, $aDoesNotEqualB);  // true if either condition is true
-$rb->logicalXor($aEqualsB, $aDoesNotEqualB); // true if only one condition is true
+$rb->logicalNot($aEqualsB);                  // The same as $aDoesNotEqualB :)
+$rb->logicalAnd($aEqualsB, $aDoesNotEqualB); // True if both conditions are true
+$rb->logicalOr($aEqualsB, $aDoesNotEqualB);  // True if either condition is true
+$rb->logicalXor($aEqualsB, $aDoesNotEqualB); // True if only one condition is true
 ```
 
 ### `evaluate` and `execute` Rules
@@ -162,7 +162,7 @@ $hiJustin = $rb->create(
     }
 );
 
-$hiJustin->execute($context);  // Hi, Justin!
+$hiJustin->execute($context);  // "Hi, Justin!"
 ```
 
 ### Even `execute` a whole grip of Rules at once
@@ -218,10 +218,10 @@ Rules.
 
 $context = new Context;
 
-// some static values...
+// Some static values...
 $context['reallyAnnoyingUsers'] = array('bobthecow', 'jwage');
 
-// you'll remember this one from before
+// You'll remember this one from before
 $context['userName'] = function() {
     return isset($_SESSION['userName']) ? $_SESSION['userName'] : null;
 };
