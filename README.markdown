@@ -165,7 +165,7 @@ $hiJustin = $rb->create(
 $hiJustin->execute($context);  // "Hi, Justin!"
 ```
 
-### Even `execute` a whole grip of Rules at once
+### Even `execute` a whole group of Rules at once
 
 ```php
 $hiJon = $rb->create(
