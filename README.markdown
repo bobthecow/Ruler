@@ -77,7 +77,7 @@ Things you can do with your Ruler
 ```php
 <?php
 
-// These are variables. They'll be replaced by terminal values during Rule evaluation.
+// These are Variables. They'll be replaced by terminal values during Rule evaluation.
 
 $a = $rb['a'];
 $b = $rb['b'];
@@ -98,10 +98,10 @@ $a->notEqualTo($b);           // true if $a != $b
 ```php
 <?php
 
-// Create a rule with an $a == $b condition
+// Create a Rule with an $a == $b condition
 $aEqualsB = $rb->create($a->equalTo($b));
 
-// Create another rule with an $a != $b condition
+// Create another Rule with an $a != $b condition
 $aDoesNotEqualB = $rb->create($a->notEqualTo($b));
 
 // Now combine them for a tautology!
@@ -109,7 +109,7 @@ $aDoesNotEqualB = $rb->create($a->notEqualTo($b));
 $eitherOne = $rb->create($rb->logicalOr($aEqualsB, $aDoesNotEqualB));
 
 // Just to mix things up, we'll populate our evaluation context with completely
-// random variables...
+// random values...
 $context = new Context(array(
     'a' => rand(),
     'b' => rand(),
@@ -187,7 +187,7 @@ $hiEveryoneElse = $rb->create(
 
 $rules = new RuleSet(array($hiJustin, $hiJon, $hiEveryoneElse));
 
-// Let's add one more rule, so non-authenticated users have a chance to log in
+// Let's add one more Rule, so non-authenticated users have a chance to log in
 $redirectForAuthentication = $rb->create($rb->logicalNot($userIsLoggedIn), function() {
     header('Location: /login');
     exit;
@@ -195,9 +195,9 @@ $redirectForAuthentication = $rb->create($rb->logicalNot($userIsLoggedIn), funct
 
 $rules->addRule($redirectForAuthentication);
 
-// Now execute() all true rules.
+// Now execute() all true Rules.
 //
-// In this case, all of our rules are mutually exclusive so at most one of them will execute...
+// In this case, all of our Rules are mutually exclusive so at most one of them will execute...
 $rules->executeRules($context);
 ```
 
@@ -205,9 +205,9 @@ $rules->executeRules($context);
 Dynamically populate your evaluation Context
 --------------------------------------------
 
-Several of our examples above use static values for the context variables. While
+Several of our examples above use static values for the context Variables. While
 that's good for examples, it's not as useful in the Real World. You'll probably
-want to evaluate rules based on all sorts of things...
+want to evaluate Rules based on all sorts of things...
 
 You can think of the Context as a ViewModel for Rule evaluation. You provide the
 static values, or even code for lazily evaluating the Variables needed by your
@@ -242,7 +242,7 @@ $context['orderCount'] = function() use ($em, $context) {
 };
 ```
 
-Now you have all the information you need to make rules based on Order count or
+Now you have all the information you need to make Rules based on Order count or
 the current User, or any number of other crazy things. I dunno, maybe this is
 for a shipping price calculator?
 
