@@ -39,7 +39,7 @@ class Contains extends \Ruler\Operator\ComparisonOperator
 				$contains = in_array($rightValue, $leftValue);
 			}
 		} else if (!is_object($leftValue) && !is_object($rightValue)) {
-			$contains = (preg_match("/{$rightValue}/", $leftValue) === 1);
+			$contains = (preg_match(sprintf("/%s/", preg_quote((string) $rightValue, '/')), $leftValue) === 1);
 		}
 		return $contains;
 	}

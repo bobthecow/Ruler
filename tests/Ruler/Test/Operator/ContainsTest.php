@@ -54,6 +54,14 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue($op->evaluate($context));
 	}
 
+	public function testEvaluationStringInStringEscapesRegularExpressionCharacters() {
+		$varA = new Variable('a', 'abc/$^.*+def');
+		$varB = new Variable('b', '/$^.*+');
+
+		$op = new Operator\Contains($varA, $varB);
+		$this->assertTrue($op->evaluate(new Context()));
+	}
+
 	public function testConstructorAndEvaluationStringInString()
 	{
 		$varA    = new Variable('a', 'bcd');
