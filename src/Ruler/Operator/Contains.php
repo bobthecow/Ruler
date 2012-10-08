@@ -26,6 +26,7 @@ class Contains extends \Ruler\Operator\ComparisonOperator
 		$right = $this->right->prepareValue($context);
 		$rightValue = $this->normalizeValue($right->getValue());
 
+		$contains = false;
 		if ($left->equalTo($right)) {
 			$contains = true;
 		} elseif (is_null($leftValue) || is_null($rightValue)) {
