@@ -21,8 +21,6 @@ class Contains extends \Ruler\Operator\ComparisonOperator
 	 */
 	public function evaluate(Context $context)
 	{
-		$contains = false;
-
 		$left = $this->left->prepareValue($context);
 		$leftValue = $this->normalizeValue($left->getValue());
 		$right = $this->right->prepareValue($context);
@@ -30,15 +28,15 @@ class Contains extends \Ruler\Operator\ComparisonOperator
 
 		if ($left->equalTo($right)) {
 			$contains = true;
-		} else if (is_null($leftValue) || is_null($rightValue)) {
+		} elseif (is_null($leftValue) || is_null($rightValue)) {
 			$contains = false;
-		} else if (is_array($leftValue)) {
+		} elseif (is_array($leftValue)) {
 			if (is_array($rightValue)) {
 				$contains = count(array_intersect($leftValue, $rightValue)) == count($rightValue);
 			} else {
 				$contains = in_array($rightValue, $leftValue);
 			}
-		} else if (!is_object($leftValue) && !is_object($rightValue)) {
+		} elseif (!is_object($leftValue) && !is_object($rightValue)) {
 			$contains = (preg_match(sprintf("/%s/", preg_quote((string) $rightValue, '/')), $leftValue) === 1);
 		}
 		return $contains;
