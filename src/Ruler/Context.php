@@ -31,8 +31,6 @@ class Context extends \Pimple
      */
     public function __construct(array $values = array())
     {
-        foreach ($values as $key => $val) {
-            $this[$key] = $val;
-        }
+        parent::__construct($values);
     }
 }
