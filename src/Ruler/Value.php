@@ -59,6 +59,33 @@ class Value
     }
 
     /**
+     * Contains comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function contains(Value $value)
+    {
+        if (is_array($this->value)) {
+            return in_array($value->getValue(), $this->value);
+        }
+        return false;
+    }
+
+    /**
+     * Does Not Contain comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function doesNotContain(Value $value)
+    {
+        return !$this->contains($value);
+    }
+
+    /**
      * Greater Than comparison.
      *
      * @param Value $value Value object to compare against
