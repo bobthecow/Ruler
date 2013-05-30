@@ -56,7 +56,11 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
             array(NULL, NULL, false),
             array(array(1, 2, 3), array(2), false),
             array(array(1, 2, array('foo')), array('foo'), true),
-            array(array(1), array(1), false)
+            array(array(1), array(1), false),
+            array('super', 'supercalifragilistic', true),
+            array('fragil', 'supercalifragilistic', true),
+            array('a', 'supercalifragilistic', true),
+            array('stic', 'supercalifragilistic', true)
         );
     }
 }
