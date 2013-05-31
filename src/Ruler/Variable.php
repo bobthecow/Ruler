@@ -89,6 +89,30 @@ class Variable
     }
 
     /**
+     * Fluent interface helper to create a contains comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\Contains
+     */
+    public function contains($variable)
+    {
+        return new Operator\Contains($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a contains comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\DoesNotContain
+     */
+    public function doesNotContain($variable)
+    {
+        return new Operator\DoesNotContain($this, $this->asVariable($variable));
+    }
+
+    /**
      * Fluent interface helper to create a GreaterThan comparison operator.
      *
      * @param mixed $variable Right side of comparison operator

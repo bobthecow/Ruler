@@ -91,6 +91,8 @@ $a->lessThan($b);             // true if $a < $b
 $a->lessThanOrEqualTo($b);    // true if $a <= $b
 $a->equalTo($b);              // true if $a == $b
 $a->notEqualTo($b);           // true if $a != $b
+$a->contains($b);             // true if in_array($b, $a) || strpos($b, $a) !== false
+$a->doesNotContain($b);       // true if !in_array($b, $a) || strpos($b, $a) === false
 ```
 
 ### Combine things

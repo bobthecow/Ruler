@@ -73,10 +73,12 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $context = new Context(array(
             'a' => 1,
             'b' => 2,
+            'c' => array(1, 4)
         ));
     
         $varA = new Variable('a');
         $varB = new Variable('b');
+        $varC = new Variable('c');
 
         $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $varA->greaterThan(0));
 
@@ -110,5 +112,11 @@ class VariableTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\Contains', $varC->contains(1));
+        $this->assertTrue($varC->contains($varA)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\DoesNotContain', $varC->doesNotContain(1));
+        $this->assertTrue($varC->doesNotContain($varB)->evaluate($context));
     }
 }
