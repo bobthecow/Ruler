@@ -70,10 +70,8 @@ class Value
         if (is_array($this->value)) {
             return in_array($value->getValue(), $this->value);
         } else if (is_string($this->value)) {
-            return strpos($value->getValue(), $this->value) !== FALSE;
+            return strpos($value->getValue(), $this->value) !== false;
         }
-        return FALSE;
-    }
 
     /**
      * Does Not Contain comparison.
