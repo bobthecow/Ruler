@@ -30,6 +30,6 @@ class DoesNotContain extends ComparisonOperator
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->doesNotContain($this->right->prepareValue($context));
+        return $this->left->prepareValue($context)->contains($this->right->prepareValue($context)) === false;
     }
 }
