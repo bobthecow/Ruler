@@ -199,7 +199,8 @@ $rules->addRule($redirectForAuthentication);
 
 // Now execute() all true Rules.
 //
-// In this case, all of our Rules are mutually exclusive so at most one of them will execute...
+// Astute readers will note that the Rules we defined are mutually exclusive, so
+// at most one of them will evaluate to true and execute an action...
 $rules->executeRules($context);
 ```
 
