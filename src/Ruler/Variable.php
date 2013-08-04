@@ -11,8 +11,9 @@
 
 namespace Ruler;
 
-use Ruler\Operator;
 use Ruler\Context;
+use Ruler\Operator;
+use Ruler\VariableProperty;
 
 /**
  * A propositional Variable.
@@ -23,10 +24,11 @@ use Ruler\Context;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class Variable
+class Variable implements \ArrayAccess
 {
     private $name;
     private $value;
+    private $properties = array();
 
     /**
      * Variable class constructor.
@@ -86,6 +88,79 @@ class Variable
         }
 
         return ($value instanceof Value) ? $value : new Value($value);
+    }
+
+    /**
+     * Get a VariableProperty for accessing methods, indexes and properties of
+     * the current variable.
+     *
+     * @param  string $name  Property name
+     * @param  mixed  $value The default VariableProperty value
+     *
+     * @return VariableProperty
+     */
+    public function getProperty($name, $value = null)
+    {
+        if (!isset($this->properties[$name])) {
+            $this->properties[$name] = new VariableProperty($this, $name, $value);
+        }
+
+        return $this->properties[$name];
+    }
+
+    /**
+     * Fluent interface method for checking whether a VariableProperty has been defined.
+     *
+     * @param  string $name Property name
+     *
+     * @return bool
+     */
+    public function offsetExists($name)
+    {
+        return isset($this->properties[$name]);
+    }
+
+    /**
+     * Fluent interface method for creating or accessing VariableProperties.
+     *
+     * @see getProperty
+     *
+     * @param  string $name Property name
+     *
+     * @return VariableProperty
+     */
+    public function offsetGet($name)
+    {
+        return $this->getProperty($name);
+    }
+
+    /**
+     * Fluent interface method for setting default a VariableProperty value.
+     *
+     * @see setValue
+     *
+     * @param  string $name  Property name
+     * @param mixed $value The default Variable value
+     */
+    public function offsetSet($name, $value)
+    {
+        $this->getProperty($name)->setValue($value);
+    }
+
+    /**
+     * Fluent interface method for removing a VariableProperty reference.
+     *
+     * @throws InvalidArgumentException If a VariableProperty of that name is not defined.
+     *
+     * @param  string $name Property name
+     */
+    public function offsetUnset($name)
+    {
+        if (!$this->offsetExists($name)) {
+            throw new \InvalidArgumentException('Unknown variable property: ' . $name);
+        }
+
+        unset($this->properties[$name]);
     }
 
     /**

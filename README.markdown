@@ -6,7 +6,7 @@ Ruler is a simple stateless production rules engine for PHP 5.3+
 [![Build Status](https://secure.travis-ci.org/bobthecow/Ruler.png?branch=master)](http://travis-ci.org/bobthecow/Ruler)
 
 
-Ruler has a fairly straightforward DSL
+Ruler has an easy, straightforward DSL
 --------------------------------------
 
 ... provided by the RuleBuilder:
@@ -251,6 +251,85 @@ for a shipping price calculator?
 
 > If the current User has placed 5 or more orders, but isn't "really annoying",
 > give 'em free shipping.
+
+
+Access variable properties
+--------------------------
+
+As an added bonus, Ruler lets you access properties, methods and offsets on your
+variable values. This can come in really handy. Say we wanted to log the current
+user's name if they are an administrator:
+
+```php
+
+// Reusing our $context from the last example...
+
+// We'll define a few variables for determining what roles a user has, and what
+// their full name is
+
+$context['userRoles'] = function() use ($em, $context) {
+    if ($user = $context['user']) {
+        return $user->roles();
+    } else {
+        // return a default "anonymous" role if there is no current user
+        return array('anonymous');
+    }
+};
+
+$context['userFullName'] = function() use ($em, $context) {
+    if ($user = $context['user']) {
+        return $user->fullName;
+    }
+};
+
+
+// Now we'll create a rule to write the log message
+
+$rb->create(
+    $rb->logicalAnd(
+        $userIsLoggedIn,
+        $rb['userRoles']->contains('admin')
+    ),
+    function() use ($context, $logger) {
+        $logger->info(sprintf("Admin user %s did a thing!", $context['userFullName']));
+    }
+);
+```
+
+That was a bit of a moutfull. Instead of creating context Variables for
+everything we might need to access in a rule, we can use VariableProperties, and
+their convenient RuleBuilder interface:
+
+```php
+// We can skip over the Context Variable building above. We'll simply set our, 
+// default roles on the VariableProperty itself, then go right to writing rules:
+
+$rb['user']['roles'] = array('anonymous');
+
+$rb->create(
+    $rb->logicalAnd(
+        $userIsLoggedIn,
+        $rb['user']['roles']->contains('admin')
+    ),
+    function() use ($context, $logger) {
+        $logger->info(sprintf("Admin user %s did a thing!", $context['user']['fullName']);
+    }
+);
+```
+
+If the parent Variable resolves to an object, and this VariableProperty name is
+"bar", it will do a prioritized lookup for:
+
+  1. A method named `bar`
+  2. A public property named `bar`
+  3. ArrayAccess + offsetExists named `bar`
+
+If the Variable resolves to an array it will return:
+
+  1. Array index `bar`
+
+If none of the above are true, it will return the default value for this
+VariableProperty.
 
 
 But that's not all...
