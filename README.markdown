@@ -1,7 +1,7 @@
 Ruler
 =====
 
-Ruler is a simple stateless production rules engine for PHP 5.3+
+Ruler is a simple stateless production rules engine for PHP 5.3+.
 
 [![Build Status](https://secure.travis-ci.org/bobthecow/Ruler.png?branch=master)](http://travis-ci.org/bobthecow/Ruler)
 
@@ -257,15 +257,16 @@ Access variable properties
 --------------------------
 
 As an added bonus, Ruler lets you access properties, methods and offsets on your
-variable values. This can come in really handy. Say we wanted to log the current
-user's name if they are an administrator:
+Context Variable values. This can come in really handy.
+
+Say we wanted to log the current user's name if they are an administrator:
 
 ```php
 
 // Reusing our $context from the last example...
 
-// We'll define a few variables for determining what roles a user has, and what
-// their full name is
+// We'll define a few context variables for determining what roles a user has,
+// and their full name:
 
 $context['userRoles'] = function() use ($em, $context) {
     if ($user = $context['user']) {
@@ -296,7 +297,7 @@ $rb->create(
 );
 ```
 
-That was a bit of a moutfull. Instead of creating context Variables for
+That was a bit of a mouthful. Instead of creating context Variables for
 everything we might need to access in a rule, we can use VariableProperties, and
 their convenient RuleBuilder interface:
 
