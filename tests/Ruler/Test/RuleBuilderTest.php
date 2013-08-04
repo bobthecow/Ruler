@@ -62,6 +62,25 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($rb->logicalXor($true, $false)->evaluate($context));
     }
 
+    public function testLogicalOperatorGenerationOfMultiplePropositions()
+    {
+        $rb      = new RuleBuilder();
+        $context = new Context();
+
+        $true  = new TrueProposition();
+        $false = new FalseProposition();
+
+        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $rb->logicalAnd(array($true, $false)));
+        $this->assertInstanceOf('Ruler\Operator\LogicalAnd', $rb->logicalAnd(array($true, $false)));
+        $this->assertFalse($rb->logicalAnd(array($true, $false))->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\LogicalOr', $rb->logicalOr(array($true, $false)));
+        $this->assertTrue($rb->logicalOr(array($true, $false))->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\LogicalXor', $rb->logicalXor(array($true, $false)));
+        $this->assertTrue($rb->logicalXor(array($true, $false))->evaluate($context));
+    }
+
     public function testRuleCreation()
     {
         $rb      = new RuleBuilder();
