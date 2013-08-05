@@ -139,8 +139,8 @@ class Variable implements \ArrayAccess
      *
      * @see setValue
      *
-     * @param  string $name  Property name
-     * @param mixed $value The default Variable value
+     * @param string $name  Property name
+     * @param mixed  $value The default Variable value
      */
     public function offsetSet($name, $value)
     {
@@ -150,16 +150,10 @@ class Variable implements \ArrayAccess
     /**
      * Fluent interface method for removing a VariableProperty reference.
      *
-     * @throws InvalidArgumentException If a VariableProperty of that name is not defined.
-     *
-     * @param  string $name Property name
+     * @param string $name Property name
      */
     public function offsetUnset($name)
     {
-        if (!$this->offsetExists($name)) {
-            throw new \InvalidArgumentException('Unknown variable property: ' . $name);
-        }
-
         unset($this->properties[$name]);
     }
 
