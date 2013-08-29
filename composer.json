@@ -14,7 +14,7 @@
     "autoload": {
         "psr-0": { 
             "Ruler": "src",
-            "Ruler\\Test": "test"
+            "Ruler\\Test": "tests"
             }
     },
     "authors": [
