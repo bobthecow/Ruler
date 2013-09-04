@@ -93,6 +93,8 @@ $a->equalTo($b);              // true if $a == $b
 $a->notEqualTo($b);           // true if $a != $b
 $a->contains($b);             // true if in_array($b, $a) || strpos($b, $a) !== false
 $a->doesNotContain($b);       // true if !in_array($b, $a) || strpos($b, $a) === false
+$a->sameAs($b);               // true if $a === $b
+$a->notSameAs($b);            // true if $a !== $b
 ```
 
 ### Combine things
