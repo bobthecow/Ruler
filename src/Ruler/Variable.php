@@ -254,6 +254,30 @@ class Variable implements \ArrayAccess
     }
 
     /**
+     * Fluent interface helper to create a SameAs comparison operator.
+     *
+     * @param mixed $variable  Right side of comparison operator
+     *
+     * @return Operator\SameAs
+     */
+    public function sameAs($variable)
+    {
+        return new Operator\SameAs($this, $this->asVariable($variable));
+    }
+    
+    /**
+     * Fluent interface helper to create a NotSameAs comparison operator.
+     *
+     * @param mixed $variable  Right side of comparison operator
+     *
+     * @return Operator\SameAs
+     */
+    public function notSameAs($variable)
+    {
+        return new Operator\NotSameAs($this, $this->asVariable($variable));
+    }
+
+    /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
      * @param mixed $variable Variable instance or value
