@@ -29,6 +29,7 @@ class Variable implements \ArrayAccess
     private $name;
     private $value;
     private $properties = array();
+    private static $operatorNamespaces = array();
 
     /**
      * Variable class constructor.
@@ -40,6 +41,22 @@ class Variable implements \ArrayAccess
     {
         $this->name  = $name;
         $this->value = $value;
+    }
+
+    /**
+     * Register an operator namespace to use external operators
+     *
+     * @param string $namespace Operator namespace
+     *
+     * @throwt LogicException
+     */
+    public static function registerOperatorNamespace($namespace)
+    {
+        if (!is_string($namespace)) {
+            throw new \LogicException('Namespace argument must be a string');
+        }
+
+        self::$operatorNamespaces[] = $namespace;
     }
 
     /**
@@ -155,6 +172,33 @@ class Variable implements \ArrayAccess
     public function offsetUnset($name)
     {
         unset($this->properties[$name]);
+    }
+
+    /**
+     * Magic method to try instanstiate extra operators considering operator namespaces previously registered
+     *
+     * @see Variable::registerOperatorNamespace
+     *
+     * @throws LogicException
+     */
+    public function __call($name, $arguments)
+    {
+        $operator = ucfirst($name);
+
+        foreach (self::$operatorNamespaces as $operatorNamespace)
+        {
+            $class = $operatorNamespace . '\\' . $operator;
+
+            if (class_exists($class))
+            {
+                return new $class($this, $this->asVariable($arguments[0]));
+            }
+        }
+
+        throw new \LogicException(
+            sprintf('Did not manage to instantiate extra operator "%s"',
+            $name
+        ));
     }
 
     /**
