@@ -9,13 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Ruler;
+namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
+use Ruler\Value;
 use Ruler\Variable;
 
 /**
- * A propositional VariableProperty.
+ * All the guts of the VariableProperty, but none of the PHP 5.3ness.
+ *
+ * PHP 5.4+ users: Use this trait when creating custom Variable and
+ * VariableProperty classes for extending the RuleBuilder DSL.
+ *
+ * Everyone else: Ignore this, it's too cool for you.
+ *
+ * Apparently too cool for me, too, otherwise the VariableProperty classes in
+ * this library would be using this trait.
  *
  * A VariableProperty is a special propositional Variable which maps to a
  * property, method or offset of another Variable. During evaluation, they are
@@ -24,21 +33,18 @@ use Ruler\Variable;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class VariableProperty extends Variable
+trait VariablePropertyTrait
 {
     private $parent;
 
     /**
-     * VariableProperty class constructor.
+     * Set the parent Variable reference.
      *
      * @param Variable $parent Parent Variable instance
-     * @param string            $name   Property name
-     * @param mixed             $value  Default Property value (default: null)
      */
-    public function __construct(Variable $parent, $name, $value = null)
+    public function setParent(Variable $parent)
     {
         $this->parent = $parent;
-        parent::__construct($name, $value);
     }
 
     /**
