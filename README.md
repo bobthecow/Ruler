@@ -335,6 +335,19 @@ If none of the above are true, it will return the default value for this
 VariableProperty.
 
 
+External Operators
+------------------
+
+Additional operators can be written to fit special per project needs:
+
+```php
+// Assume the namespace is known and ALotGreaterThan operator is implemented
+$rb->registesOperatorNamespace('Ruler\Test\Fixtures');
+$rb->create(
+    $rb['a']->aLotGreaterThan(10);
+);
+```
+
 But that's not all...
 ---------------------
 

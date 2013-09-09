@@ -51,6 +51,20 @@ class RuleBuilder implements \ArrayAccess
     }
 
     /**
+     * Register an operator namespace (Facade to Ruler\Variable::registerNamespace satic method))
+     *
+     * @param string $namespace Operator namespace
+     *
+     * @return RuleBuilder
+     */
+    public function registerNamespace($namespace)
+    {
+        Variable::registerOperatorNamespace($namespace);
+
+        return $this;
+    }
+
+    /**
      * Create a logical AND operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
