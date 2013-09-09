@@ -11,10 +11,10 @@
 
 namespace Ruler;
 
+use Ruler\Operator;
 use Ruler\Proposition;
 use Ruler\Rule;
-use Ruler\Operator;
-use Ruler\Variable;
+use Ruler\RuleBuilder;
 
 /**
  * RuleBuilder.
@@ -123,7 +123,7 @@ class RuleBuilder implements \ArrayAccess
     public function offsetGet($name)
     {
         if (!isset($this->variables[$name])) {
-            $this->variables[$name] = new Variable($name);
+            $this->variables[$name] = new RuleBuilder\Variable($name);
         }
 
         return $this->variables[$name];
