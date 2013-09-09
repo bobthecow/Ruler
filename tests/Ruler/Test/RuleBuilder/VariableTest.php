@@ -219,4 +219,57 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($var['baz']));
         $this->assertTrue(isset($var['qux']));
     }
+
+    public function testExternalOperators()
+    {
+        Variable::registerOperatorNamespace('\Ruler\Test\Fixtures');
+        $context = new Context(array('a' => 100));
+        $varA = new Variable('a');
+
+        $this->assertTrue($varA->aLotGreaterThan(1)->evaluate($context));
+
+        $context['a'] = 9;
+        $this->assertFalse($varA->aLotGreaterThan(1)->evaluate($context));
+    }
+
+    /**
+     * @dataProvider testLogicExceptionOnRegisteringOperatorNamespaceProvider
+     *
+     * @expectedException LogicException
+     * @expectedExceptionMessage Namespace argument must be a string
+     */
+    public function testLogicExceptionOnRegisteringOperatorNamespace($input)
+    {
+        Variable::registerOperatorNamespace($input);
+    }
+
+    public function testLogicExceptionOnRegisteringOperatorNamespaceProvider()
+    {
+        return array(
+            array(
+                array('ExceptionRisen')
+            ),
+            array(
+                new \StdClass()
+            ),
+            array(
+                0
+            ),
+            array(
+                null
+            )
+        );
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Did not manage to instantiate extra operator "aLotBiggerThan"
+     */
+    public function testLogicExceptionOnUnknownOperator()
+    {
+        Variable::registerOperatorNamespace('\Ruler\Test\Fixtures');
+        $varA = new Variable('a');
+
+        $varA->aLotBiggerThan(1);
+    }
 }

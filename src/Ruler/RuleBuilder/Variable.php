@@ -30,6 +30,23 @@ use Ruler\Variable as BaseVariable;
 class Variable extends BaseVariable implements \ArrayAccess
 {
     private $properties = array();
+    private static $operatorNamespaces = array();
+
+    /**
+     * Register an operator namespace to use external operators
+     *
+     * @param string $namespace Operator namespace
+     *
+     * @throwt LogicException
+     */
+    public static function registerOperatorNamespace($namespace)
+    {
+        if (!is_string($namespace)) {
+            throw new \LogicException('Namespace argument must be a string');
+        }
+
+        self::$operatorNamespaces[] = $namespace;
+    }
 
     /**
      * Get a VariableProperty for accessing methods, indexes and properties of
@@ -490,5 +507,30 @@ class Variable extends BaseVariable implements \ArrayAccess
     public function startsWithInsensitive($variable)
     {
         return new Operator\StartsWithInsensitive($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Magic method to try instanstiate extra operators considering operator namespaces previously registered
+     *
+     * @see Variable::registerOperatorNamespace
+     *
+     * @throws LogicException
+     */
+    public function __call($name, $arguments)
+    {
+        $operator = ucfirst($name);
+
+        foreach (self::$operatorNamespaces as $operatorNamespace) {
+            $class = $operatorNamespace . '\\' . $operator;
+
+            if (class_exists($class)) {
+                return new $class($this, $this->asVariable($arguments[0]));
+            }
+        }
+
+        throw new \LogicException(
+            sprintf('Did not manage to instantiate extra operator "%s"',
+            $name
+        ));
     }
 }
