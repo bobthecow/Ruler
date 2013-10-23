@@ -220,6 +220,30 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * Fluent interface helper to create a HasIntersection comparison operator.
+     *
+     * @param array $variable
+     *
+     * @return Operator\HasIntersection
+     */
+    public function hasIntersection($variable)
+    {
+        return new Operator\HasIntersection($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a HasNoIntersection comparison operator.
+     *
+     * @param array $variable
+     *
+     * @return Operator\HasNoIntersection
+     */
+    public function hasNoIntersection($variable)
+    {
+        return new Operator\HasNoIntersection($this, $this->asVariable($variable));
+    }
+
+    /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
      * @param mixed $variable BaseVariable instance or value
