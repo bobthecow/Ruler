@@ -14,15 +14,15 @@ namespace Ruler\Operator;
 use Ruler\Context;
 
 /**
- * A HasIntersection comparison operator.
+ * A HasNoIntersection operator.
  *
  * @author Enrico Baioni <enrico.baioni@gmail.com>
  * @extends ComparisonOperator
  */
-class HasIntersection extends ComparisonOperator
+class HasNoIntersection extends ComparisonOperator
 {
     /**
-     * Evaluate whether the left variable has at least one element in common with the right in the current Context.
+     * Evaluate whether the left variable has no elements in common with the right in the current Context.
      *
      * @param Context $context Context with which to evaluate this ComparisonOperator
      *
@@ -30,6 +30,6 @@ class HasIntersection extends ComparisonOperator
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->hasIntersection($this->right->prepareValue($context));
+        return $this->left->prepareValue($context)->hasIntersection($this->right->prepareValue($context)) === false;
     }
 }
