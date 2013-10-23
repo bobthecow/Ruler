@@ -120,6 +120,6 @@ class Value
     public function hasIntersection(Value $value)
     {
         $result = array_intersect($this->value, $value->getValue());
-        return empty($result);
+        return !empty($result);
     }
 }
