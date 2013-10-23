@@ -111,4 +111,15 @@ class Value
     {
         return $this->value < $value->getValue();
     }
+
+    /**
+     * @param Value $value
+     *
+     * @return boolean
+     */
+    public function hasIntersection(Value $value)
+    {
+        $result = array_intersect($this->value, $value->getValue());
+        return empty($result);
+    }
 }
