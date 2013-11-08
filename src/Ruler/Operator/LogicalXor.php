@@ -11,7 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * A logical XOR operator.
@@ -19,24 +19,24 @@ use Ruler\Context;
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
-class LogicalXor extends LogicalOperator
+class LogicalXor extends MultipleOperator implements LogicalOperator
 {
     /**
-     * Evaluate whether exactly one child Proposition evaluates to true given the current Context.
+     * @param array $operands
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
-     *
-     * @return boolean
+     * @return bool
+     * @throws \LogicException
      */
-    public function evaluate(Context $context)
+    protected function evaluatePrepared(array $operands)
     {
-        if (empty($this->propositions)) {
+        if (empty($operands)) {
             throw new \LogicException('Logical Xor requires at least one proposition');
         }
 
         $true = 0;
-        foreach ($this->propositions as $prop) {
-            if ($prop->evaluate($context) === true) {
+        /** @var Value $operand */
+        foreach ($operands as $operand) {
+            if ($operand->getValue() === true) {
                 if (++$true > 1) {
                     return false;
                 }

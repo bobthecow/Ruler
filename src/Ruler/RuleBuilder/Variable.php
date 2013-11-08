@@ -220,6 +220,106 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * @param $variable
+     *
+     * @return Operator\Addition
+     */
+    public function add($variable)
+    {
+        return new Operator\Addition($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\Division
+     */
+    public function divide($variable)
+    {
+        return new Operator\Division($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\Modulo
+     */
+    public function modulo($variable)
+    {
+        return new Operator\Modulo($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\Multiplication
+     */
+    public function multiply($variable)
+    {
+        return new Operator\Multiplication($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\Subtraction
+     */
+    public function subtract($variable)
+    {
+        return new Operator\Subtraction($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @return Operator\Negation
+     */
+    public function negate()
+    {
+        return new Operator\Negation($this);
+    }
+
+    /**
+     * @return Operator\Ceil
+     */
+    public function ceil()
+    {
+        return new Operator\Ceil($this);
+    }
+
+    /**
+     * @return Operator\Floor
+     */
+    public function floor()
+    {
+        return new Operator\Floor($this);
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\Exponentiate
+     */
+    public function exponentiate($variable)
+    {
+        return new Operator\Exponentiate($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @return Operator\Min
+     */
+    public function min()
+    {
+        return new Operator\Min($this);
+    }
+
+    /**
+     * @return Operator\Max
+     */
+    public function max()
+    {
+        return new Operator\Max($this);
+    }
+
+    /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
      * @param mixed $variable BaseVariable instance or value

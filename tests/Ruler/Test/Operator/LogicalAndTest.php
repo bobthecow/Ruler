@@ -39,7 +39,7 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
         $op->addProposition($true);
         $this->assertTrue($op->evaluate($context));
 
-        $op->addProposition($true);
+        $op->addOperand($true);
         $this->assertTrue($op->evaluate($context));
 
         $op->addProposition($false);
@@ -47,7 +47,7 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testExecutingALogicalAndWithoutPropositionsThrowsAnException()
     {

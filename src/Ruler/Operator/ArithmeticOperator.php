@@ -12,9 +12,10 @@
 namespace Ruler\Operator;
 
 /**
- * Interface LogicalOperator
- * @package Ruler\Operator
+ * @abstract
+ * @author Jordan Raub <jordan@raub.me>
+ * @implements Proposition
  */
-interface LogicalOperator
+interface ArithmeticOperator
 {
 }

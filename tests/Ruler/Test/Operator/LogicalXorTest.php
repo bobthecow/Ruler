@@ -39,18 +39,18 @@ class LogicalXorTest extends \PHPUnit_Framework_TestCase
         $op->addProposition($false);
         $this->assertFalse($op->evaluate($context));
 
-        $op->addProposition($false);
+        $op->addOperand($false);
         $this->assertFalse($op->evaluate($context));
 
         $op->addProposition($true);
         $this->assertTrue($op->evaluate($context));
 
-        $op->addProposition($true);
+        $op->addOperand($true);
         $this->assertFalse($op->evaluate($context));
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testExecutingALogicalXorWithoutPropositionsThrowsAnException()
     {

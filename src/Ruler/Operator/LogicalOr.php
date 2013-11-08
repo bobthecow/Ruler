@@ -11,7 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * A logical OR operator.
@@ -19,23 +19,23 @@ use Ruler\Context;
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
-class LogicalOr extends LogicalOperator
+class LogicalOr extends MultipleOperator implements LogicalOperator
 {
     /**
-     * Evaluate whether any child Proposition evaluates to true given the current Context.
+     * @param array $operands
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
-     *
-     * @return boolean
+     * @return bool
+     * @throws \LogicException
      */
-    public function evaluate(Context $context)
+    protected function evaluatePrepared(array $operands)
     {
-        if (empty($this->propositions)) {
+        if (empty($operands)) {
             throw new \LogicException('Logical Or requires at least one proposition');
         }
 
-        foreach ($this->propositions as $prop) {
-            if ($prop->evaluate($context) === true) {
+        /** @var Value $operand */
+        foreach ($operands as $operand) {
+            if ($operand->getValue() === true) {
                 return true;
             }
         }

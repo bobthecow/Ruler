@@ -14,21 +14,20 @@ namespace Ruler\Operator;
 use Ruler\Value;
 
 /**
- * A LessThan comparison operator.
+ * TODO: implement this as an automagical multiple operator?
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Jordan Raub <jordan@raub.me>
  * @extends ComparisonOperator
  */
-class LessThan extends ComparisonOperator
+class Max extends UnaryOperator implements ArithmeticOperator
 {
     /**
-     * @param Value $left
-     * @param Value $right
+     * @param Value $operand
      *
-     * @return bool
+     * @return mixed
      */
-    public function evaluatePrepared(Value $left, Value $right)
+    protected function evaluatePrepared(Value $operand)
     {
-        return $left->lessThan($right);
+        return $operand->max();
     }
 }

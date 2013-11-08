@@ -9,12 +9,8 @@ class CallbackProposition implements Proposition
 {
     private $callback;
 
-    public function __construct($callback)
+    public function __construct(callable $callback)
     {
-        if (!is_callable($callback)) {
-            throw new \InvalidArgumentException('CallbackProposition expects a callable argument');
-        }
-
         $this->callback = $callback;
     }
 

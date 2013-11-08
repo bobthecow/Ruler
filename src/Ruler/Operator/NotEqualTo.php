@@ -11,7 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * A NotEqualTo comparison operator.
@@ -24,12 +24,13 @@ class NotEqualTo extends ComparisonOperator
     /**
      * Evaluate whether the given variables are not equal in the current Context.
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Value $left
+     * @param Value $right
      *
-     * @return boolean
+     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluatePrepared(Value $left, Value $right)
     {
-        return $this->left->prepareValue($context)->equalTo($this->right->prepareValue($context)) === false;
+        return $left->equalTo($right) === false;
     }
 }

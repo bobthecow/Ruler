@@ -11,7 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * An EqualTo comparison operator.
@@ -22,14 +22,13 @@ use Ruler\Context;
 class EqualTo extends ComparisonOperator
 {
     /**
-     * Evaluate whether the given variables are equal in the current Context.
+     * @param Value $left
+     * @param Value $right
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
-     *
-     * @return boolean
+     * @return bool
      */
-    public function evaluate(Context $context)
+    protected function evaluatePrepared(Value $left, Value $right)
     {
-        return $this->left->prepareValue($context)->equalTo($this->right->prepareValue($context));
+        return $left->equalTo($right);
     }
 }

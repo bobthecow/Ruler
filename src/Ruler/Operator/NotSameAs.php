@@ -11,8 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Operator\ComparisonOperator;
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * An NotSameAs comparison operator.
@@ -25,12 +24,13 @@ class NotSameAs extends ComparisonOperator
     /**
      * Evaluate whether the given variables are not identical in the current Context.
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Value $left
+     * @param Value $right
      *
      * @return boolean
      */
-    public function evaluate(Context $context)
+    public function evaluatePrepared(Value $left, Value $right)
     {
-        return $this->left->prepareValue($context)->sameAs($this->right->prepareValue($context)) === false;
+        return $left->sameAs($right) === false;
     }
 }

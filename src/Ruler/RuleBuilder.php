@@ -11,10 +11,7 @@
 
 namespace Ruler;
 
-use Ruler\Operator;
 use Ruler\Proposition;
-use Ruler\Rule;
-use Ruler\RuleBuilder;
 
 /**
  * RuleBuilder.
@@ -54,7 +51,7 @@ class RuleBuilder implements \ArrayAccess
      * Create a logical AND operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalAnd
      */
@@ -67,7 +64,7 @@ class RuleBuilder implements \ArrayAccess
      * Create a logical OR operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalOr
      */
@@ -85,14 +82,14 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalNot(Proposition $prop)
     {
-        return new Operator\LogicalNot(func_get_args());
+        return new Operator\LogicalNot($prop);
     }
 
     /**
      * Create a logical XOR operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalXor
      */

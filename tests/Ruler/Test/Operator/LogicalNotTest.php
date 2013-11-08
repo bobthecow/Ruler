@@ -13,49 +13,14 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
     {
         $true = new TrueProposition();
 
-        $op = new Operator\LogicalNot(array($true));
+        $op = new Operator\LogicalNot($true);
         $this->assertInstanceOf('Ruler\Proposition', $op);
         $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $op);
     }
 
     public function testConstructor()
     {
-        $op = new Operator\LogicalNot(array(new FalseProposition()));
+        $op = new Operator\LogicalNot(new FalseProposition());
         $this->assertTrue($op->evaluate(new Context()));
-    }
-
-    public function testAddPropositionAndEvaluate()
-    {
-        $op = new Operator\LogicalNot();
-
-        $op->addProposition(new TrueProposition());
-        $this->assertFalse($op->evaluate(new Context()));
-    }
-
-    /**
-     * @expectedException LogicException
-     */
-    public function testExecutingALogicalNotWithoutPropositionsThrowsAnException()
-    {
-        $op = new Operator\LogicalNot();
-        $op->evaluate(new Context());
-    }
-
-    /**
-     * @expectedException LogicException
-     */
-    public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
-    {
-        $op = new Operator\LogicalNot(array(new TrueProposition(), new FalseProposition()));
-    }
-
-    /**
-     * @expectedException LogicException
-     */
-    public function testAddingASecondPropositionToLogicalNotThrowsAnException()
-    {
-        $op = new Operator\LogicalNot();
-        $op->addProposition(new TrueProposition());
-        $op->addProposition(new TrueProposition());
     }
 }

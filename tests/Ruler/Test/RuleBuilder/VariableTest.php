@@ -81,12 +81,14 @@ class VariableTest extends \PHPUnit_Framework_TestCase
                     'qux' => 3,
                 ),
             ),
+            'e' => 1.5,
         ));
 
         $varA = new Variable('a');
         $varB = new Variable('b');
         $varC = new Variable('c');
         $varD = new Variable('d');
+        $varE = new Variable('e');
 
         $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $varA->greaterThan(0));
 
@@ -117,6 +119,48 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($varA->notEqualTo(1)->evaluate($context));
         $this->assertTrue($varA->notEqualTo(0)->evaluate($context));
         $this->assertTrue($varA->notEqualTo(2)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Addition', $varA->add(3));
+        $this->assertEquals(4, $varA->add(3)->evaluate($context));
+        $this->assertEquals(0, $varA->add(-1)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Ceil', $varE->ceil());
+        $this->assertEquals(2, $varE->ceil()->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Division', $varB->divide(3));
+        $this->assertEquals(1, $varB->divide(2)->evaluate($context));
+        $this->assertEquals(-2, $varB->divide(-1)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Floor', $varE->floor());
+        $this->assertEquals(1, $varE->floor()->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Modulo', $varA->modulo(3));
+        $this->assertEquals(1, $varA->modulo(3)->evaluate($context));
+        $this->assertEquals(0, $varB->modulo(2)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Multiplication', $varA->multiply(3));
+        $this->assertEquals(6, $varB->multiply(3)->evaluate($context));
+        $this->assertEquals(-2, $varB->multiply(-1)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Negation', $varA->negate());
+        $this->assertEquals(-1, $varA->negate()->evaluate($context));
+        $this->assertEquals(-2, $varB->negate()->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Subtraction', $varA->subtract(3));
+        $this->assertEquals(-2, $varA->subtract(3)->evaluate($context));
+        $this->assertEquals(2, $varA->subtract(-1)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Exponentiate', $varA->exponentiate(3));
+        $this->assertEquals(1, $varA->exponentiate(3)->evaluate($context));
+        $this->assertEquals(1, $varA->exponentiate(-1)->evaluate($context));
+        $this->assertEquals(8, $varB->exponentiate(3)->evaluate($context));
+        $this->assertEquals(0.5, $varB->exponentiate(-1)->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Max', $varA->max());
+        $this->assertEquals(4, $varC->max()->evaluate($context));
+
+        $this->assertInstanceof('Ruler\Operator\Min', $varA->min());
+        $this->assertEquals(1, $varC->min()->evaluate($context));
 
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));

@@ -11,7 +11,7 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Context;
+use Ruler\Value;
 
 /**
  * A GreaterThan comparison operator.
@@ -22,14 +22,13 @@ use Ruler\Context;
 class GreaterThanOrEqualTo extends ComparisonOperator
 {
     /**
-     * Evaluate whether the left variable is greater than or equal to the right in the current Context.
+     * @param Value $left
+     * @param Value $right
      *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
-     *
-     * @return boolean
+     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluatePrepared(Value $left, Value $right)
     {
-        return $this->left->prepareValue($context)->lessThan($this->right->prepareValue($context)) === false;
+        return $left->lessThan($right) === false;
     }
 }

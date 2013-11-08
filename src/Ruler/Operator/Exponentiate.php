@@ -14,21 +14,19 @@ namespace Ruler\Operator;
 use Ruler\Value;
 
 /**
- * A LessThan comparison operator.
- *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Jordan Raub <jordan@raub.me>
  * @extends ComparisonOperator
  */
-class LessThan extends ComparisonOperator
+class Exponentiate extends BinaryOperator implements ArithmeticOperator
 {
     /**
      * @param Value $left
      * @param Value $right
      *
-     * @return bool
+     * @return number
      */
-    public function evaluatePrepared(Value $left, Value $right)
+    protected function evaluatePrepared(Value $left, Value $right)
     {
-        return $left->lessThan($right);
+        return $left->exponentiate($right);
     }
 }
