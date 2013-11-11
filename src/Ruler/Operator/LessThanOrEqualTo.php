@@ -11,7 +11,9 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
  * A LessThanOrEqualTo comparison operator.
@@ -19,16 +21,25 @@ use Ruler\Value;
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
-class LessThanOrEqualTo extends ComparisonOperator
+class LessThanOrEqualTo extends VariableOperator implements Proposition
 {
     /**
-     * @param Value $left
-     * @param Value $right
+     * Evaluate the Proposition with the given Context.
      *
-     * @return bool
+     * @param Context $context Context with which to evaluate this Proposition
+     *
+     * @return boolean
      */
-    public function evaluatePrepared(Value $left, Value $right)
+    public function evaluate(Context $context)
     {
-        return $left->greaterThan($right) === false;
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+        return false === $left->prepareValue($context)->greaterThan($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

@@ -14,8 +14,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
         $varB = new Variable('b', array(2));
 
         $op = new Operator\Division($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ArithmeticOperator', $op);
+        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
     }
 
     /**
@@ -29,7 +28,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Division($varA, $varB);
-        $op->evaluate($context);
+        $op->prepareValue($context);
     }
 
     /**
@@ -43,7 +42,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Division($varA, $varB);
-        $op->evaluate($context);
+        $op->prepareValue($context);
     }
 
     /**
@@ -56,7 +55,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Division($varA, $varB);
-        $this->assertEquals($op->evaluate($context), $result);
+        $this->assertEquals($op->prepareValue($context), $result);
     }
 
     public function divisionData()

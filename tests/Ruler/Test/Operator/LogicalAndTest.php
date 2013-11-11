@@ -15,10 +15,19 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\LogicalAnd(array($true));
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $op);
     }
 
     public function testConstructor()
+    {
+        $true    = new TrueProposition();
+        $false   = new FalseProposition();
+        $context = new Context();
+
+        $op = new Operator\LogicalAnd($true, $false);
+        $this->assertFalse($op->evaluate($context));
+    }
+
+    public function testConstructorAsArray()
     {
         $true    = new TrueProposition();
         $false   = new FalseProposition();

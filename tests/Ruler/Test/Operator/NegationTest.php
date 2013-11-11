@@ -13,8 +13,7 @@ class NegationTest extends \PHPUnit_Framework_TestCase
         $varA = new Variable('a', 1);
 
         $op = new Operator\Negation($varA);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ArithmeticOperator', $op);
+        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
     }
 
     /**
@@ -27,7 +26,7 @@ class NegationTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Negation($varA);
-        $op->evaluate($context);
+        $op->prepareValue($context);
     }
 
     /**
@@ -39,7 +38,7 @@ class NegationTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Negation($varA);
-        $this->assertEquals($op->evaluate($context), $result);
+        $this->assertEquals($op->prepareValue($context), $result);
     }
 
     public function negateData()

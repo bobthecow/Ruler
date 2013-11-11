@@ -15,7 +15,6 @@ class LogicalXorTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\LogicalXor(array($true));
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $op);
     }
 
     public function testConstructor()

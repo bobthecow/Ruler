@@ -11,22 +11,26 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\VariableOperand;
 
 /**
+ * Class Exponentiate
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
+ * @package Ruler\Operator
  */
-class Exponentiate extends BinaryOperator implements ArithmeticOperator
+class Exponentiate extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Value $left
-     * @param Value $right
-     *
-     * @return number
-     */
-    protected function evaluatePrepared(Value $left, Value $right)
+    public function prepareValue(Context $context)
     {
-        return $left->exponentiate($right);
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+        return $left->prepareValue($context)->exponentiate($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

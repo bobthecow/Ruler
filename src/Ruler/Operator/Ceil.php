@@ -11,23 +11,25 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\VariableOperand;
 
 /**
- * A GreaterThan comparison operator.
- *
+ * Class Ceil
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
+ * @package Ruler\Operator
  */
-class Ceil extends UnaryOperator implements ArithmeticOperator
+class Ceil extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Value $operand
-     *
-     * @return int
-     */
-    protected function evaluatePrepared(Value $operand)
+    public function prepareValue(Context $context)
     {
-        return $operand->ceil();
+        /** @var VariableOperand $operand */
+        list($operand) = $this->getOperands();
+        return $operand->prepareValue($context)->ceil();
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::UNARY;
     }
 }

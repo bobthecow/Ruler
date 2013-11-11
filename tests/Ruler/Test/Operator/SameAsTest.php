@@ -15,7 +15,6 @@ class SameAsTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\SameAs($varA, $varB);
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $op);
     }
 
     public function testConstructorAndEvaluation()

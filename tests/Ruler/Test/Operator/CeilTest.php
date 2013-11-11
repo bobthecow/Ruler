@@ -13,8 +13,7 @@ class CeilTest extends \PHPUnit_Framework_TestCase
         $varA = new Variable('a', 1);
 
         $op = new Operator\Ceil($varA);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ArithmeticOperator', $op);
+        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
     }
 
     /**
@@ -27,7 +26,7 @@ class CeilTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Ceil($varA);
-        $op->evaluate($context);
+        $op->prepareValue($context);
     }
 
     /**
@@ -39,7 +38,7 @@ class CeilTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Ceil($varA);
-        $this->assertEquals($op->evaluate($context), $result);
+        $this->assertEquals($op->prepareValue($context), $result);
     }
 
     public function ceilingData()

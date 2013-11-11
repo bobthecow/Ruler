@@ -11,22 +11,26 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\VariableOperand;
 
 /**
+ * Class Addition
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
+ * @package Ruler\Operator
  */
-class Addition extends BinaryOperator implements ArithmeticOperator
+class Addition extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Value $left
-     * @param Value $right
-     *
-     * @return int|string
-     */
-    protected function evaluatePrepared(Value $left, Value $right)
+    public function prepareValue(Context $context)
     {
-        return $left->add($right);
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+        return $left->prepareValue($context)->add($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

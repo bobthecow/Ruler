@@ -23,7 +23,7 @@ use Ruler\Operator;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class Variable
+class Variable implements VariableOperand
 {
     private $name;
     private $value;

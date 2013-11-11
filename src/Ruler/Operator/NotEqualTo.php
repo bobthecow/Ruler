@@ -11,26 +11,35 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
- * A NotEqualTo comparison operator.
+ * An EqualTo comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
-class NotEqualTo extends ComparisonOperator
+class NotEqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the given variables are not equal in the current Context.
+     * Evaluate the Proposition with the given Context.
      *
-     * @param Value $left
-     * @param Value $right
+     * @param Context $context Context with which to evaluate this Proposition
      *
-     * @return bool
+     * @return boolean
      */
-    public function evaluatePrepared(Value $left, Value $right)
+    public function evaluate(Context $context)
     {
-        return $left->equalTo($right) === false;
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+        return false === $left->prepareValue($context)->equalTo($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

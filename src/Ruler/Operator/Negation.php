@@ -11,21 +11,25 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\VariableOperand;
 
 /**
+ * Class Ceil
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
+ * @package Ruler\Operator
  */
-class Negation extends UnaryOperator implements ArithmeticOperator
+class Negation extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Value $operand
-     *
-     * @return int|string
-     */
-    protected function evaluatePrepared(Value $operand)
+    public function prepareValue(Context $context)
     {
-        return $operand->negate();
+        /** @var VariableOperand $operand */
+        list($operand) = $this->getOperands();
+        return $operand->prepareValue($context)->negate();
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::UNARY;
     }
 }

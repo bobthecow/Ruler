@@ -11,21 +11,25 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\VariableOperand;
 
 /**
+ * Class Floor
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
+ * @package Ruler\Operator
  */
-class Floor extends UnaryOperator implements ArithmeticOperator
+class Floor extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Value $operand
-     *
-     * @return int
-     */
-    protected function evaluatePrepared(Value $operand)
+    public function prepareValue(Context $context)
     {
-        return $operand->floor();
+        /** @var VariableOperand $operand */
+        list($operand) = $this->getOperands();
+        return $operand->prepareValue($context)->floor();
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::UNARY;
     }
 }

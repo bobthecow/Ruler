@@ -11,7 +11,8 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\Proposition;
 
 /**
  * A logical NOT operator.
@@ -19,15 +20,24 @@ use Ruler\Value;
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
-class LogicalNot extends UnaryOperator implements LogicalOperator
+class LogicalNot extends PropositionOperator implements Proposition
 {
     /**
-     * @param Value $operand
+     * Evaluate the Proposition with the given Context.
      *
-     * @return bool
+     * @param Context $context Context with which to evaluate this Proposition
+     *
+     * @return boolean
      */
-    protected function evaluatePrepared(Value $operand)
+    public function evaluate(Context $context)
     {
-        return !$operand->getValue();
+        /** @var Proposition $operand */
+        list($operand) = $this->getOperands();
+        return !$operand->evaluate($context);
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::UNARY;
     }
 }

@@ -11,26 +11,35 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
- * An SameAs comparison operator.
+ * An EqualTo comparison operator.
  *
- * @author Christophe Sicard <sicard.christophe@gmail.com>
+ * @author Justin Hileman <justin@shopopensky.com>
  * @extends ComparisonOperator
  */
-class SameAs extends ComparisonOperator
+class SameAs extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the given variables are identical in the current Context.
+     * Evaluate the Proposition with the given Context.
      *
-     * @param Value $left
-     * @param Value $right
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
-    public function evaluatePrepared(Value $left, Value $right)
+    public function evaluate(Context $context)
     {
-        return $left->sameAs($right);
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+        return $left->prepareValue($context)->sameAs($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

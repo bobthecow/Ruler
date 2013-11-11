@@ -48,7 +48,6 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         $true  = new TrueProposition();
         $false = new FalseProposition();
 
-        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $rb->logicalAnd($true, $false));
         $this->assertInstanceOf('Ruler\Operator\LogicalAnd', $rb->logicalAnd($true, $false));
         $this->assertFalse($rb->logicalAnd($true, $false)->evaluate($context));
 

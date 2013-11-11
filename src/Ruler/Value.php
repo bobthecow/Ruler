@@ -189,31 +189,4 @@ class Value
         }
         return pow($this->value, $value->getValue());
     }
-
-    public function min()
-    {
-        if (!$this->isValidNumericArray($this->value)) {
-            throw new \RuntimeException("min must be given an array of numbers");
-        }
-        return min($this->value);
-    }
-
-    public function max()
-    {
-        if (!$this->isValidNumericArray($this->value)) {
-            throw new \RuntimeException("max must be given an array of numbers");
-        }
-        return max($this->value);
-    }
-
-    protected function isValidNumericArray($values)
-    {
-        if (!is_array($values)
-            || count($values) != array_sum(array_map('is_numeric', $values))
-        ) {
-            return false;
-        }
-
-        return true;
-    }
 }

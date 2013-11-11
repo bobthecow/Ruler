@@ -11,7 +11,8 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Value;
+use Ruler\Context;
+use Ruler\Proposition;
 
 /**
  * A logical AND operator.
@@ -19,27 +20,29 @@ use Ruler\Value;
  * @author Justin Hileman <justin@shopopensky.com>
  * @extends LogicalOperator
  */
-class LogicalAnd extends MultipleOperator implements LogicalOperator
+class LogicalAnd extends PropositionOperator implements Proposition
 {
     /**
-     * @param array $operands
+     * Evaluate the Proposition with the given Context.
      *
-     * @return bool
-     * @throws \LogicException
+     * @param Context $context Context with which to evaluate this Proposition
+     *
+     * @return boolean
      */
-    protected function evaluatePrepared(array $operands)
+    public function evaluate(Context $context)
     {
-        if (empty($operands)) {
-            throw new \LogicException('Logical And requires at least one proposition');
-        }
-
-        /** @var Value $operand */
-        foreach ($operands as $operand) {
-            if ($operand->getValue() === false) {
+        /** @var Proposition $operand */
+        foreach ($this->getOperands() as $operand) {
+            if (false === $operand->evaluate($context)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::MULTIPLE;
     }
 }

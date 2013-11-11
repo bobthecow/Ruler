@@ -304,22 +304,6 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Min
-     */
-    public function min()
-    {
-        return new Operator\Min($this);
-    }
-
-    /**
-     * @return Operator\Max
-     */
-    public function max()
-    {
-        return new Operator\Max($this);
-    }
-
-    /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
      * @param mixed $variable BaseVariable instance or value
