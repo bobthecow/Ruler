@@ -16,16 +16,13 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * A GreaterThan comparison operator.
+ * A GreaterThanOrEqualTo comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
  */
-class GreaterThanOrEqualto extends VariableOperator implements Proposition
+class GreaterThanOrEqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
@@ -35,7 +32,7 @@ class GreaterThanOrEqualto extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return false === $left->prepareValue($context)->lessThan($right->prepareValue($context));
+        return $left->prepareValue($context)->lessThan($right->prepareValue($context)) === false;
     }
 
     protected function getOperandCardinality()

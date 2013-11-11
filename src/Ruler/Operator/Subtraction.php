@@ -15,9 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Addition
+ * A Subtraction Arithmetic Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Subtraction extends VariableOperator implements VariableOperand
 {

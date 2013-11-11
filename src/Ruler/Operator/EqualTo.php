@@ -19,13 +19,10 @@ use Ruler\VariableOperand;
  * An EqualTo comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
  */
 class EqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean

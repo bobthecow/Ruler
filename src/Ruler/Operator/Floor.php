@@ -15,9 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Floor
+ * A Floor Math Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Floor extends VariableOperator implements VariableOperand
 {

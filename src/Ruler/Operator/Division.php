@@ -15,8 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
+ * A Division Arithmetic Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @extends ComparisonOperator
  */
 class Division extends VariableOperator implements VariableOperand
 {

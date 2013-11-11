@@ -16,16 +16,13 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * An EqualTo comparison operator.
+ * A SameAs comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
+ * @author Christophe Sicard <sicard.christophe@gmail.com>
  */
 class SameAs extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean

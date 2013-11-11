@@ -15,9 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Ceil
+ * A Ceil Math Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Ceil extends VariableOperator implements VariableOperand
 {

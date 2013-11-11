@@ -18,13 +18,10 @@ use Ruler\Proposition;
  * A logical OR operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends LogicalOperator
  */
 class LogicalOr extends PropositionOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
@@ -33,7 +30,7 @@ class LogicalOr extends PropositionOperator implements Proposition
     {
         /** @var Proposition $operand */
         foreach ($this->getOperands() as $operand) {
-            if (true === $operand->evaluate($context)) {
+            if ($operand->evaluate($context) === true) {
                 return true;
             }
         }

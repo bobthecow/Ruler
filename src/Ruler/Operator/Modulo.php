@@ -15,6 +15,8 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
+ * A Modulo Arithmetic Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
  */
 class Modulo extends VariableOperator implements VariableOperand

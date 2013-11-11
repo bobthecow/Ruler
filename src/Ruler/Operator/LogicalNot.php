@@ -18,13 +18,10 @@ use Ruler\Proposition;
  * A logical NOT operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends LogicalOperator
  */
 class LogicalNot extends PropositionOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean

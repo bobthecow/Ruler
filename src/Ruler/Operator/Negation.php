@@ -15,9 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Ceil
+ * A Negation Math Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Negation extends VariableOperator implements VariableOperand
 {

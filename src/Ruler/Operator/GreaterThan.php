@@ -19,13 +19,10 @@ use Ruler\VariableOperand;
  * A GreaterThan comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
  */
 class GreaterThan extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean

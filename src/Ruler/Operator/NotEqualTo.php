@@ -16,16 +16,13 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * An EqualTo comparison operator.
+ * A NotEqualTo comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
  */
 class NotEqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
@@ -35,7 +32,7 @@ class NotEqualTo extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return false === $left->prepareValue($context)->equalTo($right->prepareValue($context));
+        return $left->prepareValue($context)->equalTo($right->prepareValue($context)) === false;
     }
 
     protected function getOperandCardinality()

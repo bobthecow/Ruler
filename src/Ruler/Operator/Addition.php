@@ -15,12 +15,17 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Addition
+ * An Addition Arithmetic Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Addition extends VariableOperator implements VariableOperand
 {
+    /**
+     * @param Context $context
+     *
+     * @return int|\Ruler\Value
+     */
     public function prepareValue(Context $context)
     {
         /** @var VariableOperand $left */

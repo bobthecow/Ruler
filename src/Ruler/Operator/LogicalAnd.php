@@ -18,13 +18,10 @@ use Ruler\Proposition;
  * A logical AND operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends LogicalOperator
  */
 class LogicalAnd extends PropositionOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
@@ -33,7 +30,7 @@ class LogicalAnd extends PropositionOperator implements Proposition
     {
         /** @var Proposition $operand */
         foreach ($this->getOperands() as $operand) {
-            if (false === $operand->evaluate($context)) {
+            if ($operand->evaluate($context) === false) {
                 return false;
             }
         }

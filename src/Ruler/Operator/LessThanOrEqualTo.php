@@ -19,13 +19,10 @@ use Ruler\VariableOperand;
  * A LessThanOrEqualTo comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
  */
 class LessThanOrEqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate the Proposition with the given Context.
-     *
      * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
@@ -35,7 +32,7 @@ class LessThanOrEqualTo extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return false === $left->prepareValue($context)->greaterThan($right->prepareValue($context));
+        return $left->prepareValue($context)->greaterThan($right->prepareValue($context)) === false;
     }
 
     protected function getOperandCardinality()

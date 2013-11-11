@@ -15,6 +15,8 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
+ * A Multiplication Arithmetic Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
  */
 class Multiplication extends VariableOperator implements VariableOperand

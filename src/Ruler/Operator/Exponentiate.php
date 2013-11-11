@@ -15,9 +15,9 @@ use Ruler\Context;
 use Ruler\VariableOperand;
 
 /**
- * Class Exponentiate
+ * An Exponentiate Math Operator
+ *
  * @author Jordan Raub <jordan@raub.me>
- * @package Ruler\Operator
  */
 class Exponentiate extends VariableOperator implements VariableOperand
 {
