@@ -13,6 +13,7 @@ namespace Ruler\Operator;
 
 use Ruler\Context;
 use Ruler\VariableOperand;
+use Ruler\Value;
 
 /**
  * A Multiplication Arithmetic Operator
@@ -26,7 +27,7 @@ class Multiplication extends VariableOperator implements VariableOperand
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return $left->prepareValue($context)->multiply($right->prepareValue($context));
+        return new Value($left->prepareValue($context)->multiply($right->prepareValue($context)));
     }
 
     protected function getOperandCardinality()

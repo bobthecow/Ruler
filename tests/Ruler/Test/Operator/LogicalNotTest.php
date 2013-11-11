@@ -13,54 +13,48 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
     {
         $true = new TrueProposition();
 
-        $op = new Operator\LogicalNot($true);
+        $op = new Operator\LogicalNot(array($true));
         $this->assertInstanceOf('Ruler\Proposition', $op);
     }
 
     public function testConstructor()
-    {
-        $op = new Operator\LogicalNot(new FalseProposition());
-        $this->assertTrue($op->evaluate(new Context()));
-    }
-
-    public function testConstructorAsArray()
     {
         $op = new Operator\LogicalNot(array(new FalseProposition()));
         $this->assertTrue($op->evaluate(new Context()));
     }
 
     public function testAddPropositionAndEvaluate()
-     {
-         $op = new Operator\LogicalNot();
+    {
+        $op = new Operator\LogicalNot();
 
-         $op->addProposition(new TrueProposition());
-         $this->assertFalse($op->evaluate(new Context()));
-     }
+        $op->addProposition(new TrueProposition());
+        $this->assertFalse($op->evaluate(new Context()));
+    }
 
     /**
      * @expectedException \LogicException
      */
     public function testExecutingALogicalNotWithoutPropositionsThrowsAnException()
-     {
-            $op = new Operator\LogicalNot();
-            $op->evaluate(new Context());
-        }
+    {
+        $op = new Operator\LogicalNot();
+        $op->evaluate(new Context());
+    }
 
-     /**
-      * @expectedException \LogicException
-      */
-     public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
-     {
-            $op = new Operator\LogicalNot(array(new TrueProposition(), new FalseProposition()));
-        }
+    /**
+     * @expectedException \LogicException
+     */
+    public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
+    {
+        $op = new Operator\LogicalNot(array(new TrueProposition(), new FalseProposition()));
+    }
 
-     /**
-      * @expectedException \LogicException
-      */
-     public function testAddingASecondPropositionToLogicalNotThrowsAnException()
-     {
-            $op = new Operator\LogicalNot();
-            $op->addProposition(new TrueProposition());
-            $op->addProposition(new TrueProposition());
-        }
+    /**
+     * @expectedException \LogicException
+     */
+    public function testAddingASecondPropositionToLogicalNotThrowsAnException()
+    {
+        $op = new Operator\LogicalNot();
+        $op->addProposition(new TrueProposition());
+        $op->addProposition(new TrueProposition());
+    }
 }

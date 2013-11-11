@@ -27,15 +27,7 @@ abstract class Operator
      * @param array $operands
      */
     public function __construct() {
-        /*
-         * magic for backwards compatibility
-         */
-        $operands = func_get_args();
-        if (1 == count($operands) && is_array($operands[0])) {
-            $operands = $operands[0];
-        }
-
-        foreach ($operands as $operand) {
+        foreach (func_get_args() as $operand) {
             $this->addOperand($operand);
         }
     }

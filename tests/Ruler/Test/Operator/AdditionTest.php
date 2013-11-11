@@ -41,7 +41,7 @@ class AdditionTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Addition($varA, $varB);
-        $this->assertEquals($op->prepareValue($context), $result);
+        $this->assertEquals($op->prepareValue($context)->getValue(), $result);
     }
 
     public function additionData()

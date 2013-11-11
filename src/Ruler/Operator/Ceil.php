@@ -12,6 +12,7 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
@@ -25,7 +26,7 @@ class Ceil extends VariableOperator implements VariableOperand
     {
         /** @var VariableOperand $operand */
         list($operand) = $this->getOperands();
-        return $operand->prepareValue($context)->ceil();
+        return new Value($operand->prepareValue($context)->ceil());
     }
 
     protected function getOperandCardinality()

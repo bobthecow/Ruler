@@ -119,40 +119,41 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($varA->notEqualTo(2)->evaluate($context));
 
         $this->assertInstanceof('Ruler\Operator\Addition', $varA->add(3));
-        $this->assertEquals(4, $varA->add(3)->prepareValue($context));
-        $this->assertEquals(0, $varA->add(-1)->prepareValue($context));
+        $this->assertInstanceof('Ruler\Value', $varA->add(3)->prepareValue($context));
+        $this->assertEquals(4, $varA->add(3)->prepareValue($context)->getValue());
+        $this->assertEquals(0, $varA->add(-1)->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Ceil', $varE->ceil());
-        $this->assertEquals(2, $varE->ceil()->prepareValue($context));
+        $this->assertEquals(2, $varE->ceil()->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Division', $varB->divide(3));
-        $this->assertEquals(1, $varB->divide(2)->prepareValue($context));
-        $this->assertEquals(-2, $varB->divide(-1)->prepareValue($context));
+        $this->assertEquals(1, $varB->divide(2)->prepareValue($context)->getValue());
+        $this->assertEquals(-2, $varB->divide(-1)->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Floor', $varE->floor());
-        $this->assertEquals(1, $varE->floor()->prepareValue($context));
+        $this->assertEquals(1, $varE->floor()->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Modulo', $varA->modulo(3));
-        $this->assertEquals(1, $varA->modulo(3)->prepareValue($context));
-        $this->assertEquals(0, $varB->modulo(2)->prepareValue($context));
+        $this->assertEquals(1, $varA->modulo(3)->prepareValue($context)->getValue());
+        $this->assertEquals(0, $varB->modulo(2)->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Multiplication', $varA->multiply(3));
-        $this->assertEquals(6, $varB->multiply(3)->prepareValue($context));
-        $this->assertEquals(-2, $varB->multiply(-1)->prepareValue($context));
+        $this->assertEquals(6, $varB->multiply(3)->prepareValue($context)->getValue());
+        $this->assertEquals(-2, $varB->multiply(-1)->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Negation', $varA->negate());
-        $this->assertEquals(-1, $varA->negate()->prepareValue($context));
-        $this->assertEquals(-2, $varB->negate()->prepareValue($context));
+        $this->assertEquals(-1, $varA->negate()->prepareValue($context)->getValue());
+        $this->assertEquals(-2, $varB->negate()->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Subtraction', $varA->subtract(3));
-        $this->assertEquals(-2, $varA->subtract(3)->prepareValue($context));
-        $this->assertEquals(2, $varA->subtract(-1)->prepareValue($context));
+        $this->assertEquals(-2, $varA->subtract(3)->prepareValue($context)->getValue());
+        $this->assertEquals(2, $varA->subtract(-1)->prepareValue($context)->getValue());
 
         $this->assertInstanceof('Ruler\Operator\Exponentiate', $varA->exponentiate(3));
-        $this->assertEquals(1, $varA->exponentiate(3)->prepareValue($context));
-        $this->assertEquals(1, $varA->exponentiate(-1)->prepareValue($context));
-        $this->assertEquals(8, $varB->exponentiate(3)->prepareValue($context));
-        $this->assertEquals(0.5, $varB->exponentiate(-1)->prepareValue($context));
+        $this->assertEquals(1, $varA->exponentiate(3)->prepareValue($context)->getValue());
+        $this->assertEquals(1, $varA->exponentiate(-1)->prepareValue($context)->getValue());
+        $this->assertEquals(8, $varB->exponentiate(3)->prepareValue($context)->getValue());
+        $this->assertEquals(0.5, $varB->exponentiate(-1)->prepareValue($context)->getValue());
 
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));

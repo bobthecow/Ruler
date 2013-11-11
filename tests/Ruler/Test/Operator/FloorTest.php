@@ -38,7 +38,7 @@ class FloorTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Floor($varA);
-        $this->assertEquals($op->prepareValue($context), $result);
+        $this->assertEquals($op->prepareValue($context)->getValue(), $result);
     }
 
     public function ceilingData()

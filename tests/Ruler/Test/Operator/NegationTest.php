@@ -38,7 +38,7 @@ class NegationTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Negation($varA);
-        $this->assertEquals($op->prepareValue($context), $result);
+        $this->assertEquals($op->prepareValue($context)->getValue(), $result);
     }
 
     public function negateData()

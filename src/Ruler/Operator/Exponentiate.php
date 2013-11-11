@@ -12,6 +12,7 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
@@ -26,7 +27,7 @@ class Exponentiate extends VariableOperator implements VariableOperand
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return $left->prepareValue($context)->exponentiate($right->prepareValue($context));
+        return new Value($left->prepareValue($context)->exponentiate($right->prepareValue($context)));
     }
 
     protected function getOperandCardinality()

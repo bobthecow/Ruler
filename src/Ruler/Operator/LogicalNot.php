@@ -19,7 +19,7 @@ use Ruler\Proposition;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class LogicalNot extends PropositionOperator implements Proposition
+class LogicalNot extends LogicalOperator
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition

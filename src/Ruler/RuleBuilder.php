@@ -80,7 +80,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalNot(Proposition $prop)
     {
-        return new Operator\LogicalNot($prop);
+        return new Operator\LogicalNot(array($prop));
     }
 
     /**

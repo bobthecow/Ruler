@@ -19,7 +19,7 @@ use Ruler\Proposition;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class LogicalXor extends PropositionOperator implements Proposition
+class LogicalXor extends LogicalOperator
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition

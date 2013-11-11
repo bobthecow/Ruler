@@ -41,7 +41,7 @@ class SubtractionTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
 
         $op = new Operator\Subtraction($varA, $varB);
-        $this->assertEquals($op->prepareValue($context), $result);
+        $this->assertEquals($op->prepareValue($context)->getValue(), $result);
     }
 
     public function subtractData()

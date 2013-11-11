@@ -23,16 +23,6 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
         $false   = new FalseProposition();
         $context = new Context();
 
-        $op = new Operator\LogicalAnd($true, $false);
-        $this->assertFalse($op->evaluate($context));
-    }
-
-    public function testConstructorAsArray()
-    {
-        $true    = new TrueProposition();
-        $false   = new FalseProposition();
-        $context = new Context();
-
         $op = new Operator\LogicalAnd(array($true, $false));
         $this->assertFalse($op->evaluate($context));
     }
