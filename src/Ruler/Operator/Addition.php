@@ -22,11 +22,6 @@ use Ruler\VariableOperand;
  */
 class Addition extends VariableOperator implements VariableOperand
 {
-    /**
-     * @param Context $context
-     *
-     * @return int|\Ruler\Value
-     */
     public function prepareValue(Context $context)
     {
         /** @var VariableOperand $left */

@@ -15,7 +15,6 @@ use Ruler\Proposition;
 use Ruler\Operator as BaseOperator;
 
 /**
- * @abstract
  * @author Jordan Raub <jordan@raub.me>
  */
 abstract class PropositionOperator extends BaseOperator

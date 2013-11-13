@@ -15,7 +15,6 @@ use Ruler\VariableOperand;
 use Ruler\Operator as BaseOperator;
 
 /**
- * @abstract
  * @author Jordan Raub <jordan@raub.me>
  */
 abstract class VariableOperator extends BaseOperator
