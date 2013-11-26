@@ -82,4 +82,26 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         $rule->execute($context);
         $this->assertTrue($executed);
     }
+
+    public function testNotAddEqualTo()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'A2' => 8,
+            'A3' => 4,
+            'B2' => 13
+        ));
+
+        $rule = $rb->logicalNot(
+            $rb['A2']->equalTo($rb['B2'])
+        );
+        $this->assertTrue($rule->evaluate($context));
+
+        $rule = $rb['A2']->add($rb['A3']);
+
+        $rule = $rb->logicalNot(
+            $rule->equalTo($rb['B2'])
+        );
+        $this->assertTrue($rule->evaluate($context));
+    }
 }

@@ -226,7 +226,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function add($variable)
     {
-        return new Operator\Addition($this, $this->asVariable($variable));
+        return new self(null, new Operator\Addition($this, $this->asVariable($variable)));
     }
 
     /**
@@ -236,7 +236,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function divide($variable)
     {
-        return new Operator\Division($this, $this->asVariable($variable));
+        return new self(null, new Operator\Division($this, $this->asVariable($variable)));
     }
 
     /**
@@ -246,7 +246,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function modulo($variable)
     {
-        return new Operator\Modulo($this, $this->asVariable($variable));
+        return new self(null, new Operator\Modulo($this, $this->asVariable($variable)));
     }
 
     /**
@@ -256,7 +256,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function multiply($variable)
     {
-        return new Operator\Multiplication($this, $this->asVariable($variable));
+        return new self(null, new Operator\Multiplication($this, $this->asVariable($variable)));
     }
 
     /**
@@ -266,7 +266,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function subtract($variable)
     {
-        return new Operator\Subtraction($this, $this->asVariable($variable));
+        return new self(null, new Operator\Subtraction($this, $this->asVariable($variable)));
     }
 
     /**
@@ -274,7 +274,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function negate()
     {
-        return new Operator\Negation($this);
+        return new self(null, new Operator\Negation($this));
     }
 
     /**
@@ -282,7 +282,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function ceil()
     {
-        return new Operator\Ceil($this);
+        return new self(null, new Operator\Ceil($this));
     }
 
     /**
@@ -290,7 +290,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function floor()
     {
-        return new Operator\Floor($this);
+        return new self(null, new Operator\Floor($this));
     }
 
     /**
@@ -300,7 +300,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function exponentiate($variable)
     {
-        return new Operator\Exponentiate($this, $this->asVariable($variable));
+        return new self(null, new Operator\Exponentiate($this, $this->asVariable($variable)));
     }
 
     /**
