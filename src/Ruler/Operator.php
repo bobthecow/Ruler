@@ -21,7 +21,7 @@ abstract class Operator
     const BINARY = 'BINARY';
     const MULTIPLE = 'MULTIPLE';
 
-    protected $operands;
+    protected $operands = array();
 
     /**
      * @param array $operands
@@ -43,11 +43,6 @@ abstract class Operator
             case self::BINARY:
                 if (2 != count($this->operands)) {
                     throw new \LogicException(get_class($this) . ' takes 2 operands');
-                }
-                break;
-            case self::MULTIPLE:
-                if (0 == count($this->operands)) {
-                    throw new \LogicException(get_class($this) . ' takes at least 1 operand');
                 }
                 break;
         }

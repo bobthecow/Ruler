@@ -97,6 +97,30 @@ class RuleBuilder implements \ArrayAccess
     }
 
     /**
+     * @param $callback
+     *
+     * @return Operator\CallbackProposition
+     */
+    public function callbackProposition($callback)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackProposition');
+
+        return $reflection->newInstanceArgs(func_get_args());
+    }
+
+    /**
+     * @param $callback
+     *
+     * @return RuleBuilder\Variable
+     */
+    public function callbackVariable($callback)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackVariableOperand');
+
+        return new RuleBuilder\Variable(null, $reflection->newInstanceArgs(func_get_args()));
+    }
+
+    /**
      * Check whether a Variable is already set.
      *
      * @param string $name The Variable name
@@ -113,7 +137,7 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name The Variable name
      *
-     * @return Variable
+     * @return RuleBuilder\Variable
      */
     public function offsetGet($name)
     {
@@ -129,8 +153,6 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name  The Variable name
      * @param mixed  $value The Variable default value
-     *
-     * @return Variable
      */
     public function offsetSet($name, $value)
     {

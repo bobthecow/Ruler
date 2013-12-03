@@ -6,6 +6,7 @@ use Ruler\RuleBuilder;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
 use Ruler\Test\Fixtures\FalseProposition;
+use Ruler\Value;
 
 class RuleBuilderTest extends \PHPUnit_Framework_TestCase
 {
@@ -97,11 +98,154 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertTrue($rule->evaluate($context));
 
-        $rule = $rb['A2']->add($rb['A3']);
+        $rule = $rb->logicalNot(
+            $rb['A2']->add($rb['A3'])->equalTo($rb['B2'])
+        );
+        $this->assertTrue($rule->evaluate($context));
+    }
+
+    public function testCallbackPropositionOnBuilder()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context();
+        $test = $this;
 
         $rule = $rb->logicalNot(
-            $rule->equalTo($rb['B2'])
+            $rb->callbackProposition(
+                function ($c) use ($context, $test) {
+                    $test->assertSame($c, $context);
+                    return false;
+                }
+            )
         );
+
+        $this->assertTrue($rule->evaluate($context));
+    }
+
+    public function testCallbackPropositionOnVariable()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'thing' => 27
+        ));
+        $test = $this;
+
+        $rule = $rb->logicalNot(
+            $rb['thing']->callbackProposition(
+                function ($c, Value $thing) use ($context, $test) {
+                    $test->assertSame($c, $context);
+                    return 27 != $thing->getValue();
+                }
+            )
+        );
+
+        $this->assertTrue($rule->evaluate($context));
+    }
+
+    public function testCallbackVariableOnBuilder()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'other' => 30
+        ));
+        $test = $this;
+
+        $ran = false;
+        $rule = $rb->logicalNot(
+            $rb->callbackVariable(
+                function ($c) use ($context, $test, &$ran) {
+                    $ran = true;
+                    $test->assertSame($c, $context);
+                    return 30;
+                }
+            )->equalTo($rb['other'])
+        );
+
+        $this->assertFalse($ran);
+        $this->assertFalse($rule->evaluate($context));
+        $this->assertTrue($ran);
+    }
+
+    public function testCallbackVariableOnVariable()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'this' => 27,
+            'that' => 3,
+            'other' => 30
+        ));
+        $test = $this;
+
+        $ran = false;
+        $rule = $rb->logicalNot(
+            $rb['this']->add($rb['that'])->callbackVariable(
+                function ($c, Value $given) use ($context, $test, &$ran) {
+                    $ran = true;
+                    $test->assertSame($c, $context);
+                    return $given->getValue();
+                }
+            )->equalTo($rb['other'])
+        );
+
+        $this->assertFalse($ran);
+        $this->assertFalse($rule->evaluate($context));
+        $this->assertTrue($ran);
+    }
+
+    public function testCallbackVariableMultiple()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'this' => 27,
+            'that' => 3,
+            'other' => 30
+        ));
+        $test = $this;
+
+        $ran = false;
+        $rule = $rb->logicalNot(
+            $rb['this']->add($rb['that'])->callbackVariable(
+                function ($c, Value $given, Value $twentySeven, Value $thirty) use ($context, $test, &$ran) {
+                    $ran = true;
+                    $test->assertSame($c, $context);
+                    $test->assertEquals(27, $twentySeven->getValue());
+                    $test->assertEquals(30, $thirty->getValue());
+                    return $given->getValue();
+                },
+                $rb['that']->exponentiate(3),
+                30
+            )->equalTo($rb['other'])
+        );
+
+        $this->assertFalse($ran);
+        $this->assertFalse($rule->evaluate($context));
+        $this->assertTrue($ran);
+    }
+
+    public function testReadme()
+    {
+        $rb = new RuleBuilder();
+        $context = new Context(array(
+            'this' => 4,
+            'that' => 2,
+            'other' => 6000
+        ));
+        $rule = $rb['this']->add($rb['that'])->callbackVariable(
+            function ($c, Value $given) {
+                return $given->getValue() * 1000;
+            }
+        )->equalTo($rb['other']);
+
+        //evaluates to true
+        $this->assertTrue($rule->evaluate($context));
+
+        $rule = $rb->callbackProposition(
+            function ($c, Value $that) {
+                return $that->getValue() == $c['that'];
+            },
+            $rb['that']
+        );
+
         $this->assertTrue($rule->evaluate($context));
     }
 }

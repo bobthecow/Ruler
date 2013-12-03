@@ -31,4 +31,13 @@ abstract class LogicalOperator extends PropositionOperator implements Propositio
             $this->addOperand($operand);
         }
     }
+
+    public function getOperands()
+    {
+        if (0 == count($this->operands)) {
+            throw new \LogicException(get_class($this) . ' takes at least 1 operand');
+        }
+
+        return parent::getOperands();
+    }
 }

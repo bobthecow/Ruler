@@ -220,9 +220,43 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * @return Operator\CallbackProposition
+     */
+    public function callbackProposition()
+    {
+        $funcArgs = func_get_args();
+        $args = array(
+            array_shift($funcArgs),
+            $this
+        );
+        foreach ($funcArgs as $arg) {
+            $args[] = $arg;
+        }
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackProposition');
+        return $reflection->newInstanceArgs($args);
+    }
+
+    /**
+     * @return self
+     */
+    public function callbackVariable()
+    {
+        $funcArgs = func_get_args();
+        $args = array(
+            array_shift($funcArgs),
+            $this
+        );
+        foreach ($funcArgs as $arg) {
+            $args[] = $arg;
+        }
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackVariableOperand');
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
      * @param $variable
      *
-     * @return Operator\Addition
+     * @return self
      */
     public function add($variable)
     {
@@ -232,7 +266,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Division
+     * @return self
      */
     public function divide($variable)
     {
@@ -242,7 +276,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Modulo
+     * @return self
      */
     public function modulo($variable)
     {
@@ -252,7 +286,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Multiplication
+     * @return self
      */
     public function multiply($variable)
     {
@@ -262,7 +296,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Subtraction
+     * @return self
      */
     public function subtract($variable)
     {
@@ -270,7 +304,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Negation
+     * @return self
      */
     public function negate()
     {
@@ -278,7 +312,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Ceil
+     * @return self
      */
     public function ceil()
     {
@@ -286,7 +320,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Floor
+     * @return self
      */
     public function floor()
     {
@@ -296,7 +330,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Exponentiate
+     * @return self
      */
     public function exponentiate($variable)
     {
