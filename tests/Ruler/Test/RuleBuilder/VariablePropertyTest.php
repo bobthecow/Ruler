@@ -80,8 +80,6 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $varC = $root['c'];
         $varD = $root['d'];
 
-        $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $varA->greaterThan(0));
-
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
         $this->assertFalse($varA->greaterThan(2)->evaluate($context));

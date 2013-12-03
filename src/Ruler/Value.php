@@ -111,4 +111,82 @@ class Value
     {
         return $this->value < $value->getValue();
     }
+
+    public function add(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return $this->value + $value->getValue();
+    }
+
+    public function divide(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        if (0 == $value->getValue()) {
+            throw new \RuntimeException("Division by zero");
+        }
+        return $this->value / $value->getValue();
+    }
+
+    public function modulo(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        if (0 == $value->getValue()) {
+            throw new \RuntimeException("Division by zero");
+        }
+        return $this->value % $value->getValue();
+    }
+
+    public function multiply(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return $this->value * $value->getValue();
+    }
+
+    public function subtract(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return $this->value - $value->getValue();
+    }
+
+    public function negate()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return -$this->value;
+    }
+
+    public function ceil()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return (int) ceil($this->value);
+    }
+
+    public function floor()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return (int) floor($this->value);
+    }
+
+    public function exponentiate(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        return pow($this->value, $value->getValue());
+    }
 }

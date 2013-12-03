@@ -220,6 +220,124 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * @return Operator\CallbackProposition
+     */
+    public function callbackProposition()
+    {
+        $funcArgs = func_get_args();
+        $args = array(
+            array_shift($funcArgs),
+            $this
+        );
+        foreach ($funcArgs as $arg) {
+            $args[] = $arg;
+        }
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackProposition');
+        return $reflection->newInstanceArgs($args);
+    }
+
+    /**
+     * @return self
+     */
+    public function callbackVariable()
+    {
+        $funcArgs = func_get_args();
+        $args = array(
+            array_shift($funcArgs),
+            $this
+        );
+        foreach ($funcArgs as $arg) {
+            $args[] = $arg;
+        }
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackVariableOperand');
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function add($variable)
+    {
+        return new self(null, new Operator\Addition($this, $this->asVariable($variable)));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function divide($variable)
+    {
+        return new self(null, new Operator\Division($this, $this->asVariable($variable)));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function modulo($variable)
+    {
+        return new self(null, new Operator\Modulo($this, $this->asVariable($variable)));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function multiply($variable)
+    {
+        return new self(null, new Operator\Multiplication($this, $this->asVariable($variable)));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function subtract($variable)
+    {
+        return new self(null, new Operator\Subtraction($this, $this->asVariable($variable)));
+    }
+
+    /**
+     * @return self
+     */
+    public function negate()
+    {
+        return new self(null, new Operator\Negation($this));
+    }
+
+    /**
+     * @return self
+     */
+    public function ceil()
+    {
+        return new self(null, new Operator\Ceil($this));
+    }
+
+    /**
+     * @return self
+     */
+    public function floor()
+    {
+        return new self(null, new Operator\Floor($this));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return self
+     */
+    public function exponentiate($variable)
+    {
+        return new self(null, new Operator\Exponentiate($this, $this->asVariable($variable)));
+    }
+
+    /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
      * @param mixed $variable BaseVariable instance or value

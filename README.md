@@ -304,7 +304,7 @@ everything we might need to access in a rule, we can use VariableProperties, and
 their convenient RuleBuilder interface:
 
 ```php
-// We can skip over the Context Variable building above. We'll simply set our, 
+// We can skip over the Context Variable building above. We'll simply set our,
 // default roles on the VariableProperty itself, then go right to writing rules:
 
 $rb['user']['roles'] = array('anonymous');
@@ -341,6 +341,45 @@ But that's not all...
 Check out [the test suite](https://github.com/bobthecow/Ruler/blob/master/tests/Ruler/Test/Functional/RulerTest.php)
 for more examples (and some hot CS 320 combinatorial logic action).
 
+
+But wait there's more!
+----------------------
+
+you can create callbacks that are either Propositions (boolean) or return Values:
+
+The callback takes the first parameter as the context. subsequent parameters are
+given as parameters after the callback.
+
+```php
+//CallbackVariable from a returned variable
+//NOTE: the $given value is whats returned by the addition.
+//      so in this case it's the value of (4 + 2) which is multiplied by 1000
+//      that in turn is equalTo 6000
+$rb = new RuleBuilder();
+$context = new Context(array(
+    'this' => 4,
+    'that' => 2,
+    'other' => 6000
+));
+$rule = $rb['this']->add($rb['that'])->callbackVariable(
+    function ($c, Value $given) {
+        return $given->getValue() * 1000;
+    }
+)->equalTo($rb['other']);
+
+//evaluates to true
+$rule->evaluate($context);
+
+//CallbackProposition from the rule builder
+$rule = $rb->callbackProposition(
+    function ($c, Value $that) {
+        return $that->getValue() == $c['that'];
+    },
+    $rb['that']
+);
+
+$rule->evaluate($context);
+```
 
 Ruler is plumbing. Bring your own porcelain.
 ============================================

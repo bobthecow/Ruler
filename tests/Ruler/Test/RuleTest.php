@@ -62,7 +62,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testNonCallableActionsWillThrowAnException()
     {

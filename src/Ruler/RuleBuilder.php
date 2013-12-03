@@ -11,11 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Operator;
-use Ruler\Proposition;
-use Ruler\Rule;
-use Ruler\RuleBuilder;
-
 /**
  * RuleBuilder.
  *
@@ -54,7 +49,7 @@ class RuleBuilder implements \ArrayAccess
      * Create a logical AND operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalAnd
      */
@@ -67,7 +62,7 @@ class RuleBuilder implements \ArrayAccess
      * Create a logical OR operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalOr
      */
@@ -85,20 +80,44 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalNot(Proposition $prop)
     {
-        return new Operator\LogicalNot(func_get_args());
+        return new Operator\LogicalNot(array($prop));
     }
 
     /**
      * Create a logical XOR operator proposition.
      *
      * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalXor
      */
     public function logicalXor(Proposition $prop, Proposition $prop2 = null)
     {
         return new Operator\LogicalXor(func_get_args());
+    }
+
+    /**
+     * @param $callback
+     *
+     * @return Operator\CallbackProposition
+     */
+    public function callbackProposition($callback)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackProposition');
+
+        return $reflection->newInstanceArgs(func_get_args());
+    }
+
+    /**
+     * @param $callback
+     *
+     * @return RuleBuilder\Variable
+     */
+    public function callbackVariable($callback)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\CallbackVariableOperand');
+
+        return new RuleBuilder\Variable(null, $reflection->newInstanceArgs(func_get_args()));
     }
 
     /**
@@ -118,7 +137,7 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name The Variable name
      *
-     * @return Variable
+     * @return RuleBuilder\Variable
      */
     public function offsetGet($name)
     {
@@ -134,8 +153,6 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name  The Variable name
      * @param mixed  $value The Variable default value
-     *
-     * @return Variable
      */
     public function offsetSet($name, $value)
     {

@@ -15,7 +15,6 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\Contains($varA, $varB);
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $op);
     }
 
     /**

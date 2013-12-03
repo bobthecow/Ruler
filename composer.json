@@ -12,7 +12,7 @@
         "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-0": { 
+        "psr-0": {
             "Ruler": "src",
             "Ruler\\Test": "tests"
             }

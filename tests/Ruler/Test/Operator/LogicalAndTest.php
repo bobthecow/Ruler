@@ -15,7 +15,6 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\LogicalAnd(array($true));
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $op);
     }
 
     public function testConstructor()
@@ -39,7 +38,7 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
         $op->addProposition($true);
         $this->assertTrue($op->evaluate($context));
 
-        $op->addProposition($true);
+        $op->addOperand($true);
         $this->assertTrue($op->evaluate($context));
 
         $op->addProposition($false);
@@ -47,7 +46,7 @@ class LogicalAndTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testExecutingALogicalAndWithoutPropositionsThrowsAnException()
     {

@@ -23,7 +23,7 @@ use Ruler\Operator;
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class Variable
+class Variable implements VariableOperand
 {
     private $name;
     private $value;
@@ -81,6 +81,8 @@ class Variable
     {
         if (isset($this->name) && isset($context[$this->name])) {
             $value = $context[$this->name];
+        } else if ($this->value instanceof VariableOperand){
+            $value = $this->value->prepareValue($context);
         } else {
             $value = $this->value;
         }
