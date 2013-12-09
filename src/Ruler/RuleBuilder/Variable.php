@@ -104,11 +104,11 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param mixed $variable Right side of comparison operator
      *
-     * @return Operator\Contains
+     * @return Operator\StringContains
      */
-    public function contains($variable)
+    public function stringContains($variable)
     {
-        return new Operator\Contains($this, $this->asVariable($variable));
+        return new Operator\StringContains($this, $this->asVariable($variable));
     }
 
     /**
@@ -116,11 +116,11 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param mixed $variable Right side of comparison operator
      *
-     * @return Operator\DoesNotContain
+     * @return Operator\StringDoesNotContain
      */
-    public function doesNotContain($variable)
+    public function stringDoesNotContain($variable)
     {
-        return new Operator\DoesNotContain($this, $this->asVariable($variable));
+        return new Operator\StringDoesNotContain($this, $this->asVariable($variable));
     }
 
     /**
@@ -217,6 +217,98 @@ class Variable extends BaseVariable implements \ArrayAccess
     public function notSameAs($variable)
     {
         return new Operator\NotSameAs($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Variable
+     */
+    public function union($variable)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Union');
+        $args = func_get_args();
+        array_unshift($args, $this);
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Variable
+     */
+    public function intersect($variable)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Intersect');
+        $args = func_get_args();
+        array_unshift($args, $this);
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Variable
+     */
+    public function complement($variable)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Complement');
+        $args = func_get_args();
+        array_unshift($args, $this);
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Variable
+     */
+    public function symmetricDifference($variable)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\SymmetricDifference');
+        $args = func_get_args();
+        array_unshift($args, $this);
+        return new self(null, $reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * @return Variable
+     */
+    public function min()
+    {
+        return new self(null, new Operator\Min($this));
+    }
+
+    /**
+     * @return Variable
+     */
+    public function max()
+    {
+        return new self(null, new Operator\Max($this));
+    }
+
+    /**
+     * Fluent interface helper to create a contains comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\SetContains
+     */
+    public function setContains($variable)
+    {
+        return new Operator\SetContains($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a contains comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\SetDoesNotContain
+     */
+    public function setDoesNotContain($variable)
+    {
+        return new Operator\SetDoesNotContain($this, $this->asVariable($variable));
     }
 
     /**

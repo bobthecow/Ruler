@@ -16,11 +16,11 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * A DoesNotContain comparison operator.
+ * A String Contains comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class DoesNotContain extends VariableOperator implements Proposition
+class StringContains extends VariableOperator implements Proposition
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition
@@ -32,7 +32,7 @@ class DoesNotContain extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-        return $left->prepareValue($context)->contains($right->prepareValue($context)) === false;
+        return $left->prepareValue($context)->stringContains($right->prepareValue($context));
     }
 
     protected function getOperandCardinality()
