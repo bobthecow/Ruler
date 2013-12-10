@@ -11,7 +11,7 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $facts = array(
             'name' => 'Mint Chip',
             'type' => 'Ice Cream',
-            'delicious' => function() {
+            'delicious' => function () {
                 return true;
             }
         );
@@ -28,4 +28,3 @@ class ContextTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($context['delicious']);
     }
 }
-

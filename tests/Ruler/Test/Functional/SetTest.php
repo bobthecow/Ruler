@@ -15,6 +15,7 @@ class SetTest extends \PHPUnit_Framework_TestCase
             'foo' => array('a', 'z'),
             'bar' => array('z', 'b'),
             'baz' => array('a', 'z', 'b', 'q'),
+            'bob' => array('a', 'd'),
         ));
 
         $this->assertTrue(
@@ -25,11 +26,11 @@ class SetTest extends \PHPUnit_Framework_TestCase
             )->evaluate($context)
         );
 
-        $this->assertFalse(
+        $this->assertTrue(
             $rb->create(
-                $rb['foo']->intersect(
-                    $rb['bar']->symmetricDifference($rb['baz'])
-                )->setDoesNotContain($rb['expected'])
+                $rb['bar']->union(
+                    $rb['bob']
+                )->containsSubset($rb['foo'])
             )->evaluate($context)
         );
     }

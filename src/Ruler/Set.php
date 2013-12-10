@@ -39,6 +39,26 @@ class Set extends Value
                 $this->value = array($this->value);
             }
         }
+        foreach ($this->value as &$value) {
+            if (is_array($value)) {
+                $value = new Set($value);
+            }
+        }
+
+        $this->value = array_unique($this->value);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $returnValue = '';
+        foreach ($this->value as $value) {
+            $returnValue .= (string) $value;
+        }
+
+        return $returnValue;
     }
 
     /**
@@ -50,6 +70,15 @@ class Set extends Value
      */
     public function setContains(Value $value)
     {
+        if (is_array($value->getValue())) {
+            foreach ($this->value as $val) {
+                if ($val instanceof Set
+                    && $val == $value->getSet()) {
+                    return true;
+                }
+            }
+            return false;
+        }
         return in_array($value->getValue(), $this->value);
     }
 
@@ -125,7 +154,8 @@ class Set extends Value
     }
 
     /**
-     * @return Value
+     * @return mixed
+     * @throws \RuntimeException
      */
     public function min()
     {
@@ -139,7 +169,8 @@ class Set extends Value
     }
 
     /**
-     * @return Value
+     * @return mixed
+     * @throws \RuntimeException
      */
     public function max()
     {
@@ -150,6 +181,20 @@ class Set extends Value
             return null;
         }
         return max($this->value);
+    }
+
+    /**
+     * @param Set $set
+     *
+     * @return bool
+     */
+    public function containsSubset(Set $set)
+    {
+        if (count($set->getValue()) > count($this->getValue())) {
+            return false;
+        }
+
+        return array_intersect($set->getValue(), $this->getValue()) == $set->getValue();
     }
 
     protected function isValidNumericSet()

@@ -288,6 +288,26 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * @param $variable
+     *
+     * @return Operator\ContainsSubset
+     */
+    public function containsSubset($variable)
+    {
+        return new Operator\ContainsSubset($this, $this->asVariable($variable));
+    }
+
+    /**
+     * @param $variable
+     *
+     * @return Operator\DoesNotContainSubset
+     */
+    public function doesNotContainSubset($variable)
+    {
+        return new Operator\DoesNotContainSubset($this, $this->asVariable($variable));
+    }
+
+    /**
      * Fluent interface helper to create a contains comparison operator.
      *
      * @param mixed $variable Right side of comparison operator

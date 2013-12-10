@@ -74,7 +74,7 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($rb->create($false)->evaluate($context));
 
         $executed = false;
-        $rule = $rb->create($true, function() use (&$executed) {
+        $rule = $rb->create($true, function () use (&$executed) {
             $executed = true;
         });
 
