@@ -6,14 +6,14 @@ use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Variable;
 
-class StringContainsTest extends \PHPUnit_Framework_TestCase
+class StringContainsInsensitiveTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
         $varB = new Variable('b', array(2));
 
-        $op = new Operator\StringContains($varA, $varB);
+        $op = new Operator\StringContainsInsensitive($varA, $varB);
         $this->assertInstanceOf('Ruler\Proposition', $op);
     }
 
@@ -26,7 +26,7 @@ class StringContainsTest extends \PHPUnit_Framework_TestCase
         $varB    = new Variable('b', $b);
         $context = new Context();
 
-        $op = new Operator\StringContains($varA, $varB);
+        $op = new Operator\StringContainsInsensitive($varA, $varB);
         $this->assertEquals($op->evaluate($context), $result);
     }
 
@@ -39,7 +39,7 @@ class StringContainsTest extends \PHPUnit_Framework_TestCase
         $varB    = new Variable('b', $b);
         $context = new Context();
 
-        $op = new Operator\StringDoesNotContain($varA, $varB);
+        $op = new Operator\StringDoesNotContainInsensitive($varA, $varB);
         $this->assertNotEquals($op->evaluate($context), $result);
     }
 
@@ -51,7 +51,15 @@ class StringContainsTest extends \PHPUnit_Framework_TestCase
             array('supercalifragilistic', 'a', true),
             array('supercalifragilistic', 'stic', true),
             array('timmy', 'bob', false),
-            array('tim', 'TIM', false),
+            array('timmy', 'tim', true),
+            array('supercalifragilistic', 'SUPER', true),
+            array('supercalifragilistic', 'frAgil', true),
+            array('supercalifragilistic', 'A', true),
+            array('supercalifragilistic', 'sTiC', true),
+            array('timmy', 'bob', false),
+            array('timmy', 'TIM', true),
+            array('tim', 'TIM', true),
+            array('tim', 'TiM', true),
         );
     }
 }

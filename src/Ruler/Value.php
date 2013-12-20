@@ -91,6 +91,18 @@ class Value
     }
 
     /**
+     * Contains comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function stringContainsInsensitive(Value $value)
+    {
+        return stripos($this->value, $value->getValue()) !== false;
+    }
+
+    /**
      * Greater Than comparison.
      *
      * @param Value $value Value object to compare against
