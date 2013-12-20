@@ -70,6 +70,9 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
                         'qux' => 3,
                     ),
                 ),
+                'e' => 'string',
+                'f' => 'ring',
+                'g' => 'stuff'
             ),
         ));
 
@@ -79,6 +82,9 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $varB = $root['b'];
         $varC = $root['c'];
         $varD = $root['d'];
+        $varE = $root['e'];
+        $varF = $root['f'];
+        $varG = $root['g'];
 
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
@@ -111,11 +117,17 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\Contains', $varC->contains(1));
-        $this->assertTrue($varC->contains($varA)->evaluate($context));
+        $this->assertInstanceOf('Ruler\Operator\StringContains', $varE->stringContains('ring'));
+        $this->assertTrue($varE->stringContains($varF)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\DoesNotContain', $varC->doesNotContain(1));
-        $this->assertTrue($varC->doesNotContain($varB)->evaluate($context));
+        $this->assertInstanceOf('Ruler\Operator\StringDoesNotContain', $varE->stringDoesNotContain('cheese'));
+        $this->assertTrue($varE->stringDoesNotContain($varG)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\SetContains', $varC->setContains(1));
+        $this->assertTrue($varC->setContains($varA)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\SetDoesNotContain', $varC->setDoesNotContain(1));
+        $this->assertTrue($varC->setDoesNotContain($varB)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\RuleBuilder\VariableProperty', $varD['bar']);
         $this->assertEquals($varD['foo']->getName(), 'foo');

@@ -37,7 +37,7 @@ class DivisionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDivideByZero()
     {
-        $varA    = new Variable('a', rand(1,100));
+        $varA    = new Variable('a', rand(1, 100));
         $varB    = new Variable('b', 0);
         $context = new Context();
 

@@ -30,7 +30,7 @@ class GreaterThanTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($op->evaluate($context));
 
         $context['a'] = 3;
-        $context['b'] = function() {
+        $context['b'] = function () {
             return 0;
         };
         $this->assertTrue($op->evaluate($context));

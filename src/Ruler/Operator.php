@@ -26,7 +26,8 @@ abstract class Operator
     /**
      * @param array $operands
      */
-    public function __construct() {
+    public function __construct()
+    {
         foreach (func_get_args() as $operand) {
             $this->addOperand($operand);
         }

@@ -15,17 +15,17 @@ class RuleSetTest extends \PHPUnit_Framework_TestCase
         $true    = new TrueProposition();
 
         $executedActionA = false;
-        $ruleA = new Rule($true, function() use (&$executedActionA) {
+        $ruleA = new Rule($true, function () use (&$executedActionA) {
             $executedActionA = true;
         });
 
         $executedActionB = false;
-        $ruleB = new Rule($true, function() use (&$executedActionB) {
+        $ruleB = new Rule($true, function () use (&$executedActionB) {
             $executedActionB = true;
         });
 
         $executedActionC = false;
-        $ruleC = new Rule($true, function() use (&$executedActionC) {
+        $ruleC = new Rule($true, function () use (&$executedActionC) {
             $executedActionC = true;
         });
 

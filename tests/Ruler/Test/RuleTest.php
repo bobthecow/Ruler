@@ -29,7 +29,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
                 $executed = true;
                 return false;
             }),
-            function() use ($test, &$actionExecuted) {
+            function () use ($test, &$actionExecuted) {
                 $actionExecuted = true;
             }
         );
@@ -49,7 +49,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
                 $executed = true;
                 return true;
             }),
-            function() use ($test, &$actionExecuted) {
+            function () use ($test, &$actionExecuted) {
                 $actionExecuted = true;
             }
         );
