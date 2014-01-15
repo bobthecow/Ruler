@@ -22,8 +22,6 @@ use Ruler\Proposition;
  */
 class LogicalNot extends LogicalOperator
 {
-    protected $proposition;
-
     /**
      * Logical NOT constructor
      *
@@ -41,7 +39,7 @@ class LogicalNot extends LogicalOperator
                 throw new \LogicException('Logical Not requires exactly one proposition');
             }
 
-            $this->proposition = array_pop($props);
+            $this->addProposition(array_pop($props));
         }
     }
 
@@ -53,15 +51,15 @@ class LogicalNot extends LogicalOperator
      *
      * @param Proposition $prop Child Proposition
      *
-     * @throws LogicException
+     * @throws \LogicException
      */
     public function addProposition(Proposition $prop)
     {
-        if (isset($this->proposition)) {
+        if (count($this->propositions) == 1) {
             throw new \LogicException('Logical Not requires exactly one proposition');
         }
 
-        $this->proposition = $prop;
+        $this->propositions[] = $prop;
     }
 
     /**
@@ -69,14 +67,15 @@ class LogicalNot extends LogicalOperator
      *
      * @param Context $context Context with which to evaluate this LogicalOperator
      *
+     * @throws \LogicException
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        if (!isset($this->proposition)) {
+        if (count($this->propositions) != 1) {
             throw new \LogicException('Logical Not requires exactly one proposition');
         }
 
-        return !$this->proposition->evaluate($context);
+        return !$this->propositions[0]->evaluate($context);
     }
 }
