@@ -37,4 +37,24 @@ abstract class ComparisonOperator implements Proposition
         $this->left  = $left;
         $this->right = $right;
     }
+
+    /**
+     * Returns left variable
+     *
+     * @return \Ruler\Variable
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * Returns right variable
+     *
+     * @return \Ruler\Variable
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
 }
