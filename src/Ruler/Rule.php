@@ -59,6 +59,7 @@ class Rule implements Proposition
      * $action callback.
      *
      * @param Context $context Context with which to execute this Rule
+     * @throws \LogicException
      */
     public function execute(Context $context)
     {
@@ -69,5 +70,15 @@ class Rule implements Proposition
 
             call_user_func($this->action);
         }
+    }
+
+    /**
+     * Returns previously set condition
+     *
+     * @return \Ruler\Proposition
+     */
+    public function getCondition()
+    {
+        return $this->condition;
     }
 }
