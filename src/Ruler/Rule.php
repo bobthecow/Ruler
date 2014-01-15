@@ -59,6 +59,7 @@ class Rule implements Proposition
      * $action callback.
      *
      * @param Context $context Context with which to execute this Rule
+     * @throws \LogicException
      */
     public function execute(Context $context)
     {
