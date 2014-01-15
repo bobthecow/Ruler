@@ -2,11 +2,15 @@
 
 namespace Ruler\Test;
 
+use Ruler\Operator\GreaterThanOrEqualTo;
+use Ruler\Operator\LessThanOrEqualTo;
+use Ruler\Operator\LogicalAnd;
 use Ruler\Rule;
 use Ruler\Proposition;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
 use Ruler\Test\Fixtures\CallbackProposition;
+use Ruler\Variable;
 
 class RuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,5 +73,22 @@ class RuleTest extends \PHPUnit_Framework_TestCase
         $context = new Context();
         $rule = new Rule(new TrueProposition(), 'this is not callable');
         $rule->execute($context);
+    }
+
+    public function testConditionCanBeReturned()
+    {
+        $actualNumPeople = new Variable('actualNumPeople');
+        $rule = new Rule(
+            new LogicalAnd(array(
+                new LessThanOrEqualTo(new Variable('minNumPeople'), $actualNumPeople),
+                new GreaterThanOrEqualTo(new Variable('maxNumPeople'), $actualNumPeople)
+            )),
+            function() {
+                echo 'YAY!';
+            }
+        );
+
+        $condition = $rule->getCondition();
+        $this->assertInstanceOf('Ruler\Operator\LogicalAnd', $condition);
     }
 }
