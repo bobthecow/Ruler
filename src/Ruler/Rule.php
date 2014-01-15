@@ -71,4 +71,14 @@ class Rule implements Proposition
             call_user_func($this->action);
         }
     }
+
+    /**
+     * Returns previously set condition
+     *
+     * @return \Ruler\Proposition
+     */
+    public function getCondition()
+    {
+        return $this->condition;
+    }
 }
