@@ -49,4 +49,14 @@ abstract class LogicalOperator implements Proposition
     {
         $this->propositions[] = $prop;
     }
+
+    /**
+     * Returns existing propositions
+     *
+     * @return array
+     */
+    public function getPropositions()
+    {
+        return $this->propositions;
+    }
 }
