@@ -32,7 +32,7 @@ class LogicalNot extends LogicalOperator
      *
      * @param array $props Child Proposition (default:null)
      *
-     * @throws LogicException
+     * @throws \LogicException
      */
     public function __construct(array $props = null)
     {
