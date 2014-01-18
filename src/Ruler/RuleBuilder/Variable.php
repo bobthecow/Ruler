@@ -12,7 +12,6 @@
 namespace Ruler\RuleBuilder;
 
 use Ruler\Operator;
-use Ruler\RuleBuilder\VariableProperty;
 use Ruler\Variable as BaseVariable;
 
 /**
@@ -36,8 +35,8 @@ class Variable extends BaseVariable implements \ArrayAccess
      * Get a VariableProperty for accessing methods, indexes and properties of
      * the current variable.
      *
-     * @param  string $name  Property name
-     * @param  mixed  $value The default VariableProperty value
+     * @param string $name  Property name
+     * @param mixed  $value The default VariableProperty value
      *
      * @return VariableProperty
      */
@@ -53,7 +52,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * Fluent interface method for checking whether a VariableProperty has been defined.
      *
-     * @param  string $name Property name
+     * @param string $name Property name
      *
      * @return bool
      */
@@ -67,7 +66,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @see getProperty
      *
-     * @param  string $name Property name
+     * @param string $name Property name
      *
      * @return VariableProperty
      */
@@ -198,7 +197,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * Fluent interface helper to create a SameAs comparison operator.
      *
-     * @param mixed $variable  Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
      *
      * @return Operator\SameAs
      */
@@ -210,7 +209,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * Fluent interface helper to create a NotSameAs comparison operator.
      *
-     * @param mixed $variable  Right side of comparison operator
+     * @param mixed $variable Right side of comparison operator
      *
      * @return Operator\SameAs
      */

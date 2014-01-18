@@ -27,6 +27,7 @@ class Addition extends VariableOperator implements VariableOperand
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
+
         return new Value($left->prepareValue($context)->add($right->prepareValue($context)));
     }
 

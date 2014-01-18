@@ -11,8 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-
 /**
  * A Ruler RuleSet.
  *

@@ -32,7 +32,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $values = array(
             'one' => 'Foo',
             'two' => 'BAR',
-            'three' => function() {
+            'three' => function () {
                 return 'baz';
             }
         );

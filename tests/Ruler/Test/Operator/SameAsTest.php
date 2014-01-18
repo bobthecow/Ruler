@@ -30,7 +30,7 @@ class SameAsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($op->evaluate($context));
 
         $context['a'] = 3;
-        $context['b'] = function() {
+        $context['b'] = function () {
             return 3;
         };
         $this->assertTrue($op->evaluate($context));

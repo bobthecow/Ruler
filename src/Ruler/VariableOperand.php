@@ -11,9 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-use Ruler\Value;
-
 /**
  * @author Jordan Raub <jordan@raub.me>
  */

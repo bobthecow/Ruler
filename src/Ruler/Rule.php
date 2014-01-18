@@ -11,9 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Proposition;
-use Ruler\Context;
-
 /**
  * Rule class.
  *
@@ -58,7 +55,7 @@ class Rule implements Proposition
      * The Rule will be evaluated, and if successful, will execute its
      * $action callback.
      *
-     * @param Context $context Context with which to execute this Rule
+     * @param  Context         $context Context with which to execute this Rule
      * @throws \LogicException
      */
     public function execute(Context $context)

@@ -12,7 +12,6 @@
 namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
-use Ruler\RuleBuilder\Variable;
 use Ruler\Value;
 use Ruler\Variable as BaseVariable;
 

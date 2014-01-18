@@ -26,6 +26,7 @@ class Floor extends VariableOperator implements VariableOperand
     {
         /** @var VariableOperand $operand */
         list($operand) = $this->getOperands();
+
         return new Value($operand->prepareValue($context)->floor());
     }
 

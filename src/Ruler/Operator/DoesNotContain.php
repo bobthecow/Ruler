@@ -32,6 +32,7 @@ class DoesNotContain extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
+
         return $left->prepareValue($context)->contains($right->prepareValue($context)) === false;
     }
 

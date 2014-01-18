@@ -11,8 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-
 /**
  * The Proposition interface represents a propositional statement.
  *

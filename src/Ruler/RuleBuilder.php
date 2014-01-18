@@ -48,7 +48,7 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical AND operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
+     * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalAnd
@@ -61,7 +61,7 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical OR operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
+     * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalOr
@@ -86,7 +86,7 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical XOR operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
+     * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalXor

@@ -81,7 +81,7 @@ class Value
     {
         if (is_array($this->value)) {
             return in_array($value->getValue(), $this->value);
-        } else if (is_string($this->value)) {
+        } elseif (is_string($this->value)) {
             return strpos($value->getValue(), $this->value) !== false;
         }
 
@@ -117,6 +117,7 @@ class Value
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return $this->value + $value->getValue();
     }
 
@@ -128,6 +129,7 @@ class Value
         if (0 == $value->getValue()) {
             throw new \RuntimeException("Division by zero");
         }
+
         return $this->value / $value->getValue();
     }
 
@@ -139,6 +141,7 @@ class Value
         if (0 == $value->getValue()) {
             throw new \RuntimeException("Division by zero");
         }
+
         return $this->value % $value->getValue();
     }
 
@@ -147,6 +150,7 @@ class Value
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return $this->value * $value->getValue();
     }
 
@@ -155,6 +159,7 @@ class Value
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return $this->value - $value->getValue();
     }
 
@@ -163,6 +168,7 @@ class Value
         if (!is_numeric($this->value)) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return -$this->value;
     }
 
@@ -171,6 +177,7 @@ class Value
         if (!is_numeric($this->value)) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return (int) ceil($this->value);
     }
 
@@ -179,6 +186,7 @@ class Value
         if (!is_numeric($this->value)) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return (int) floor($this->value);
     }
 
@@ -187,6 +195,7 @@ class Value
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
+
         return pow($this->value, $value->getValue());
     }
 }
