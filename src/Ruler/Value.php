@@ -198,4 +198,38 @@ class Value
 
         return pow($this->value, $value->getValue());
     }
+
+    /**
+     * Check if the string starts with a string
+     *
+     * @param Value $value
+     *
+     * @return bool
+     */
+    public function startsWith(Value $value)
+    {
+        $value = $value->getValue();
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= strlen($value)) {
+            return substr_compare($this->value, $value, 0, strlen($value)) === 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the string ends with a string
+     *
+     * @param Value $value
+     *
+     * @return bool
+     */
+    public function endsWith(Value $value)
+    {
+        $value = $value->getValue();
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= strlen($value)) {
+            return substr_compare($this->value, $value, -strlen($value)) === 0;
+        }
+
+        return false;
+    }
 }
