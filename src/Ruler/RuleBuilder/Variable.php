@@ -313,4 +313,52 @@ class Variable extends BaseVariable implements \ArrayAccess
     {
         return ($variable instanceof BaseVariable) ? $variable : new BaseVariable(null, $variable);
     }
+
+    /**
+     * Fluent interface helper to create a startsWith comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\StartsWith
+     */
+    public function startsWith($variable)
+    {
+        return new Operator\StartsWith($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a endsWith comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\EndsWith
+     */
+    public function endsWith($variable)
+    {
+        return new Operator\EndsWith($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a contained comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\Contained
+     */
+    public function contained($variable)
+    {
+        return new Operator\Contained($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a contained comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\IsNotContained
+     */
+    public function isNotContained($variable)
+    {
+        return new Operator\IsNotContained($this, $this->asVariable($variable));
+    }
 }

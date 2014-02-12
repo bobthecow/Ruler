@@ -70,6 +70,11 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
                         'qux' => 3,
                     ),
                 ),
+                'e' => 'supercalifragilistic',
+                'f' => 'super',
+                'g' => 'fragil',
+                'h' => 'stic',
+                'i' => 'foo',
             ),
         ));
 
@@ -79,6 +84,11 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $varB = $root['b'];
         $varC = $root['c'];
         $varD = $root['d'];
+        $varE = $root['e'];
+        $varF = $root['f'];
+        $varG = $root['g'];
+        $varH = $root['h'];
+        $varI = $root['i'];
 
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
@@ -111,11 +121,17 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));
 
+        $this->assertInstanceOf('Ruler\Operator\Contained', $varG->contained('supercalifragilistic'));
+        $this->assertTrue($varG->contained($varE)->evaluate($context));
+
         $this->assertInstanceOf('Ruler\Operator\Contains', $varC->contains(1));
         $this->assertTrue($varC->contains($varA)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\Operator\DoesNotContain', $varC->doesNotContain(1));
         $this->assertTrue($varC->doesNotContain($varB)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\IsNotContained', $varI->isNotContained('supercalifragilistic'));
+        $this->assertTrue($varI->doesNotContain($varE)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\RuleBuilder\VariableProperty', $varD['bar']);
         $this->assertEquals($varD['foo']->getName(), 'foo');
@@ -128,5 +144,11 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Ruler\RuleBuilder\VariableProperty', $varD['baz']['qux']);
         $this->assertEquals($varD['baz']['qux']->getName(), 'qux');
         $this->assertTrue($varD['baz']['qux']->equalTo(3)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\StartsWith', $varE->startsWith('super'));
+        $this->assertTrue($varE->startsWith($varF)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\EndsWith', $varE->endsWith('stic'));
+        $this->assertTrue($varE->endsWith($varH)->evaluate($context));
     }
 }
