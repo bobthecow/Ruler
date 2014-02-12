@@ -337,4 +337,28 @@ class Variable extends BaseVariable implements \ArrayAccess
     {
         return new Operator\EndsWith($this, $this->asVariable($variable));
     }
+
+    /**
+     * Fluent interface helper to create a contained comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\Contained
+     */
+    public function contained($variable)
+    {
+        return new Operator\Contained($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a contained comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\IsNotContained
+     */
+    public function isNotContained($variable)
+    {
+        return new Operator\IsNotContained($this, $this->asVariable($variable));
+    }
 }

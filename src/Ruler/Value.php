@@ -82,7 +82,7 @@ class Value
         if (is_array($this->value)) {
             return in_array($value->getValue(), $this->value);
         } elseif (is_string($this->value)) {
-            return strpos($value->getValue(), $this->value) !== false;
+            return strpos($this->value, $value->getValue()) !== false;
         }
 
         return false;
