@@ -160,6 +160,16 @@ class Variable
         return new Operator\NotEqualTo($this, $this->asVariable($variable));
     }
 
+    public function sameAs($variable)
+    {
+        return new Operator\SameAs($this, $this->asVariable($variable));
+    }
+
+    public function notSameAs($variable)
+    {
+        return new Operator\NotSameAs($this, $this->asVariable($variable));
+    }
+
     /**
      * Private helper to retrieve a Variable instance for the given $variable.
      *
@@ -171,4 +181,6 @@ class Variable
     {
         return ($variable instanceof Variable) ? $variable : new Variable(null, $variable);
     }
+
+
 }

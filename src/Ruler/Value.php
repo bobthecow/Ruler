@@ -59,6 +59,18 @@ class Value
     }
 
     /**
+     * Identical To comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function sameAs(Value $value)
+    {
+        return $this->value === $value->getValue();
+    }
+
+    /**
      * Greater Than comparison.
      *
      * @param Value $value Value object to compare against
@@ -81,4 +93,5 @@ class Value
     {
         return $this->value < $value->getValue();
     }
+
 }
