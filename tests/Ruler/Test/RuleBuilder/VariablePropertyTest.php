@@ -141,4 +141,34 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($varD['baz']['qux']->getName(), 'qux');
         $this->assertTrue($varD['baz']['qux']->equalTo(3)->evaluate($context));
     }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedExceptionMessage Contains operator is deprecated, please use SetContains
+     */
+    public function testDeprecationNoticeForContainsWithSet()
+    {
+        $context = new Context(array(
+            'var' => array('foo', 'bar', 'baz'),
+        ));
+
+        $var = new Variable('var');
+
+        $this->assertTrue($var->contains('bar')->evaluate($context));
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedExceptionMessage Contains operator is deprecated, please use StringContains
+     */
+    public function testDeprecationNoticeForContainsWithString()
+    {
+        $context = new Context(array(
+            'var' => 'string',
+        ));
+
+        $var = new Variable('var');
+
+        $this->assertTrue($var->contains('ring')->evaluate($context));
+    }
 }

@@ -81,7 +81,7 @@ class Value
     }
 
     /**
-     * Contains comparison.
+     * String Contains comparison.
      *
      * @param Value $value Value object to compare against
      *
@@ -93,7 +93,7 @@ class Value
     }
 
     /**
-     * Contains comparison.
+     * String Contains case-insensitive comparison.
      *
      * @param Value $value Value object to compare against
      *
