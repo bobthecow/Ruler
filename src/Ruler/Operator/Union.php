@@ -30,6 +30,7 @@ class Union extends VariableOperator implements VariableOperand
             $set = $operand->prepareValue($context)->getSet();
             $union = $union->union($set);
         }
+
         return $union;
     }
 

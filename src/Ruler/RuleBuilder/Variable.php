@@ -228,6 +228,7 @@ class Variable extends BaseVariable implements \ArrayAccess
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\Union');
         $args = func_get_args();
         array_unshift($args, $this);
+
         return new self(null, $reflection->newInstanceArgs($args));
     }
 
@@ -241,6 +242,7 @@ class Variable extends BaseVariable implements \ArrayAccess
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\Intersect');
         $args = func_get_args();
         array_unshift($args, $this);
+
         return new self(null, $reflection->newInstanceArgs($args));
     }
 
@@ -254,6 +256,7 @@ class Variable extends BaseVariable implements \ArrayAccess
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\Complement');
         $args = func_get_args();
         array_unshift($args, $this);
+
         return new self(null, $reflection->newInstanceArgs($args));
     }
 
@@ -267,6 +270,7 @@ class Variable extends BaseVariable implements \ArrayAccess
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\SymmetricDifference');
         $args = func_get_args();
         array_unshift($args, $this);
+
         return new self(null, $reflection->newInstanceArgs($args));
     }
 

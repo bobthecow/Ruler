@@ -13,7 +13,6 @@ namespace Ruler\Operator;
 
 use Ruler\Context;
 use Ruler\Set;
-use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
@@ -35,6 +34,7 @@ class Complement extends VariableOperator implements VariableOperand
                 $complement = $complement->complement($set);
             }
         }
+
         return $complement;
     }
 

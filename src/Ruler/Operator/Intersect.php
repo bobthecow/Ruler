@@ -34,6 +34,7 @@ class Intersect extends VariableOperator implements VariableOperand
                 $intersect = $intersect->intersect($set);
             }
         }
+
         return $intersect;
     }
 

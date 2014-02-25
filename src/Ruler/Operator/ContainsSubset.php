@@ -32,8 +32,9 @@ class ContainsSubset extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
+
         return $left->prepareValue($context)->getSet()
-            ->ContainsSubset($right->prepareValue($context)->getSet());
+            ->containsSubset($right->prepareValue($context)->getSet());
     }
 
     protected function getOperandCardinality()

@@ -32,6 +32,7 @@ class StringDoesNotContain extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
+
         return $left->prepareValue($context)->stringContains($right->prepareValue($context)) === false;
     }
 

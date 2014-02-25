@@ -77,8 +77,10 @@ class Set extends Value
                     return true;
                 }
             }
+
             return false;
         }
+
         return in_array($value->getValue(), $this->value);
     }
 
@@ -117,6 +119,7 @@ class Set extends Value
             //array_values is needed to make sure the indexes are ordered from 0
             $intersect = array_values(array_intersect($intersect, $convertedArg));
         }
+
         return new self($intersect);
     }
 
@@ -136,6 +139,7 @@ class Set extends Value
             //array_values is needed to make sure the indexes are ordered from 0
             $complement = array_values(array_diff($complement, $convertedArg));
         }
+
         return new self($complement);
     }
 
@@ -147,6 +151,7 @@ class Set extends Value
     public function symmetricDifference(Value $set)
     {
         $returnValue = new Set(array());
+
         return $returnValue->union(
             $this->complement($set),
             $set->getSet()->complement($this)
@@ -165,6 +170,7 @@ class Set extends Value
         if (empty($this->value)) {
             return null;
         }
+
         return min($this->value);
     }
 
@@ -180,6 +186,7 @@ class Set extends Value
         if (empty($this->value)) {
             return null;
         }
+
         return max($this->value);
     }
 
