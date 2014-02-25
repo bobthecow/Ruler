@@ -12,20 +12,20 @@
 namespace Ruler;
 
 /**
- * A Ruler Value.
+ * A Ruler Set.
  *
- * A Value represents a comparable terminal value. Variables and Comparison Operators
- * are resolved to Values by applying the current Context and the default Variable value.
+ * A Set is essentially an array, a special case of Value which can be compared
+ * by SetOperators.
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
 class Set extends Value
 {
     /**
-     * Value constructor.
+     * Set constructor.
      *
-     * A Value object is immutable, and is used by Variables for comparing their default
-     * values or facts from the current Context.
+     * A Set object is immutable, and is used by Variables for comparing their
+     * Default values or facts from the current Context.
      *
      * @param mixed $set Immutable value represented by this Value object
      */
@@ -62,7 +62,7 @@ class Set extends Value
     }
 
     /**
-     * Contains comparison.
+     * Set Contains comparison.
      *
      * @param Value $value Value object to compare against
      *
@@ -85,6 +85,10 @@ class Set extends Value
     }
 
     /**
+     * Set union operator.
+     *
+     * Returns a Set which is the union of this Set with all passed Sets.
+     *
      * @param Value $set,...
      *
      * @return Set
@@ -104,6 +108,10 @@ class Set extends Value
     }
 
     /**
+     * Set intersection operator.
+     *
+     * Returns a Set which is the intersection of this Set with all passed sets.
+     *
      * @param Value $set,...
      *
      * @return Set
@@ -124,6 +132,10 @@ class Set extends Value
     }
 
     /**
+     * Set complement operator.
+     *
+     * Returns a Set which is the complement of this Set with all passed Sets.
+     *
      * @param Value $set,...
      *
      * @return Set
@@ -144,6 +156,11 @@ class Set extends Value
     }
 
     /**
+     * Set symmetric difference operator.
+     *
+     * Returns a Set which is the symmetric difference of this Set with the
+     * passed Set.
+     *
      * @param Value $set
      *
      * @return Set
@@ -159,8 +176,11 @@ class Set extends Value
     }
 
     /**
+     * Numeric minimum value in this Set.
+     *
+     * @throws \RuntimeException if this Set contains non-numeric members.
+     *
      * @return mixed
-     * @throws \RuntimeException
      */
     public function min()
     {
@@ -175,8 +195,11 @@ class Set extends Value
     }
 
     /**
+     * Numeric maximum value in this Set.
+     *
+     * @throws \RuntimeException if this Set contains non-numeric members.
+     *
      * @return mixed
-     * @throws \RuntimeException
      */
     public function max()
     {
@@ -191,6 +214,8 @@ class Set extends Value
     }
 
     /**
+     * Contains Subset comparison.
+     *
      * @param Set $set
      *
      * @return bool
@@ -204,6 +229,11 @@ class Set extends Value
         return array_intersect($set->getValue(), $this->getValue()) == $set->getValue();
     }
 
+    /**
+     * Helper function to validate that a set contains only numeric members.
+     *
+     * @return bool
+     */
     protected function isValidNumericSet()
     {
         return count($this->value) == array_sum(array_map('is_numeric', $this->value));

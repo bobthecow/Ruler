@@ -47,6 +47,8 @@ class Value
     }
 
     /**
+     * Get a Set containing this Value.
+     *
      * @return Set
      */
     public function getSet()
