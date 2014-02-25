@@ -16,11 +16,11 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * A DoesNotContain comparison operator.
+ * A String Contains case insensitive comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Jordan Raub <jordan@raub.me>
  */
-class DoesNotContain extends VariableOperator implements Proposition
+class StringContainsInsensitive extends VariableOperator implements Proposition
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition
@@ -32,8 +32,7 @@ class DoesNotContain extends VariableOperator implements Proposition
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
-
-        return $left->prepareValue($context)->contains($right->prepareValue($context)) === false;
+        return $left->prepareValue($context)->stringContainsInsensitive($right->prepareValue($context));
     }
 
     protected function getOperandCardinality()

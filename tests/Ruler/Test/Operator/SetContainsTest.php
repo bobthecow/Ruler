@@ -6,14 +6,14 @@ use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Variable;
 
-class ContainsTest extends \PHPUnit_Framework_TestCase
+class SetContainsTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
         $varB = new Variable('b', array(2));
 
-        $op = new Operator\Contains($varA, $varB);
+        $op = new Operator\SetContains($varA, $varB);
         $this->assertInstanceOf('Ruler\Proposition', $op);
     }
 
@@ -26,7 +26,7 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
         $varB    = new Variable('b', $b);
         $context = new Context();
 
-        $op = new Operator\Contains($varA, $varB);
+        $op = new Operator\SetContains($varA, $varB);
         $this->assertEquals($op->evaluate($context), $result);
     }
 
@@ -39,7 +39,7 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
         $varB    = new Variable('b', $b);
         $context = new Context();
 
-        $op = new Operator\DoesNotContain($varA, $varB);
+        $op = new Operator\SetDoesNotContain($varA, $varB);
         $this->assertNotEquals($op->evaluate($context), $result);
     }
 
@@ -56,10 +56,6 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
             array(array(1, 2, 3), array(2), false),
             array(array(1, 2, array('foo')), array('foo'), true),
             array(array(1), array(1), false),
-            array('super', 'supercalifragilistic', true),
-            array('fragil', 'supercalifragilistic', true),
-            array('a', 'supercalifragilistic', true),
-            array('stic', 'supercalifragilistic', true)
         );
     }
 }

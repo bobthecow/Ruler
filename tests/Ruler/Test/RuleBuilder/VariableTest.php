@@ -167,11 +167,11 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\Contains', $varC->contains(1));
-        $this->assertTrue($varC->contains($varA)->evaluate($context));
+        $this->assertInstanceOf('Ruler\Operator\SetContains', $varC->setContains(1));
+        $this->assertTrue($varC->setContains($varA)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\DoesNotContain', $varC->doesNotContain(1));
-        $this->assertTrue($varC->doesNotContain($varB)->evaluate($context));
+        $this->assertInstanceOf('Ruler\Operator\SetDoesNotContain', $varC->setDoesNotContain(1));
+        $this->assertTrue($varC->setDoesNotContain($varB)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\RuleBuilder\VariableProperty', $varD['bar']);
         $this->assertEquals($varD['foo']->getName(), 'foo');

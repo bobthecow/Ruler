@@ -47,6 +47,14 @@ class Value
     }
 
     /**
+     * @return Set
+     */
+    public function getSet()
+    {
+        return new Set($this->value);
+    }
+
+    /**
      * Equal To comparison.
      *
      * @param Value $value Value object to compare against
@@ -77,15 +85,21 @@ class Value
      *
      * @return boolean
      */
-    public function contains(Value $value)
+    public function stringContains(Value $value)
     {
-        if (is_array($this->value)) {
-            return in_array($value->getValue(), $this->value);
-        } elseif (is_string($this->value)) {
-            return strpos($value->getValue(), $this->value) !== false;
-        }
+        return strpos($this->value, $value->getValue()) !== false;
+    }
 
-        return false;
+    /**
+     * Contains comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function stringContainsInsensitive(Value $value)
+    {
+        return stripos($this->value, $value->getValue()) !== false;
     }
 
     /**

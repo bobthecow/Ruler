@@ -16,11 +16,11 @@ use Ruler\Proposition;
 use Ruler\VariableOperand;
 
 /**
- * A Contains comparison operator.
+ * A Set Contains comparison operator.
  *
  * @author Justin Hileman <justin@shopopensky.com>
  */
-class Contains extends VariableOperator implements Proposition
+class SetContains extends VariableOperator implements Proposition
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition
@@ -33,7 +33,7 @@ class Contains extends VariableOperator implements Proposition
         /** @var VariableOperand $right */
         list($left, $right) = $this->getOperands();
 
-        return $left->prepareValue($context)->contains($right->prepareValue($context));
+        return $left->prepareValue($context)->getSet()->setContains($right->prepareValue($context));
     }
 
     protected function getOperandCardinality()
