@@ -2,6 +2,7 @@
 
 namespace Ruler\Test\RuleBuilder;
 
+use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
 use Ruler\Context;
 use Ruler\Value;
@@ -11,7 +12,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $name = 'evil';
-        $var = new Variable($name);
+        $var  = new Variable(new RuleBuilder(), $name);
         $this->assertEquals($name, $var->getName());
         $this->assertNull($var->getValue());
     }
@@ -20,7 +21,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
     {
         $values = explode(', ', 'Plug it, play it, burn it, rip it, drag and drop it, zip, unzip it');
 
-        $variable = new Variable('technologic');
+        $variable = new Variable(new RuleBuilder(), 'technologic');
         foreach ($values as $valueString) {
             $variable->setValue($valueString);
             $this->assertEquals($valueString, $variable->getValue());
@@ -39,7 +40,8 @@ class VariableTest extends \PHPUnit_Framework_TestCase
 
         $context = new Context($values);
 
-        $varA = new Variable('four', 'qux');
+        $rb   = new RuleBuilder();
+        $varA = new Variable($rb, 'four', 'qux');
         $this->assertInstanceOf('Ruler\Value', $varA->prepareValue($context));
         $this->assertEquals(
             'qux',
@@ -47,19 +49,19 @@ class VariableTest extends \PHPUnit_Framework_TestCase
             "Variables should return the default value if it's missing from the context."
         );
 
-        $varB = new Variable('one', 'FAIL');
+        $varB = new Variable($rb, 'one', 'FAIL');
         $this->assertEquals(
             'Foo',
             $varB->prepareValue($context)->getValue()
         );
 
-        $varC = new Variable('three', 'FAIL');
+        $varC = new Variable($rb, 'three', 'FAIL');
         $this->assertEquals(
             'baz',
             $varC->prepareValue($context)->getValue()
         );
 
-        $varD = new Variable(null, 'qux');
+        $varD = new Variable($rb, null, 'qux');
         $this->assertInstanceOf('Ruler\Value', $varD->prepareValue($context));
         $this->assertEquals(
             'qux',
@@ -70,6 +72,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
 
     public function testFluentInterfaceHelpersAndAnonymousVariables()
     {
+        $rb = new RuleBuilder();
         $context = new Context(array(
             'a' => 1,
             'b' => 2,
@@ -84,11 +87,11 @@ class VariableTest extends \PHPUnit_Framework_TestCase
             'e' => 1.5,
         ));
 
-        $varA = new Variable('a');
-        $varB = new Variable('b');
-        $varC = new Variable('c');
-        $varD = new Variable('d');
-        $varE = new Variable('e');
+        $varA = new Variable($rb, 'a');
+        $varB = new Variable($rb, 'b');
+        $varC = new Variable($rb, 'c');
+        $varD = new Variable($rb, 'd');
+        $varE = new Variable($rb, 'e');
 
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
@@ -188,7 +191,7 @@ class VariableTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayAccess()
     {
-        $var = new Variable;
+        $var = new Variable(new RuleBuilder());
         $this->assertInstanceOf('ArrayAccess', $var);
 
         $foo = $var['foo'];
@@ -218,58 +221,5 @@ class VariableTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(isset($var['bar']));
         $this->assertFalse(isset($var['baz']));
         $this->assertTrue(isset($var['qux']));
-    }
-
-    public function testExternalOperators()
-    {
-        Variable::registerOperatorNamespace('\Ruler\Test\Fixtures');
-        $context = new Context(array('a' => 100));
-        $varA = new Variable('a');
-
-        $this->assertTrue($varA->aLotGreaterThan(1)->evaluate($context));
-
-        $context['a'] = 9;
-        $this->assertFalse($varA->aLotGreaterThan(1)->evaluate($context));
-    }
-
-    /**
-     * @dataProvider testLogicExceptionOnRegisteringOperatorNamespaceProvider
-     *
-     * @expectedException LogicException
-     * @expectedExceptionMessage Namespace argument must be a string
-     */
-    public function testLogicExceptionOnRegisteringOperatorNamespace($input)
-    {
-        Variable::registerOperatorNamespace($input);
-    }
-
-    public function testLogicExceptionOnRegisteringOperatorNamespaceProvider()
-    {
-        return array(
-            array(
-                array('ExceptionRisen')
-            ),
-            array(
-                new \StdClass()
-            ),
-            array(
-                0
-            ),
-            array(
-                null
-            )
-        );
-    }
-
-    /**
-     * @expectedException LogicException
-     * @expectedExceptionMessage Did not manage to instantiate extra operator "aLotBiggerThan"
-     */
-    public function testLogicExceptionOnUnknownOperator()
-    {
-        Variable::registerOperatorNamespace('\Ruler\Test\Fixtures');
-        $varA = new Variable('a');
-
-        $varA->aLotBiggerThan(1);
     }
 }

@@ -104,4 +104,61 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertTrue($rule->evaluate($context));
     }
+
+    public function testExternalOperators()
+    {
+        $rb = new RuleBuilder();
+        $rb->registerOperatorNamespace('\Ruler\Test\Fixtures');
+
+        $context = new Context(array('a' => 100));
+        $varA = $rb['a'];
+
+        $this->assertTrue($varA->aLotGreaterThan(1)->evaluate($context));
+
+        $context['a'] = 9;
+        $this->assertFalse($varA->aLotGreaterThan(1)->evaluate($context));
+    }
+
+    /**
+     * @dataProvider testLogicExceptionOnRegisteringOperatorNamespaceProvider
+     *
+     * @expectedException LogicException
+     * @expectedExceptionMessage Namespace argument must be a string
+     */
+    public function testLogicExceptionOnRegisteringOperatorNamespace($input)
+    {
+        $rb = new RuleBuilder();
+        $rb->registerOperatorNamespace($input);
+    }
+
+    public function testLogicExceptionOnRegisteringOperatorNamespaceProvider()
+    {
+        return array(
+            array(
+                array('ExceptionRisen')
+            ),
+            array(
+                new \StdClass()
+            ),
+            array(
+                0
+            ),
+            array(
+                null
+            )
+        );
+    }
+
+    /**
+     * @expectedException LogicException
+     * @expectedExceptionMessage Unknown operator: "aLotBiggerThan"
+     */
+    public function testLogicExceptionOnUnknownOperator()
+    {
+        $rb = new RuleBuilder();
+        $rb->registerOperatorNamespace('\Ruler\Test\Fixtures');
+        $varA = $rb['a'];
+
+        $varA->aLotBiggerThan(1);
+    }
 }

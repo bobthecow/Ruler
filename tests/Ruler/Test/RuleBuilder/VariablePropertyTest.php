@@ -4,6 +4,7 @@ namespace Ruler\Test\RuleBuilder;
 
 use Ruler\Context;
 use Ruler\Value;
+use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
 use Ruler\RuleBuilder\VariableProperty;
 
@@ -12,7 +13,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $name = 'evil';
-        $prop = new VariableProperty(new Variable, $name);
+        $prop = new VariableProperty(new Variable(new RuleBuilder()), $name);
         $this->assertEquals($name, $prop->getName());
         $this->assertNull($prop->getValue());
     }
@@ -21,7 +22,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     {
         $values = explode(', ', 'Plug it, play it, burn it, rip it, drag and drop it, zip, unzip it');
 
-        $prop = new VariableProperty(new Variable, 'technologic');
+        $prop = new VariableProperty(new Variable(new RuleBuilder()), 'technologic');
         foreach ($values as $valueString) {
             $prop->setValue($valueString);
             $this->assertEquals($valueString, $prop->getValue());
@@ -39,7 +40,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
 
         $context = new Context($values);
 
-        $var = new Variable('root');
+        $var = new Variable(new RuleBuilder(), 'root');
 
         $propA = new VariableProperty($var, 'undefined', 'default');
         $this->assertInstanceOf('Ruler\Value', $propA->prepareValue($context));
@@ -76,7 +77,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
             ),
         ));
 
-        $root = new Variable('root');
+        $root = new Variable(new RuleBuilder(), 'root');
 
         $varA = $root['a'];
         $varB = $root['b'];
@@ -164,7 +165,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
             'var' => array('foo', 'bar', 'baz'),
         ));
 
-        $var = new Variable('var');
+        $var = new Variable(new RuleBuilder(), 'var');
 
         $this->assertTrue($var->contains('bar')->evaluate($context));
     }
@@ -179,7 +180,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
             'var' => 'string',
         ));
 
-        $var = new Variable('var');
+        $var = new Variable(new RuleBuilder(), 'var');
 
         $this->assertTrue($var->contains('ring')->evaluate($context));
     }

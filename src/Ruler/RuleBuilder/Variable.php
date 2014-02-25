@@ -11,7 +11,9 @@
 
 namespace Ruler\RuleBuilder;
 
+use Ruler\VariableOperand;
 use Ruler\Operator;
+use Ruler\RuleBuilder;
 use Ruler\Variable as BaseVariable;
 
 /**
@@ -29,23 +31,30 @@ use Ruler\Variable as BaseVariable;
  */
 class Variable extends BaseVariable implements \ArrayAccess
 {
+    private $ruleBuilder;
     private $properties = array();
-    private static $operatorNamespaces = array();
 
     /**
-     * Register an operator namespace to use external operators
+     * RuleBuilder Variable constructor.
      *
-     * @param string $namespace Operator namespace
-     *
-     * @throwt LogicException
+     * @param RuleBuilder $ruleBuilder
+     * @param string      $name        Variable name (default: null)
+     * @param mixed       $value       Default Variable value (default: null)
      */
-    public static function registerOperatorNamespace($namespace)
+    public function __construct(RuleBuilder $ruleBuilder, $name = null, $value = null)
     {
-        if (!is_string($namespace)) {
-            throw new \LogicException('Namespace argument must be a string');
-        }
+        $this->ruleBuilder = $ruleBuilder;
+        parent::__construct($name, $value);
+    }
 
-        self::$operatorNamespaces[] = $namespace;
+    /**
+     * Get the RuleBuilder instance set on this Variable.
+     *
+     * @return RuleBuilder
+     */
+    public function getRuleBuilder()
+    {
+        return $this->ruleBuilder;
     }
 
     /**
@@ -294,7 +303,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function min()
     {
-        return new self(null, new Operator\Min($this));
+        return new self($this->ruleBuilder, null, new Operator\Min($this));
     }
 
     /**
@@ -302,7 +311,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function max()
     {
-        return new self(null, new Operator\Max($this));
+        return new self($this->ruleBuilder, null, new Operator\Max($this));
     }
 
     /**
@@ -356,7 +365,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function add($variable)
     {
-        return new self(null, new Operator\Addition($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Addition($this, $this->asVariable($variable)));
     }
 
     /**
@@ -366,7 +375,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function divide($variable)
     {
-        return new self(null, new Operator\Division($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Division($this, $this->asVariable($variable)));
     }
 
     /**
@@ -376,7 +385,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function modulo($variable)
     {
-        return new self(null, new Operator\Modulo($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Modulo($this, $this->asVariable($variable)));
     }
 
     /**
@@ -386,7 +395,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function multiply($variable)
     {
-        return new self(null, new Operator\Multiplication($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Multiplication($this, $this->asVariable($variable)));
     }
 
     /**
@@ -396,7 +405,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function subtract($variable)
     {
-        return new self(null, new Operator\Subtraction($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Subtraction($this, $this->asVariable($variable)));
     }
 
     /**
@@ -404,7 +413,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function negate()
     {
-        return new self(null, new Operator\Negation($this));
+        return new self($this->ruleBuilder, null, new Operator\Negation($this));
     }
 
     /**
@@ -412,7 +421,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function ceil()
     {
-        return new self(null, new Operator\Ceil($this));
+        return new self($this->ruleBuilder, null, new Operator\Ceil($this));
     }
 
     /**
@@ -420,7 +429,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function floor()
     {
-        return new self(null, new Operator\Floor($this));
+        return new self($this->ruleBuilder, null, new Operator\Floor($this));
     }
 
     /**
@@ -430,7 +439,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function exponentiate($variable)
     {
-        return new self(null, new Operator\Exponentiate($this, $this->asVariable($variable)));
+        return new self($this->ruleBuilder, null, new Operator\Exponentiate($this, $this->asVariable($variable)));
     }
 
     /**
@@ -458,7 +467,7 @@ class Variable extends BaseVariable implements \ArrayAccess
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\' . $name);
         array_unshift($args, $this);
 
-        return new self(null, $reflection->newInstanceArgs($args));
+        return new self($this->ruleBuilder, null, $reflection->newInstanceArgs($args));
     }
 
     /**
@@ -510,27 +519,29 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * Magic method to try instanstiate extra operators considering operator namespaces previously registered
+     * Magic method to apply operators registered with RuleBuilder.
      *
-     * @see Variable::registerOperatorNamespace
+     * @see RuleBuilder::registerOperatorNamespace
      *
-     * @throws LogicException
+     * @throws \LogicException if operator is not registered.
+     *
+     * @param string $name
+     * @param array  $args
+     *
+     * @return Operator
      */
-    public function __call($name, $arguments)
+    public function __call($name, array $args)
     {
-        $operator = ucfirst($name);
+        $reflection = new \ReflectionClass($this->ruleBuilder->findOperator($name));
+        $args = array_map(array($this, 'asVariable'), $args);
+        array_unshift($args, $this);
 
-        foreach (self::$operatorNamespaces as $operatorNamespace) {
-            $class = $operatorNamespace . '\\' . $operator;
+        $op = $reflection->newInstanceArgs($args);
 
-            if (class_exists($class)) {
-                return new $class($this, $this->asVariable($arguments[0]));
-            }
+        if ($op instanceof VariableOperand) {
+            return new self($this->ruleBuilder, null, $op);
+        } else {
+            return $op;
         }
-
-        throw new \LogicException(
-            sprintf('Did not manage to instantiate extra operator "%s"',
-            $name
-        ));
     }
 }

@@ -49,7 +49,7 @@ class VariableProperty extends Variable
     public function __construct(BaseVariable $parent, $name, $value = null)
     {
         $this->parent = $parent;
-        parent::__construct($name, $value);
+        parent::__construct($parent->getRuleBuilder(), $name, $value);
     }
 
     /**
