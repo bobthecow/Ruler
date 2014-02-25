@@ -239,7 +239,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function union($variable)
     {
-        return new self(null, $this->getOperator('Union', func_get_args()));
+        return $this->applySetOperator('Union', func_get_args());
     }
 
     /**
@@ -249,7 +249,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function intersect($variable)
     {
-        return new self(null, $this->getOperator('Intersect', func_get_args()));
+        return $this->applySetOperator('Intersect', func_get_args());
     }
 
     /**
@@ -259,7 +259,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function complement($variable)
     {
-        return new self(null, $this->getOperator('Complement', func_get_args()));
+        return $this->applySetOperator('Complement', func_get_args());
     }
 
     /**
@@ -269,7 +269,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function symmetricDifference($variable)
     {
-        return new self(null, $this->getOperator('SymmetricDifference', func_get_args()));
+        return $this->applySetOperator('SymmetricDifference', func_get_args());
     }
 
     /**
@@ -429,14 +429,14 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * Private helper to instantiate an operator instance.
+     * Private helper to apply a set operator.
      *
      * @param string $name
      * @param array  $args
      *
      * @return Variable
      */
-    private function getOperator($name, array $args)
+    private function applySetOperator($name, array $args)
     {
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\' . $name);
         array_unshift($args, $this);
