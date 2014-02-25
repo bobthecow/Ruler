@@ -225,11 +225,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function union($variable)
     {
-        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Union');
-        $args = func_get_args();
-        array_unshift($args, $this);
-
-        return new self(null, $reflection->newInstanceArgs($args));
+        return new self(null, $this->getOperator('Union', func_get_args()));
     }
 
     /**
@@ -239,11 +235,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function intersect($variable)
     {
-        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Intersect');
-        $args = func_get_args();
-        array_unshift($args, $this);
-
-        return new self(null, $reflection->newInstanceArgs($args));
+        return new self(null, $this->getOperator('Intersect', func_get_args()));
     }
 
     /**
@@ -253,11 +245,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function complement($variable)
     {
-        $reflection = new \ReflectionClass('\\Ruler\\Operator\\Complement');
-        $args = func_get_args();
-        array_unshift($args, $this);
-
-        return new self(null, $reflection->newInstanceArgs($args));
+        return new self(null, $this->getOperator('Complement', func_get_args()));
     }
 
     /**
@@ -267,11 +255,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function symmetricDifference($variable)
     {
-        $reflection = new \ReflectionClass('\\Ruler\\Operator\\SymmetricDifference');
-        $args = func_get_args();
-        array_unshift($args, $this);
-
-        return new self(null, $reflection->newInstanceArgs($args));
+        return new self(null, $this->getOperator('SymmetricDifference', func_get_args()));
     }
 
     /**
@@ -428,5 +412,21 @@ class Variable extends BaseVariable implements \ArrayAccess
     private function asVariable($variable)
     {
         return ($variable instanceof BaseVariable) ? $variable : new BaseVariable(null, $variable);
+    }
+
+    /**
+     * Private helper to instantiate an operator instance.
+     *
+     * @param string $name
+     * @param array  $args
+     *
+     * @return Variable
+     */
+    private function getOperator($name, array $args)
+    {
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\' . $name);
+        array_unshift($args, $this);
+
+        return new self(null, $reflection->newInstanceArgs($args));
     }
 }
