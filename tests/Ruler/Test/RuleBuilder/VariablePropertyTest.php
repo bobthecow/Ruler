@@ -140,6 +140,18 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Ruler\RuleBuilder\VariableProperty', $varD['baz']['qux']);
         $this->assertEquals($varD['baz']['qux']->getName(), 'qux');
         $this->assertTrue($varD['baz']['qux']->equalTo(3)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\EndsWith', $varE->endsWith('string'));
+        $this->assertTrue($varE->endsWith($varE)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\EndsWithInsensitive', $varE->endsWithInsensitive('STRING'));
+        $this->assertTrue($varE->endsWithInsensitive($varE)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\StartsWith', $varE->startsWith('string'));
+        $this->assertTrue($varE->startsWith($varE)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\StartsWithInsensitive', $varE->startsWithInsensitive('STRING'));
+        $this->assertTrue($varE->startsWithInsensitive($varE)->evaluate($context));
     }
 
     /**

@@ -443,4 +443,52 @@ class Variable extends BaseVariable implements \ArrayAccess
 
         return new self(null, $reflection->newInstanceArgs($args));
     }
+
+    /**
+     * Fluent interface helper to create a endsWith comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\EndsWith
+     */
+    public function endsWith($variable)
+    {
+        return new Operator\EndsWith($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a endsWith insensitive comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\EndsWithInsensitive
+     */
+    public function endsWithInsensitive($variable)
+    {
+        return new Operator\EndsWithInsensitive($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a startsWith comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\StartsWith
+     */
+    public function startsWith($variable)
+    {
+        return new Operator\StartsWith($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Fluent interface helper to create a startsWith insensitive comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\StartsWithInsensitive
+     */
+    public function startsWithInsensitive($variable)
+    {
+        return new Operator\StartsWithInsensitive($this, $this->asVariable($variable));
+    }
 }
