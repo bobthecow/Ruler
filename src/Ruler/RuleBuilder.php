@@ -18,7 +18,6 @@ namespace Ruler;
  * Rules.
  *
  * @author Justin Hileman <justin@justinhileman.info>
- * @implements ArrayAccess
  */
 class RuleBuilder implements \ArrayAccess
 {

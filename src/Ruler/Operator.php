@@ -12,7 +12,6 @@
 namespace Ruler;
 
 /**
- * @abstract
  * @author Jordan Raub <jordan@raub.me>
  */
 abstract class Operator

@@ -18,7 +18,6 @@ namespace Ruler;
  * executed upon successful evaluation.
  *
  * @author Justin Hileman <justin@justinhileman.info>
- * @implements Proposition
  */
 class Rule implements Proposition
 {
