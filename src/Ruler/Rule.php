@@ -17,7 +17,7 @@ namespace Ruler;
  * A Rule is a conditional Proposition with an (optional) action which is
  * executed upon successful evaluation.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  * @implements Proposition
  */
 class Rule implements Proposition

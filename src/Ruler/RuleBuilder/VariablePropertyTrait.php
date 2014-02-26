@@ -31,7 +31,7 @@ use Ruler\Variable;
  * replaced with terminal Values from properties of their parent Variable,
  * either from their default Value, or from the current Context.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 trait VariablePropertyTrait
 {

@@ -16,7 +16,7 @@ use Ruler\Proposition;
 /**
  * Logical operator base class
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 abstract class LogicalOperator extends PropositionOperator implements Proposition
 {

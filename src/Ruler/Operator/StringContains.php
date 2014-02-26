@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A String Contains comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class StringContains extends VariableOperator implements Proposition
 {

@@ -17,7 +17,7 @@ use Ruler\Proposition;
 /**
  * A logical AND operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LogicalAnd extends LogicalOperator
 {

@@ -17,7 +17,7 @@ use Ruler\Proposition;
 /**
  * A logical XOR operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LogicalXor extends LogicalOperator
 {

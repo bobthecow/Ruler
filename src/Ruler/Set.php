@@ -17,7 +17,7 @@ namespace Ruler;
  * A Set is essentially an array, a special case of Value which can be compared
  * by SetOperators.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Set extends Value
 {

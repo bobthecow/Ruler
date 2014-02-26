@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A Set Contains comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class SetDoesNotContain extends VariableOperator implements Proposition
 {

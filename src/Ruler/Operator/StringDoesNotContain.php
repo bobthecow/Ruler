@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A StringDoesNotContain comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class StringDoesNotContain extends VariableOperator implements Proposition
 {

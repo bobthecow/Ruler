@@ -25,7 +25,7 @@ use Ruler\Variable as BaseVariable;
  * interface for creating VariableProperties, Operators and Rules without all
  * kinds of awkward object instantiation.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Variable extends BaseVariable implements \ArrayAccess
 {

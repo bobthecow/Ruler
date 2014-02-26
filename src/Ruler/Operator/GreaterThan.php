@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A GreaterThan comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class GreaterThan extends VariableOperator implements Proposition
 {

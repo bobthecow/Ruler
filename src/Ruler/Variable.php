@@ -18,7 +18,7 @@ namespace Ruler;
  * evaluation, they are replaced with terminal Values, either from the Variable
  * default or from the current Context.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Variable implements VariableOperand
 {

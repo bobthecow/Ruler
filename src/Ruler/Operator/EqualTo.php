@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * An EqualTo comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class EqualTo extends VariableOperator implements Proposition
 {

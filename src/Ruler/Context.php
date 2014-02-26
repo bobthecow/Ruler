@@ -16,7 +16,7 @@ namespace Ruler;
  *
  * The Context contains facts with which to evaluate a Rule or other Proposition.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Context extends \Pimple
 {

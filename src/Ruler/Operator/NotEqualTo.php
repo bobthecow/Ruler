@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A NotEqualTo comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class NotEqualTo extends VariableOperator implements Proposition
 {

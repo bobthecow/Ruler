@@ -33,7 +33,7 @@ use Ruler\Variable as BaseVariable;
  * PHP 5.3+. Instead it uses a highly refined "copy and paste" technique,
  * perfected over years of diligent practice.)
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class VariableProperty extends Variable
 {

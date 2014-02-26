@@ -18,7 +18,7 @@ use Ruler\VariableOperand;
 /**
  * A LessThanOrEqualTo comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LessThanOrEqualTo extends VariableOperator implements Proposition
 {

@@ -17,7 +17,7 @@ use Ruler\Proposition;
 /**
  * A logical NOT operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LogicalNot extends LogicalOperator
 {

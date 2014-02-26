@@ -20,7 +20,7 @@ use Ruler\VariableOperand;
  *
  * @deprecated Please use SetContains or StringContains operators instead.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Contains extends VariableOperator implements Proposition
 {

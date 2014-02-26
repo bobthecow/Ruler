@@ -17,7 +17,7 @@ namespace Ruler;
  * A Value represents a comparable terminal value. Variables and Comparison Operators
  * are resolved to Values by applying the current Context and the default Variable value.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Value
 {

@@ -17,7 +17,7 @@ namespace Ruler;
  * The RuleBuilder provides a DSL and fluent interface for constructing
  * Rules.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  * @implements ArrayAccess
  */
 class RuleBuilder implements \ArrayAccess
