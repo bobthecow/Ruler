@@ -214,4 +214,44 @@ class Value
 
         return pow($this->value, $value->getValue());
     }
+
+    /**
+     * String StartsWith comparison.
+     *
+     * @param Value $value Value object to compare against
+     * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
+     *
+     * @return boolean
+     */
+    public function startsWith(Value $value, $insensitive = false)
+    {
+        $value = $value->getValue();
+        $valueLength = strlen($value);
+
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= $valueLength) {
+            return substr_compare($this->value, $value, 0, $valueLength, $insensitive) === 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * String EndsWith comparison.
+     *
+     * @param Value $value Value object to compare against
+     * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
+     *
+     * @return boolean
+     */
+    public function endsWith(Value $value, $insensitive = false)
+    {
+        $value = $value->getValue();
+        $valueLength = strlen($value);
+
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= $valueLength) {
+            return substr_compare($this->value, $value, -$valueLength, $valueLength, $insensitive) === 0;
+        }
+
+        return false;
+    }
 }
