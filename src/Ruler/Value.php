@@ -218,7 +218,7 @@ class Value
     /**
      * String StartsWith comparison.
      *
-     * @param Value $value Value object to compare against
+     * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
      *
      * @return boolean
@@ -238,7 +238,7 @@ class Value
     /**
      * String EndsWith comparison.
      *
-     * @param Value $value Value object to compare against
+     * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
      *
      * @return boolean
