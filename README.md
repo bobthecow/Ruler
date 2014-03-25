@@ -335,14 +335,40 @@ If none of the above are true, it will return the default value for this
 VariableProperty.
 
 
-External Operators
-------------------
+Add your own Operators
+----------------------
 
-Additional operators can be written to fit special per project needs:
+If none of the default Ruler Operators fit your needs, you can write your own! Just define additional operators like this:
 
 ```php
-// Assume the namespace is known and ALotGreaterThan operator is implemented
-$rb->registesOperatorNamespace('Ruler\Test\Fixtures');
+namespace My\Ruler\Operators;
+
+use Ruler\Context;
+use Ruler\Operator\VariableOperator;
+use Ruler\Proposition;
+use Ruler\Value;
+
+class ALotGreaterThan extends VariableOperator implements Proposition
+{
+    public function evaluate(Context $context)
+    {
+        list($left, $right) = $this->getOperands();
+        $value = $right->prepareValue($context)->getValue() * 10;
+
+        return $left->prepareValue($context)->greaterThan(new Value($value));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
+    }
+}
+```
+
+Then you can use them with RuleBuilder like this:
+
+```php
+$rb->registerOperatorNamespace('My\Ruler\Operators');
 $rb->create(
     $rb['a']->aLotGreaterThan(10);
 );
