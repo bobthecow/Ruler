@@ -5,8 +5,7 @@
     "homepage": "https://github.com/bobthecow/Ruler",
     "license": "MIT",
     "require": {
-        "php": ">=5.3.0",
-        "pimple/pimple": "1.0.*"
+        "php": ">=5.3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "*"
