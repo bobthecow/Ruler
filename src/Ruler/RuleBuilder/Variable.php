@@ -12,7 +12,10 @@
 namespace Ruler\RuleBuilder;
 
 use Ruler\Operator;
+use Ruler\Operator\VariableOperator;
+use Ruler\RuleBuilder;
 use Ruler\Variable as BaseVariable;
+use Ruler\VariableOperand;
 
 /**
  * A propositional Variable.
@@ -29,7 +32,31 @@ use Ruler\Variable as BaseVariable;
  */
 class Variable extends BaseVariable implements \ArrayAccess
 {
+    private $ruleBuilder;
     private $properties = array();
+
+    /**
+     * RuleBuilder Variable constructor.
+     *
+     * @param RuleBuilder $ruleBuilder
+     * @param string      $name        Variable name (default: null)
+     * @param mixed       $value       Default Variable value (default: null)
+     */
+    public function __construct(RuleBuilder $ruleBuilder, $name = null, $value = null)
+    {
+        $this->ruleBuilder = $ruleBuilder;
+        parent::__construct($name, $value);
+    }
+
+    /**
+     * Get the RuleBuilder instance set on this Variable.
+     *
+     * @return RuleBuilder
+     */
+    public function getRuleBuilder()
+    {
+        return $this->ruleBuilder;
+    }
 
     /**
      * Get a VariableProperty for accessing methods, indexes and properties of
@@ -239,7 +266,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function union($variable)
     {
-        return new self(null, $this->getOperator('Union', func_get_args()));
+        return $this->applySetOperator('Union', func_get_args());
     }
 
     /**
@@ -249,7 +276,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function intersect($variable)
     {
-        return new self(null, $this->getOperator('Intersect', func_get_args()));
+        return $this->applySetOperator('Intersect', func_get_args());
     }
 
     /**
@@ -259,7 +286,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function complement($variable)
     {
-        return new self(null, $this->getOperator('Complement', func_get_args()));
+        return $this->applySetOperator('Complement', func_get_args());
     }
 
     /**
@@ -269,7 +296,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function symmetricDifference($variable)
     {
-        return new self(null, $this->getOperator('SymmetricDifference', func_get_args()));
+        return $this->applySetOperator('SymmetricDifference', func_get_args());
     }
 
     /**
@@ -277,7 +304,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function min()
     {
-        return new self(null, new Operator\Min($this));
+        return $this->wrap(new Operator\Min($this));
     }
 
     /**
@@ -285,7 +312,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function max()
     {
-        return new self(null, new Operator\Max($this));
+        return $this->wrap(new Operator\Max($this));
     }
 
     /**
@@ -339,7 +366,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function add($variable)
     {
-        return new self(null, new Operator\Addition($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Addition($this, $this->asVariable($variable)));
     }
 
     /**
@@ -349,7 +376,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function divide($variable)
     {
-        return new self(null, new Operator\Division($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Division($this, $this->asVariable($variable)));
     }
 
     /**
@@ -359,7 +386,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function modulo($variable)
     {
-        return new self(null, new Operator\Modulo($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Modulo($this, $this->asVariable($variable)));
     }
 
     /**
@@ -369,7 +396,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function multiply($variable)
     {
-        return new self(null, new Operator\Multiplication($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Multiplication($this, $this->asVariable($variable)));
     }
 
     /**
@@ -379,7 +406,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function subtract($variable)
     {
-        return new self(null, new Operator\Subtraction($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Subtraction($this, $this->asVariable($variable)));
     }
 
     /**
@@ -387,7 +414,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function negate()
     {
-        return new self(null, new Operator\Negation($this));
+        return $this->wrap(new Operator\Negation($this));
     }
 
     /**
@@ -395,7 +422,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function ceil()
     {
-        return new self(null, new Operator\Ceil($this));
+        return $this->wrap(new Operator\Ceil($this));
     }
 
     /**
@@ -403,7 +430,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function floor()
     {
-        return new self(null, new Operator\Floor($this));
+        return $this->wrap(new Operator\Floor($this));
     }
 
     /**
@@ -413,7 +440,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function exponentiate($variable)
     {
-        return new self(null, new Operator\Exponentiate($this, $this->asVariable($variable)));
+        return $this->wrap(new Operator\Exponentiate($this, $this->asVariable($variable)));
     }
 
     /**
@@ -429,19 +456,31 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * Private helper to instantiate an operator instance.
+     * Private helper to apply a set operator.
      *
      * @param string $name
      * @param array  $args
      *
      * @return Variable
      */
-    private function getOperator($name, array $args)
+    private function applySetOperator($name, array $args)
     {
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\' . $name);
         array_unshift($args, $this);
 
-        return new self(null, $reflection->newInstanceArgs($args));
+        return $this->wrap($reflection->newInstanceArgs($args));
+    }
+
+    /**
+     * Private helper to wrap a VariableOperator in a Variable instance.
+     *
+     * @param VariableOperator $op
+     *
+     * @return Variable
+     */
+    private function wrap(VariableOperator $op)
+    {
+        return new self($this->ruleBuilder, null, $op);
     }
 
     /**
@@ -490,5 +529,32 @@ class Variable extends BaseVariable implements \ArrayAccess
     public function startsWithInsensitive($variable)
     {
         return new Operator\StartsWithInsensitive($this, $this->asVariable($variable));
+    }
+
+    /**
+     * Magic method to apply operators registered with RuleBuilder.
+     *
+     * @see RuleBuilder::registerOperatorNamespace
+     *
+     * @throws \LogicException if operator is not registered.
+     *
+     * @param string $name
+     * @param array  $args
+     *
+     * @return Operator
+     */
+    public function __call($name, array $args)
+    {
+        $reflection = new \ReflectionClass($this->ruleBuilder->findOperator($name));
+        $args = array_map(array($this, 'asVariable'), $args);
+        array_unshift($args, $this);
+
+        $op = $reflection->newInstanceArgs($args);
+
+        if ($op instanceof VariableOperand) {
+            return $this->wrap($op);
+        } else {
+            return $op;
+        }
     }
 }
