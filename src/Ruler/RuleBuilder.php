@@ -42,7 +42,7 @@ class RuleBuilder implements \ArrayAccess
      *
      * Note that, depending on your filesystem, operator namespaces are most likely case sensitive.
      *
-     * @throws \LogicException
+     * @throws \InvalidArgumentException
      *
      * @param string $namespace Operator namespace
      *
@@ -51,7 +51,7 @@ class RuleBuilder implements \ArrayAccess
     public function registerOperatorNamespace($namespace)
     {
         if (!is_string($namespace)) {
-            throw new \LogicException('Namespace argument must be a string');
+            throw new \InvalidArgumentException('Namespace argument must be a string');
         }
 
         $this->operatorNamespaces[$namespace] = true;

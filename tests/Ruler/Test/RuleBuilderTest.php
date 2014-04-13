@@ -122,10 +122,10 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider testLogicExceptionOnRegisteringOperatorNamespaceProvider
      *
-     * @expectedException LogicException
+     * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Namespace argument must be a string
      */
-    public function testLogicExceptionOnRegisteringOperatorNamespace($input)
+    public function testInvalidArgumentExceptionOnRegisteringOperatorNamespace($input)
     {
         $rb = new RuleBuilder();
         $rb->registerOperatorNamespace($input);
