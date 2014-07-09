@@ -113,8 +113,6 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($varA->greaterThan($varB)->evaluate($context));
         $this->assertTrue($varA->lessThan($varB)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\Exists', $varC->exists('bar'));
-
         $this->assertInstanceOf('Ruler\Operator\Contains', $varC->contains(1));
         $this->assertTrue($varC->contains($varA)->evaluate($context));
 

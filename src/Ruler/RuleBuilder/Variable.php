@@ -106,9 +106,9 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @return Operator\Exists
      */
-    public function exists($variable)
+    public function exists()
     {
-        return new Operator\Exists($this, $this->asVariable($variable));
+        return new Operator\Exists($this);
     }
 
     /**
