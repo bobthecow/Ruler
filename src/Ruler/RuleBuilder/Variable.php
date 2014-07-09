@@ -100,6 +100,18 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
+     * Fluent interface helper to create an exist comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\Exists
+     */
+    public function exists($variable)
+    {
+        return new Operator\Exists($this, $this->asVariable($variable));
+    }
+
+    /**
      * Fluent interface helper to create a contains comparison operator.
      *
      * @param mixed $variable Right side of comparison operator
