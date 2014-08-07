@@ -55,4 +55,24 @@ class RuleSet
             $rule->execute($context);
         }
     }
+    
+    /**
+     * Evaluate all Rules in the RuleSet as a group.
+     * 
+     * This evaluates all the Rules in the RuleSet as an atomic group,
+     * therefore, if one rule fails, the whole group fails.
+     *
+     * @param Context $context Context with which to execute each Rule
+     * 
+     * @return boolean
+     */
+	public function evaluateRules(Context $context)
+	{
+		foreach ($this->rules as $rule) {
+			if ($rule->evaluate($context) == false){
+				return false;
+			}
+		}
+		return true;
+	}
 }
