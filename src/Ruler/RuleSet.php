@@ -66,13 +66,13 @@ class RuleSet
      * 
      * @return boolean
      */
-	public function evaluateRules(Context $context)
-	{
-		foreach ($this->rules as $rule) {
-			if ($rule->evaluate($context) == false){
-				return false;
-			}
-		}
-		return true;
-	}
+    public function evaluateRules(Context $context)
+    {
+        foreach ($this->rules as $rule) {
+            if ($rule->evaluate($context) == false){
+                return false;
+            }
+        }
+        return true;
+    }
 }
