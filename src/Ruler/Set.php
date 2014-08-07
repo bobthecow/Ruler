@@ -45,7 +45,7 @@ class Set extends Value
             }
         }
 
-        $this->value = array_unique($this->value);
+        $this->value = array_unique($this->value,SORT_REGULAR);
     }
 
     /**
