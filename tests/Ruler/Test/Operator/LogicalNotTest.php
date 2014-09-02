@@ -15,7 +15,6 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\LogicalNot(array($true));
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\LogicalOperator', $op);
     }
 
     public function testConstructor()
@@ -33,7 +32,7 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testExecutingALogicalNotWithoutPropositionsThrowsAnException()
     {
@@ -42,7 +41,7 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
     {
@@ -50,7 +49,7 @@ class LogicalNotTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testAddingASecondPropositionToLogicalNotThrowsAnException()
     {

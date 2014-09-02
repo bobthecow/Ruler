@@ -12,34 +12,34 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Proposition;
 
 /**
  * A logical AND operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends LogicalOperator
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LogicalAnd extends LogicalOperator
 {
     /**
-     * Evaluate whether all child Propositions evaluate to true given the current Context.
-     *
-     * @param Context $context Context with which to evaluate this LogicalOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        if (empty($this->propositions)) {
-            throw new \LogicException('Logical And requires at least one proposition');
-        }
-
-        foreach ($this->propositions as $prop) {
-            if ($prop->evaluate($context) === false) {
+        /** @var Proposition $operand */
+        foreach ($this->getOperands() as $operand) {
+            if ($operand->evaluate($context) === false) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::MULTIPLE;
     }
 }

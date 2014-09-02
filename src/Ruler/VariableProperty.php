@@ -11,9 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-use Ruler\Variable;
-
 /**
  * A propositional VariableProperty.
  *
@@ -22,7 +19,7 @@ use Ruler\Variable;
  * replaced with terminal Values from properties of their parent Variable,
  * either from their default Value, or from the current Context.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class VariableProperty extends Variable
 {
@@ -32,8 +29,8 @@ class VariableProperty extends Variable
      * VariableProperty class constructor.
      *
      * @param Variable $parent Parent Variable instance
-     * @param string            $name   Property name
-     * @param mixed             $value  Default Property value (default: null)
+     * @param string   $name   Property name
+     * @param mixed    $value  Default Property value (default: null)
      */
     public function __construct(Variable $parent, $name, $value = null)
     {

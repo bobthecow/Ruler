@@ -27,9 +27,10 @@ class RuleTest extends \PHPUnit_Framework_TestCase
             new CallbackProposition(function ($c) use ($test, $context, &$executed, &$actionExecuted) {
                 $test->assertSame($c, $context);
                 $executed = true;
+
                 return false;
             }),
-            function() use ($test, &$actionExecuted) {
+            function () use ($test, &$actionExecuted) {
                 $actionExecuted = true;
             }
         );
@@ -47,9 +48,10 @@ class RuleTest extends \PHPUnit_Framework_TestCase
             new CallbackProposition(function ($c) use ($test, $context, &$executed, &$actionExecuted) {
                 $test->assertSame($c, $context);
                 $executed = true;
+
                 return true;
             }),
-            function() use ($test, &$actionExecuted) {
+            function () use ($test, &$actionExecuted) {
                 $actionExecuted = true;
             }
         );
@@ -62,7 +64,7 @@ class RuleTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException LogicException
+     * @expectedException \LogicException
      */
     public function testNonCallableActionsWillThrowAnException()
     {

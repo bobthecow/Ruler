@@ -3,7 +3,8 @@ Ruler
 
 Ruler is a simple stateless production rules engine for PHP 5.3+.
 
-[![Build Status](https://secure.travis-ci.org/bobthecow/Ruler.png?branch=master)](http://travis-ci.org/bobthecow/Ruler)
+[![Package version](http://img.shields.io/packagist/v/ruler/ruler.svg)](https://packagist.org/packages/ruler/ruler)
+[![Build status](http://img.shields.io/travis/bobthecow/Ruler/develop.svg)](http://travis-ci.org/bobthecow/Ruler)
 
 
 Ruler has an easy, straightforward DSL
@@ -12,8 +13,6 @@ Ruler has an easy, straightforward DSL
 ... provided by the RuleBuilder:
 
 ```php
-<?php
-
 $rb = new RuleBuilder;
 $rule = $rb->create(
     $rb->logicalAnd(
@@ -42,8 +41,6 @@ $rule->execute($context); // "Yay!"
 ... you can use it without a RuleBuilder:
 
 ```php
-<?php
-
 $actualNumPeople = new Variable('actualNumPeople');
 $rule = new Rule(
     new Operator\LogicalAnd(array(
@@ -75,8 +72,6 @@ Things you can do with your Ruler
 ### Compare things
 
 ```php
-<?php
-
 // These are Variables. They'll be replaced by terminal values during Rule evaluation.
 
 $a = $rb['a'];
@@ -85,23 +80,80 @@ $b = $rb['b'];
 // Here are bunch of Propositions. They're not too useful by themselves, but they
 // are the building blocks of Rules, so you'll need 'em in a bit.
 
-$a->greaterThan($b);          // true if $a > $b
-$a->greaterThanOrEqualTo($b); // true if $a >= $b
-$a->lessThan($b);             // true if $a < $b
-$a->lessThanOrEqualTo($b);    // true if $a <= $b
-$a->equalTo($b);              // true if $a == $b
-$a->notEqualTo($b);           // true if $a != $b
-$a->contains($b);             // true if in_array($b, $a) || strpos($b, $a) !== false
-$a->doesNotContain($b);       // true if !in_array($b, $a) || strpos($b, $a) === false
-$a->sameAs($b);               // true if $a === $b
-$a->notSameAs($b);            // true if $a !== $b
+$a->greaterThan($b);                      // true if $a > $b
+$a->greaterThanOrEqualTo($b);             // true if $a >= $b
+$a->lessThan($b);                         // true if $a < $b
+$a->lessThanOrEqualTo($b);                // true if $a <= $b
+$a->equalTo($b);                          // true if $a == $b
+$a->notEqualTo($b);                       // true if $a != $b
+$a->stringContains($b);                   // true if strpos($b, $a) !== false
+$a->stringDoesNotContain($b);             // true if strpos($b, $a) === false
+$a->stringContainsInsensitive($b);        // true if stripos($b, $a) !== false
+$a->stringDoesNotContainInsensitive($b);  // true if stripos($b, $a) === false
+$a->startsWith($b);                       // true if strpos($b, $a) === 0
+$a->startsWithInsensitive($b);            // true if stripos($b, $a) === 0
+$a->endsWith($b);                         // true if strpos($b, $a) === len($a) - len($b)
+$a->endsWithInsensitive($b);              // true if stripos($b, $a) === len($a) - len($b)
+$a->sameAs($b);                           // true if $a === $b
+$a->notSameAs($b);                        // true if $a !== $b
 ```
 
-### Combine things
+
+### Math even more things
 
 ```php
-<?php
+$c = $rb['c'];
+$d = $rb['d'];
 
+// Mathematical operators are a bit different. They're not Propositions, so
+// they don't belong in rules all by themselves, but they can be combined
+// with Propositions for great justice.
+
+$rb['price']
+  ->add($rb['shipping'])
+  ->greaterThanOrEqualTo(50)
+
+// Of course, there are more.
+
+$c->add($d);          // $c + $d
+$c->subtract($d);     // $c - $d
+$c->multiply($d);     // $c * $d
+$c->divide($d);       // $c / $d
+$c->modulo($d);       // $c % $d
+$c->exponentiate($d); // $c ** $d
+$c->negate();         // -$c
+$c->ceil();           // ceil($c)
+$c->floor();          // floor($c)
+```
+
+
+### Reason about sets
+
+```php
+$e = $rb['e']; // These should both be arrays
+$f = $rb['f'];
+
+// Manipulate sets with set operators
+
+$e->union($f);
+$e->intersect($f);
+$e->complement($f);
+$e->symmetricDifference($f);
+$e->min();
+$e->max();
+
+// And use set Propositions to include them in Rules.
+
+$e->containsSubset($f);
+$e->doesNotContainSubset($f);
+$e->setContains($a);
+$e->setDoesNotContain($a);
+```
+
+
+### Combine Rules
+
+```php
 // Create a Rule with an $a == $b condition
 $aEqualsB = $rb->create($a->equalTo($b));
 
@@ -123,27 +175,27 @@ $context = new Context(array(
 $eitherOne->evaluate($context);
 ```
 
-### Combine more things
+
+### Combine more Rules
 
 ```php
-<?php
-
 $rb->logicalNot($aEqualsB);                  // The same as $aDoesNotEqualB :)
 $rb->logicalAnd($aEqualsB, $aDoesNotEqualB); // True if both conditions are true
 $rb->logicalOr($aEqualsB, $aDoesNotEqualB);  // True if either condition is true
 $rb->logicalXor($aEqualsB, $aDoesNotEqualB); // True if only one condition is true
 ```
 
+
 ### `evaluate` and `execute` Rules
 
 `evaluate()` a Rule with Context to figure out whether it is true.
 
 ```php
-<?php
-
-$context = new Context(array('userName', function() {
-    return isset($_SESSION['userName']) ? $_SESSION['userName'] : null;
-}));
+$context = new Context(array(
+    'userName' => function() {
+        return isset($_SESSION['userName']) ? $_SESSION['userName'] : null;
+    }
+));
 
 $userIsLoggedIn = $rb->create($rb['userName']->notEqualTo(null));
 
@@ -155,10 +207,7 @@ if ($userIsLoggedIn->evaluate($context)) {
 If a Rule has an action, you can `execute()` it directly and save yourself a
 couple of lines of code.
 
-
 ```php
-<?php
-
 $hiJustin = $rb->create(
     $rb['userName']->equalTo('bobthecow'),
     function() {
@@ -168,6 +217,7 @@ $hiJustin = $rb->create(
 
 $hiJustin->execute($context);  // "Hi, Justin!"
 ```
+
 
 ### Even `execute` a whole grip of Rules at once
 
@@ -219,8 +269,6 @@ static values, or even code for lazily evaluating the Variables needed by your
 Rules.
 
 ```php
-<?php
-
 $context = new Context;
 
 // Some static values...
@@ -254,6 +302,18 @@ for a shipping price calculator?
 > If the current User has placed 5 or more orders, but isn't "really annoying",
 > give 'em free shipping.
 
+```php
+$rb->create(
+    $rb->logicalAnd(
+        $rb['orderCount']->greaterThanOrEqualTo(5),
+        $rb['reallyAnnoyingUsers']->doesNotContain($rb['userName'])
+    ),
+    function() use ($shipManager, $context) {
+        $shipManager->giveFreeShippingTo($context['user']);
+    }
+);
+```
+
 
 Access variable properties
 --------------------------
@@ -264,7 +324,6 @@ Context Variable values. This can come in really handy.
 Say we wanted to log the current user's name if they are an administrator:
 
 ```php
-
 // Reusing our $context from the last example...
 
 // We'll define a few context variables for determining what roles a user has,
@@ -304,7 +363,7 @@ everything we might need to access in a rule, we can use VariableProperties, and
 their convenient RuleBuilder interface:
 
 ```php
-// We can skip over the Context Variable building above. We'll simply set our, 
+// We can skip over the Context Variable building above. We'll simply set our,
 // default roles on the VariableProperty itself, then go right to writing rules:
 
 $rb['user']['roles'] = array('anonymous');
@@ -333,6 +392,48 @@ If the Variable resolves to an array it will return:
 
 If none of the above are true, it will return the default value for this
 VariableProperty.
+
+
+Add your own Operators
+----------------------
+
+If none of the default Ruler Operators fit your needs, you can write your own! Just define
+additional operators like this:
+
+```php
+
+namespace My\Ruler\Operators;
+
+use Ruler\Context;
+use Ruler\Operator\VariableOperator;
+use Ruler\Proposition;
+use Ruler\Value;
+
+class ALotGreaterThan extends VariableOperator implements Proposition
+{
+    public function evaluate(Context $context)
+    {
+        list($left, $right) = $this->getOperands();
+        $value = $right->prepareValue($context)->getValue() * 10;
+
+        return $left->prepareValue($context)->greaterThan(new Value($value));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
+    }
+}
+```
+
+Then you can use them with RuleBuilder like this:
+
+```php
+$rb->registerOperatorNamespace('My\Ruler\Operators');
+$rb->create(
+    $rb['a']->aLotGreaterThan(10);
+);
+```
 
 
 But that's not all...

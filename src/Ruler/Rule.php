@@ -11,17 +11,13 @@
 
 namespace Ruler;
 
-use Ruler\Proposition;
-use Ruler\Context;
-
 /**
  * Rule class.
  *
  * A Rule is a conditional Proposition with an (optional) action which is
  * executed upon successful evaluation.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @implements Proposition
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Rule implements Proposition
 {
@@ -58,7 +54,8 @@ class Rule implements Proposition
      * The Rule will be evaluated, and if successful, will execute its
      * $action callback.
      *
-     * @param Context $context Context with which to execute this Rule
+     * @param  Context         $context Context with which to execute this Rule
+     * @throws \LogicException
      */
     public function execute(Context $context)
     {

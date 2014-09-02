@@ -11,31 +11,18 @@
 
 namespace Ruler;
 
-use Ruler\Operator;
-use Ruler\Proposition;
-use Ruler\Rule;
-use Ruler\RuleBuilder;
-
 /**
  * RuleBuilder.
  *
  * The RuleBuilder provides a DSL and fluent interface for constructing
  * Rules.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @implements ArrayAccess
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class RuleBuilder implements \ArrayAccess
 {
-    private $variables;
-
-    /**
-     * RuleBuilder constructor.
-     */
-    public function __construct()
-    {
-        $this->variables = array();
-    }
+    private $variables          = array();
+    private $operatorNamespaces = array();
 
     /**
      * Create a Rule with the given propositional condition.
@@ -51,10 +38,32 @@ class RuleBuilder implements \ArrayAccess
     }
 
     /**
+     * Register an operator namespace.
+     *
+     * Note that, depending on your filesystem, operator namespaces are most likely case sensitive.
+     *
+     * @throws \InvalidArgumentException
+     *
+     * @param string $namespace Operator namespace
+     *
+     * @return RuleBuilder
+     */
+    public function registerOperatorNamespace($namespace)
+    {
+        if (!is_string($namespace)) {
+            throw new \InvalidArgumentException('Namespace argument must be a string');
+        }
+
+        $this->operatorNamespaces[$namespace] = true;
+
+        return $this;
+    }
+
+    /**
      * Create a logical AND operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop      Initial Proposition
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalAnd
      */
@@ -66,8 +75,8 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical OR operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop      Initial Proposition
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalOr
      */
@@ -85,14 +94,14 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalNot(Proposition $prop)
     {
-        return new Operator\LogicalNot(func_get_args());
+        return new Operator\LogicalNot(array($prop));
     }
 
     /**
      * Create a logical XOR operator proposition.
      *
-     * @param Proposition $prop     Initial Proposition
-     * @param Proposition $prop,... Optional unlimited number of additional Propositions
+     * @param Proposition $prop      Initial Proposition
+     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
      *
      * @return Operator\LogicalXor
      */
@@ -123,7 +132,7 @@ class RuleBuilder implements \ArrayAccess
     public function offsetGet($name)
     {
         if (!isset($this->variables[$name])) {
-            $this->variables[$name] = new RuleBuilder\Variable($name);
+            $this->variables[$name] = new RuleBuilder\Variable($this, $name);
         }
 
         return $this->variables[$name];
@@ -150,5 +159,27 @@ class RuleBuilder implements \ArrayAccess
     public function offsetUnset($name)
     {
         unset($this->variables[$name]);
+    }
+
+    /**
+     * Find an operator in the registered operator namespaces.
+     *
+     * @throws \LogicException If a matching operator is not found.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    public function findOperator($name)
+    {
+        $operator = ucfirst($name);
+        foreach (array_keys($this->operatorNamespaces) as $namespace) {
+            $class = $namespace . '\\' . $operator;
+            if (class_exists($class)) {
+                return $class;
+            }
+        }
+
+        throw new \LogicException(sprintf('Unknown operator: "%s"', $name));
     }
 }

@@ -12,24 +12,44 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
  * A Contains comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
+ * @deprecated Please use SetContains or StringContains operators instead.
+ *
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-class Contains extends ComparisonOperator
+class Contains extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the left variable is contained within the right in the current Context.
-     *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->contains($this->right->prepareValue($context));
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+
+        $left = $left->prepareValue($context);
+
+        if (is_array($left->getValue())) {
+            trigger_error('Contains operator is deprecated, please use SetContains', E_USER_DEPRECATED);
+
+            return $left->getSet()->setContains($right->prepareValue($context));
+        } else {
+            trigger_error('Contains operator is deprecated, please use StringContains', E_USER_DEPRECATED);
+
+            return $left->stringContains($right->prepareValue($context));
+        }
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

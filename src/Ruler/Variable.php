@@ -11,9 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-use Ruler\Operator;
-
 /**
  * A propositional Variable.
  *
@@ -21,9 +18,9 @@ use Ruler\Operator;
  * evaluation, they are replaced with terminal Values, either from the Variable
  * default or from the current Context.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-class Variable
+class Variable implements VariableOperand
 {
     private $name;
     private $value;
@@ -81,6 +78,8 @@ class Variable
     {
         if (isset($this->name) && isset($context[$this->name])) {
             $value = $context[$this->name];
+        } elseif ($this->value instanceof VariableOperand) {
+            $value = $this->value->prepareValue($context);
         } else {
             $value = $this->value;
         }

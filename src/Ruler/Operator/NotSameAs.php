@@ -11,26 +11,33 @@
 
 namespace Ruler\Operator;
 
-use Ruler\Operator\ComparisonOperator;
 use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
- * An NotSameAs comparison operator.
+ * A NotSameAs comparison operator.
  *
  * @author Christophe Sicard <sicard.christophe@gmail.com>
- * @extends ComparisonOperator
  */
-class NotSameAs extends ComparisonOperator
+class NotSameAs extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the given variables are not identical in the current Context.
-     *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->sameAs($this->right->prepareValue($context)) === false;
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+
+        return $left->prepareValue($context)->sameAs($right->prepareValue($context)) === false;
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

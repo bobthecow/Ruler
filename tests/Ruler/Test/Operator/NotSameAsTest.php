@@ -15,7 +15,6 @@ class NotSameAsTest extends \PHPUnit_Framework_TestCase
 
         $op = new Operator\NotSameAs($varA, $varB);
         $this->assertInstanceOf('Ruler\Proposition', $op);
-        $this->assertInstanceOf('Ruler\Operator\ComparisonOperator', $op);
     }
 
     public function testConstructorAndEvaluation()
@@ -31,7 +30,7 @@ class NotSameAsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($op->evaluate($context));
 
         $context['a'] = 3;
-        $context['b'] = function() {
+        $context['b'] = function () {
             return 3;
         };
         $this->assertFalse($op->evaluate($context));

@@ -12,7 +12,6 @@
 namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
-use Ruler\RuleBuilder\Variable;
 use Ruler\Value;
 use Ruler\Variable as BaseVariable;
 
@@ -34,7 +33,7 @@ use Ruler\Variable as BaseVariable;
  * PHP 5.3+. Instead it uses a highly refined "copy and paste" technique,
  * perfected over years of diligent practice.)
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class VariableProperty extends Variable
 {
@@ -50,7 +49,7 @@ class VariableProperty extends Variable
     public function __construct(BaseVariable $parent, $name, $value = null)
     {
         $this->parent = $parent;
-        parent::__construct($name, $value);
+        parent::__construct($parent->getRuleBuilder(), $name, $value);
     }
 
     /**

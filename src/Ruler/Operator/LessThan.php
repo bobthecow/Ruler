@@ -12,24 +12,32 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
  * A LessThan comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-class LessThan extends ComparisonOperator
+class LessThan extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the left variable is less than the right in the current Context.
-     *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->lessThan($this->right->prepareValue($context));
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+
+        return $left->prepareValue($context)->lessThan($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }
