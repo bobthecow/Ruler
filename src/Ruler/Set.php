@@ -39,14 +39,15 @@ class Set extends Value
                 $this->value = array($this->value);
             }
         }
-        foreach ($this->value as &$value) {
-            if (is_array($value)) {
-                $value = new Set($value);
-            }
-        }
 
-        $this->value = array_unique($this->value,SORT_REGULAR);
-    }
+		$this->value = array_unique($this->value,SORT_REGULAR);
+
+		foreach ($this->value as &$value) {
+			if (is_array($value)) {
+				$value = new Set($value);
+			}
+		}
+	}
 
     /**
      * @return string
