@@ -9,7 +9,3 @@ php:
 
 before_script:
  - composer install
-
-matrix:
-  allow_failures:
-    - php: hhvm # this should be the default, eh?
