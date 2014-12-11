@@ -90,7 +90,7 @@ class Set extends Value implements \Countable
             return false;
         }
 
-        return in_array($value->getValue(), $this->value);
+        return in_array($value->getValue(), $this->value, true);
     }
 
     /**
