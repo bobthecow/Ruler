@@ -4,7 +4,7 @@ namespace Ruler\Test\Fixtures;
 
 class toStringable
 {
-    private $thingy = fail;
+    private $thingy = null;
 
     public function __construct($foo = null)
     {
