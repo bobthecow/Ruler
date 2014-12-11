@@ -19,7 +19,7 @@ namespace Ruler;
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
-class Set extends Value
+class Set extends Value implements \Countable
 {
     /**
      * Set constructor.
@@ -43,14 +43,18 @@ class Set extends Value
             if (is_array($value)) {
                 $value = new Set($value);
             } elseif (is_object($value)) {
-                $reflect = new \ReflectionObject($value);
-                if (!$reflect->hasMethod('__toString')) {
+                if (!method_exists($value, '__toString')) {
                     $value = new Value($value);
                 }
             }
         }
 
         $this->value = array_unique($this->value);
+        foreach ($this->value as &$value) {
+            if ($value instanceof Value && !$value instanceof Set) {
+                $value = $value->getValue();
+            }
+        }
     }
 
     /**
@@ -242,5 +246,13 @@ class Set extends Value
     protected function isValidNumericSet()
     {
         return count($this->value) == array_sum(array_map('is_numeric', $this->value));
+    }
+
+    /**
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->value);
     }
 }
