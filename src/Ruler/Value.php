@@ -37,6 +37,18 @@ class Value
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if (is_object($this->value)) {
+            return spl_object_hash($this->value);
+        } else {
+            return serialize($this->value);
+        }
+    }
+
+    /**
      * Return the value.
      *
      * @return mixed
