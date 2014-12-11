@@ -42,6 +42,8 @@ class Set extends Value
         foreach ($this->value as &$value) {
             if (is_array($value)) {
                 $value = new Set($value);
+            } elseif (is_object($value) && !$value instanceof Value) {
+                $value = new Value($value);
             }
         }
 
