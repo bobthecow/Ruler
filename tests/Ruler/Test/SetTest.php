@@ -47,7 +47,7 @@ class SetTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($set));
         $this->assertTrue($set->setContains(new Value($one)));
         $this->assertTrue($set->setContains(new Value($two)));
-        $this->assertTrue($set->setContains(new Value($too)));
+        $this->assertFalse($set->setContains(new Value($too)));
         $this->assertFalse($set->setContains(new Value(2)));
     }
 }
