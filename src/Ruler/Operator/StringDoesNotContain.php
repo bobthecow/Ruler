@@ -36,6 +36,16 @@ class StringDoesNotContain extends VariableOperator implements Proposition
         return $left->prepareValue($context)->stringContains($right->prepareValue($context)) === false;
     }
 
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value($this->evaluate($context));
+    }
+
     protected function getOperandCardinality()
     {
         return static::BINARY;

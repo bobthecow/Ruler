@@ -14,7 +14,7 @@ namespace Ruler;
 /**
  * @author Jordan Raub <jordan@raub.me>
  */
-interface VariableOperand
+interface VariableOperand extends BaseProposition
 {
     /**
      * @param Context $context

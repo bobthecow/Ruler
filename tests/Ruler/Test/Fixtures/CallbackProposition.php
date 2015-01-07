@@ -4,6 +4,7 @@ namespace Ruler\Test\Fixtures;
 
 use Ruler\Proposition;
 use Ruler\Context;
+use Ruler\Value;
 
 class CallbackProposition implements Proposition
 {
@@ -22,4 +23,16 @@ class CallbackProposition implements Proposition
     {
         return call_user_func($this->callback, $context);
     }
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value($this->evaluate($context));
+    }
+
+
 }

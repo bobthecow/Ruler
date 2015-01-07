@@ -31,6 +31,14 @@ class LogicalXor extends LogicalOperator
         $true = 0;
         /** @var Proposition $operand */
         foreach ($this->getOperands() as $operand) {
+            if($operand->evaluate($context) instanceof Value
+                && true === $operand->evaluate($context)->getValue()) {
+
+                if (++$true > 1) {
+                    return false;
+                }
+            }
+
             if (true === $operand->evaluate($context)) {
                 if (++$true > 1) {
                     return false;

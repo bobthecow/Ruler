@@ -11,14 +11,17 @@
 
 namespace Ruler\Operator;
 
+use Ruler\Context;
 use Ruler\Proposition;
+use Ruler\Value;
+use Ruler\VariableOperand;
 
 /**
  * Logical operator base class
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
-abstract class LogicalOperator extends PropositionOperator implements Proposition
+abstract class LogicalOperator extends PropositionOperator implements Proposition, VariableOperand
 {
     /**
      * array of propositions
@@ -31,4 +34,20 @@ abstract class LogicalOperator extends PropositionOperator implements Propositio
             $this->addOperand($operand);
         }
     }
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        if(($value = $this->evaluate($context)) instanceof Value) {
+            return $value;
+        }
+
+        return new Value($value);
+    }
+
+
 }

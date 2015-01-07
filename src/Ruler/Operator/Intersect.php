@@ -42,4 +42,17 @@ class Intersect extends VariableOperator implements VariableOperand
     {
         return static::MULTIPLE;
     }
+
+    /**
+     * Evaluate the Proposition with the given Context.
+     *
+     * @param Context $context Context with which to evaluate this Proposition
+     *
+     * @return boolean
+     */
+    public function evaluate(Context $context)
+    {
+        return $this->prepareValue($context);
+    }
+
 }

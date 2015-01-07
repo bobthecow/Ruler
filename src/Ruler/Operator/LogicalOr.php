@@ -13,6 +13,7 @@ namespace Ruler\Operator;
 
 use Ruler\Context;
 use Ruler\Proposition;
+use Ruler\Value;
 
 /**
  * A logical OR operator.
@@ -30,6 +31,11 @@ class LogicalOr extends LogicalOperator
     {
         /** @var Proposition $operand */
         foreach ($this->getOperands() as $operand) {
+            if($operand->evaluate($context) instanceof Value
+                && $operand->evaluate($context)->getValue() === true) {
+                return true;
+            }
+
             if ($operand->evaluate($context) === true) {
                 return true;
             }

@@ -19,7 +19,7 @@ namespace Ruler;
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
-class Rule implements Proposition
+class Rule implements Proposition, VariableOperand
 {
     protected $condition;
     protected $action;
@@ -47,6 +47,21 @@ class Rule implements Proposition
     {
         return $this->condition->evaluate($context);
     }
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        if(($value = $this->evaluate($context)) instanceof Value) {
+            return $value;
+        }
+
+        return new Value($value);
+    }
+
 
     /**
      * Execute the Rule with the given Context.

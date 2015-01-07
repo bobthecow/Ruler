@@ -36,6 +36,16 @@ class StringDoesNotContainInsensitive extends VariableOperator implements Propos
         return $left->prepareValue($context)->stringContainsInsensitive($right->prepareValue($context)) === false;
     }
 
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value($this->evaluate($context));
+    }
+
     protected function getOperandCardinality()
     {
         return static::BINARY;

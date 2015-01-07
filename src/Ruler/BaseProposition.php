@@ -12,11 +12,15 @@
 namespace Ruler;
 
 /**
- * The Proposition interface represents a propositional statement.
+ * Aggregation of Proposition and VariableOperand interface.
+ *
+ * An attempt to make (refactor) all propositional operators and variables stick
+ * to the same contract. After all everything could be a proposition (even Variables)
+ * in Ruler.
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
-interface Proposition extends BaseProposition
+interface BaseProposition
 {
 
     /**
@@ -27,4 +31,11 @@ interface Proposition extends BaseProposition
      * @return boolean
      */
     public function evaluate(Context $context);
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context);
 }

@@ -20,7 +20,7 @@ namespace Ruler;
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
-class Variable implements VariableOperand
+class Variable implements VariableOperand, Proposition
 {
     private $name;
     private $value;
@@ -86,4 +86,18 @@ class Variable implements VariableOperand
 
         return ($value instanceof Value) ? $value : new Value($value);
     }
+
+    /**
+     * Evaluate the Proposition with the given Context.
+     *
+     * @param Context $context Context with which to evaluate this Proposition
+     *
+     * @return boolean
+     */
+    public function evaluate(Context $context)
+    {
+        return $this->prepareValue($context)->getValue();
+    }
+
+
 }

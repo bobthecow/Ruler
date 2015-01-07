@@ -4,6 +4,7 @@ namespace Ruler\Test\Fixtures;
 
 use Ruler\Proposition;
 use Ruler\Context;
+use Ruler\Value;
 
 class FalseProposition implements Proposition
 {
@@ -11,4 +12,16 @@ class FalseProposition implements Proposition
     {
         return false;
     }
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value(false);
+    }
+
+
 }
