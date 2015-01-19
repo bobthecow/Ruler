@@ -13,6 +13,7 @@ namespace Ruler\Operator;
 
 use Ruler\Context;
 use Ruler\Proposition;
+use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
@@ -47,6 +48,17 @@ class Contains extends VariableOperator implements Proposition
             return $left->stringContains($right->prepareValue($context));
         }
     }
+
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value($this->evaluate($context));
+    }
+
 
     protected function getOperandCardinality()
     {

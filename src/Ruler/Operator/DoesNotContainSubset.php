@@ -37,6 +37,16 @@ class DoesNotContainSubset extends VariableOperator implements Proposition
             ->containsSubset($right->prepareValue($context)->getSet()) === false;
     }
 
+    /**
+     * @param Context $context
+     *
+     * @return Value
+     */
+    public function prepareValue(Context $context)
+    {
+        return new Value($this->evaluate($context));
+    }
+
     protected function getOperandCardinality()
     {
         return static::BINARY;
