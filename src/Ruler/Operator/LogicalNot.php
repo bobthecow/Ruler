@@ -31,7 +31,7 @@ class LogicalNot extends LogicalOperator
         /** @var Proposition $operand */
         list($operand) = $this->getOperands();
 
-        if($operand->evaluate($context) instanceof Value) {
+        if ($operand->evaluate($context) instanceof Value) {
             return !$operand->evaluate($context)->getValue();
         }
 

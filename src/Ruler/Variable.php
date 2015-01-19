@@ -98,6 +98,4 @@ class Variable implements VariableOperand, Proposition
     {
         return $this->prepareValue($context)->getValue();
     }
-
-
 }

@@ -55,7 +55,7 @@ class Rule implements Proposition, VariableOperand
      */
     public function prepareValue(Context $context)
     {
-        if(($value = $this->evaluate($context)) instanceof Value) {
+        if (($value = $this->evaluate($context)) instanceof Value) {
             return $value;
         }
 

@@ -47,5 +47,4 @@ class Multiplication extends VariableOperator implements VariableOperand
     {
         return $this->prepareValue($context);
     }
-
 }

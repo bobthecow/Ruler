@@ -46,5 +46,4 @@ class Negation extends VariableOperator implements VariableOperand
     {
         return $this->prepareValue($context);
     }
-
 }

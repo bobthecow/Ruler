@@ -42,12 +42,10 @@ abstract class LogicalOperator extends PropositionOperator implements Propositio
      */
     public function prepareValue(Context $context)
     {
-        if(($value = $this->evaluate($context)) instanceof Value) {
+        if (($value = $this->evaluate($context)) instanceof Value) {
             return $value;
         }
 
         return new Value($value);
     }
-
-
 }
