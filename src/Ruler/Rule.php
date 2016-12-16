@@ -53,6 +53,18 @@ class Rule implements Proposition
     }
 
     /**
+     * Evaluate Rule that is located inside the Context.
+     *
+     * @param Context $context Context with which to evaluate this Rule
+     *
+     * @return boolean
+     */
+    public function __invoke($context)
+    {
+        return $this->evaluate($context);
+    }
+
+    /**
      * Execute the Rule with the given Context.
      *
      * The Rule will be evaluated, and if successful, will execute its
@@ -67,7 +79,7 @@ class Rule implements Proposition
                 throw new \LogicException('Rule actions must be callable.');
             }
 
-            call_user_func($this->action);
+            call_user_func($this->action, $context);
         }
     }
 }

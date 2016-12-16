@@ -111,6 +111,18 @@ class RuleBuilder implements \ArrayAccess
     }
 
     /**
+     * Use class like a function.
+     *
+     * @param  string   $name
+     * @param  mixed    $arguments
+     * @return VariableMethod
+     */
+    public function __call($name, $arguments)
+    {
+        return new VariableMethod($name, $arguments);
+    }
+
+    /**
      * Retrieve a Variable by name.
      *
      * @param string $name The Variable name

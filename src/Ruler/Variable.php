@@ -26,9 +26,9 @@ use Ruler\VariableProperty;
  */
 class Variable implements \ArrayAccess
 {
-    private $name;
-    private $value;
-    private $properties = array();
+    protected $name;
+    protected $value;
+    protected $properties = array();
 
     /**
      * Variable class constructor.
@@ -117,7 +117,7 @@ class Variable implements \ArrayAccess
      */
     public function offsetExists($name)
     {
-        return isset($this->properties[$name]);
+        return $this->getProperty($name)->getValue() !== null;
     }
 
     /**
@@ -156,11 +156,7 @@ class Variable implements \ArrayAccess
      */
     public function offsetUnset($name)
     {
-        if (!$this->offsetExists($name)) {
-            throw new \InvalidArgumentException('Unknown variable property: ' . $name);
-        }
-
-        unset($this->properties[$name]);
+        $this->getProperty($name)->setValue(null);
     }
 
     /**
