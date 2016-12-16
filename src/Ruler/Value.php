@@ -17,7 +17,7 @@ namespace Ruler;
  * A Value represents a comparable terminal value. Variables and Comparison Operators
  * are resolved to Values by applying the current Context and the default Variable value.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class Value
 {
@@ -47,6 +47,16 @@ class Value
     }
 
     /**
+     * Get a Set containing this Value.
+     *
+     * @return Set
+     */
+    public function getSet()
+    {
+        return new Set($this->value);
+    }
+
+    /**
      * Equal To comparison.
      *
      * @param Value $value Value object to compare against
@@ -59,21 +69,39 @@ class Value
     }
 
     /**
-     * Contains comparison.
+     * Identical To comparison.
      *
      * @param Value $value Value object to compare against
      *
      * @return boolean
      */
-    public function contains(Value $value)
+    public function sameAs(Value $value)
     {
-        if (is_array($this->value)) {
-            return in_array($value->getValue(), $this->value);
-        } else if (is_string($this->value)) {
-            return strpos($value->getValue(), $this->value) !== false;
-        }
+        return $this->value === $value->getValue();
+    }
 
-        return false;
+    /**
+     * String Contains comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function stringContains(Value $value)
+    {
+        return strpos($this->value, $value->getValue()) !== false;
+    }
+
+    /**
+     * String Contains case-insensitive comparison.
+     *
+     * @param Value $value Value object to compare against
+     *
+     * @return boolean
+     */
+    public function stringContainsInsensitive(Value $value)
+    {
+        return stripos($this->value, $value->getValue()) !== false;
     }
 
     /**
@@ -98,5 +126,132 @@ class Value
     public function lessThan(Value $value)
     {
         return $this->value < $value->getValue();
+    }
+
+    public function add(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return $this->value + $value->getValue();
+    }
+
+    public function divide(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        if (0 == $value->getValue()) {
+            throw new \RuntimeException("Division by zero");
+        }
+
+        return $this->value / $value->getValue();
+    }
+
+    public function modulo(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+        if (0 == $value->getValue()) {
+            throw new \RuntimeException("Division by zero");
+        }
+
+        return $this->value % $value->getValue();
+    }
+
+    public function multiply(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return $this->value * $value->getValue();
+    }
+
+    public function subtract(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return $this->value - $value->getValue();
+    }
+
+    public function negate()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return -$this->value;
+    }
+
+    public function ceil()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return (int) ceil($this->value);
+    }
+
+    public function floor()
+    {
+        if (!is_numeric($this->value)) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return (int) floor($this->value);
+    }
+
+    public function exponentiate(Value $value)
+    {
+        if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
+            throw new \RuntimeException("Arithmetic: values must be numeric");
+        }
+
+        return pow($this->value, $value->getValue());
+    }
+
+    /**
+     * String StartsWith comparison.
+     *
+     * @param Value $value       Value object to compare against
+     * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
+     *
+     * @return boolean
+     */
+    public function startsWith(Value $value, $insensitive = false)
+    {
+        $value = $value->getValue();
+        $valueLength = strlen($value);
+
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= $valueLength) {
+            return substr_compare($this->value, $value, 0, $valueLength, $insensitive) === 0;
+        }
+
+        return false;
+    }
+
+    /**
+     * String EndsWith comparison.
+     *
+     * @param Value $value       Value object to compare against
+     * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
+     *
+     * @return boolean
+     */
+    public function endsWith(Value $value, $insensitive = false)
+    {
+        $value = $value->getValue();
+        $valueLength = strlen($value);
+
+        if (!empty($this->value) && !empty($value) && strlen($this->value) >= $valueLength) {
+            return substr_compare($this->value, $value, -$valueLength, $valueLength, $insensitive) === 0;
+        }
+
+        return false;
     }
 }

@@ -12,31 +12,26 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Proposition;
 
 /**
  * A logical XOR operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends LogicalOperator
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class LogicalXor extends LogicalOperator
 {
     /**
-     * Evaluate whether exactly one child Proposition evaluates to true given the current Context.
-     *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        if (empty($this->propositions)) {
-            throw new \LogicException('Logical Xor requires at least one proposition');
-        }
-
         $true = 0;
-        foreach ($this->propositions as $prop) {
-            if ($prop->evaluate($context) === true) {
+        /** @var Proposition $operand */
+        foreach ($this->getOperands() as $operand) {
+            if (true === $operand->evaluate($context)) {
                 if (++$true > 1) {
                     return false;
                 }
@@ -44,5 +39,10 @@ class LogicalXor extends LogicalOperator
         }
 
         return $true === 1;
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::MULTIPLE;
     }
 }

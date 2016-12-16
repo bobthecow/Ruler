@@ -11,12 +11,10 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-
 /**
  * A Ruler RuleSet.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
 class RuleSet
 {

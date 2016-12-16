@@ -11,10 +11,6 @@
 
 namespace Ruler;
 
-use Ruler\Context;
-use Ruler\Operator;
-use Ruler\VariableProperty;
-
 /**
  * A propositional Variable.
  *
@@ -22,13 +18,12 @@ use Ruler\VariableProperty;
  * evaluation, they are replaced with terminal Values, either from the Variable
  * default or from the current Context.
  *
- * @author Justin Hileman <justin@shopopensky.com>
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-class Variable implements \ArrayAccess
+class Variable implements VariableOperand
 {
     protected $name;
     protected $value;
-    protected $properties = array();
 
     /**
      * Variable class constructor.
@@ -83,29 +78,13 @@ class Variable implements \ArrayAccess
     {
         if (isset($this->name) && isset($context[$this->name])) {
             $value = $context[$this->name];
+        } elseif ($this->value instanceof VariableOperand) {
+            $value = $this->value->prepareValue($context);
         } else {
             $value = $this->value;
         }
 
         return ($value instanceof Value) ? $value : new Value($value);
-    }
-
-    /**
-     * Get a VariableProperty for accessing methods, indexes and properties of
-     * the current variable.
-     *
-     * @param  string $name  Property name
-     * @param  mixed  $value The default VariableProperty value
-     *
-     * @return VariableProperty
-     */
-    public function getProperty($name, $value = null)
-    {
-        if (!isset($this->properties[$name])) {
-            $this->properties[$name] = new VariableProperty($this, $name, $value);
-        }
-
-        return $this->properties[$name];
     }
 
     /**
@@ -121,33 +100,6 @@ class Variable implements \ArrayAccess
     }
 
     /**
-     * Fluent interface method for creating or accessing VariableProperties.
-     *
-     * @see getProperty
-     *
-     * @param  string $name Property name
-     *
-     * @return VariableProperty
-     */
-    public function offsetGet($name)
-    {
-        return $this->getProperty($name);
-    }
-
-    /**
-     * Fluent interface method for setting default a VariableProperty value.
-     *
-     * @see setValue
-     *
-     * @param  string $name  Property name
-     * @param mixed $value The default Variable value
-     */
-    public function offsetSet($name, $value)
-    {
-        $this->getProperty($name)->setValue($value);
-    }
-
-    /**
      * Fluent interface method for removing a VariableProperty reference.
      *
      * @throws InvalidArgumentException If a VariableProperty of that name is not defined.
@@ -157,113 +109,5 @@ class Variable implements \ArrayAccess
     public function offsetUnset($name)
     {
         $this->getProperty($name)->setValue(null);
-    }
-
-    /**
-     * Fluent interface helper to create a contains comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\Contains
-     */
-    public function contains($variable)
-    {
-        return new Operator\Contains($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a contains comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\DoesNotContain
-     */
-    public function doesNotContain($variable)
-    {
-        return new Operator\DoesNotContain($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a GreaterThan comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\GreaterThan
-     */
-    public function greaterThan($variable)
-    {
-        return new Operator\GreaterThan($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a GreaterThanOrEqualTo comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\GreaterThanOrEqualTo
-     */
-    public function greaterThanOrEqualTo($variable)
-    {
-        return new Operator\GreaterThanOrEqualTo($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a LessThan comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\LessThan
-     */
-    public function lessThan($variable)
-    {
-        return new Operator\LessThan($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a LessThanOrEqualTo comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\LessThanOrEqualTo
-     */
-    public function lessThanOrEqualTo($variable)
-    {
-        return new Operator\LessThanOrEqualTo($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a EqualTo comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\EqualTo
-     */
-    public function equalTo($variable)
-    {
-        return new Operator\EqualTo($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Fluent interface helper to create a NotEqualTo comparison operator.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\NotEqualTo
-     */
-    public function notEqualTo($variable)
-    {
-        return new Operator\NotEqualTo($this, $this->asVariable($variable));
-    }
-
-    /**
-     * Private helper to retrieve a Variable instance for the given $variable.
-     *
-     * @param mixed $variable Variable instance or value
-     *
-     * @return Variable
-     */
-    private function asVariable($variable)
-    {
-        return ($variable instanceof Variable) ? $variable : new Variable(null, $variable);
     }
 }

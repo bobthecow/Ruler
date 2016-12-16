@@ -12,24 +12,32 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
+use Ruler\Proposition;
+use Ruler\VariableOperand;
 
 /**
  * An EqualTo comparison operator.
  *
- * @author Justin Hileman <justin@shopopensky.com>
- * @extends ComparisonOperator
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-class EqualTo extends ComparisonOperator
+class EqualTo extends VariableOperator implements Proposition
 {
     /**
-     * Evaluate whether the given variables are equal in the current Context.
-     *
-     * @param Context $context Context with which to evaluate this ComparisonOperator
+     * @param Context $context Context with which to evaluate this Proposition
      *
      * @return boolean
      */
     public function evaluate(Context $context)
     {
-        return $this->left->prepareValue($context)->equalTo($this->right->prepareValue($context));
+        /** @var VariableOperand $left */
+        /** @var VariableOperand $right */
+        list($left, $right) = $this->getOperands();
+
+        return $left->prepareValue($context)->equalTo($right->prepareValue($context));
+    }
+
+    protected function getOperandCardinality()
+    {
+        return static::BINARY;
     }
 }

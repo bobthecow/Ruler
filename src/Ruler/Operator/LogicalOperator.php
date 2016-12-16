@@ -14,39 +14,21 @@ namespace Ruler\Operator;
 use Ruler\Proposition;
 
 /**
- * Abstract Logical Operator class.
+ * Logical operator base class
  *
- * Logical Operators represent propositional operations: AND, OR, NOT and XOR.
- *
- * @abstract
- * @author Justin Hileman <justin@shopopensky.com>
- * @implements Proposition
+ * @author Justin Hileman <justin@justinhileman.info>
  */
-abstract class LogicalOperator implements Proposition
+abstract class LogicalOperator extends PropositionOperator implements Proposition
 {
-    protected $propositions = array();
-
     /**
-     * Logical Operator constructor.
+     * array of propositions
      *
-     * @param array $props Initial Propositions to add to the Operator (default: null)
+     * @param array $props
      */
-    public function __construct(array $props = null)
+    public function __construct(array $props = array())
     {
-        if ($props !== null) {
-            foreach ($props as $prop) {
-                $this->addProposition($prop);
-            }
+        foreach ($props as $operand) {
+            $this->addOperand($operand);
         }
-    }
-
-    /**
-     * Add a Proposition to the Operator.
-     *
-     * @param Proposition $prop Proposition to add to this Operator
-     */
-    public function addProposition(Proposition $prop)
-    {
-        $this->propositions[] = $prop;
     }
 }
