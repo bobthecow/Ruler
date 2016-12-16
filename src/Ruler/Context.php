@@ -113,28 +113,6 @@ class Context implements \ArrayAccess
     }
 
     /**
-     * @see Pimple::offsetGet()
-     *
-     * Adds support for VariableMethod.
-     * FIXME:
-     */
-    public function &offsetGet($id)
-    {
-        if (!array_key_exists($id, $this->values)) {
-            throw new \InvalidArgumentException(sprintf('Identifier "%s" is not defined.', $id));
-        }
-
-        $isFactory = is_object($this->values[$id]) && method_exists($this->values[$id], '__invoke');
-        if ($isFactory) {
-            $result = $this->values[$id]($this);
-        } else {
-            $result =& $this->values[$id];
-        }
-
-        return $result;
-    }
-
-    /**
      * Set a fact name and value.
      *
      * A fact will be lazily evaluated if it is a Closure or invokable object.

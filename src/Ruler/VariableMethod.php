@@ -36,6 +36,7 @@ class VariableMethod extends Variable
             $params[] = ($param instanceof Variable) ? $param->prepareValue($context)->getValue() : $param;
         }
         $func = $context[$this->name];
+
         return new Value(call_user_func_array($func, $params));
     }
 }

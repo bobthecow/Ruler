@@ -86,28 +86,4 @@ class Variable implements VariableOperand
 
         return ($value instanceof Value) ? $value : new Value($value);
     }
-
-    /**
-     * Fluent interface method for checking whether a VariableProperty has been defined.
-     *
-     * @param  string $name Property name
-     *
-     * @return bool
-     */
-    public function offsetExists($name)
-    {
-        return $this->getProperty($name)->getValue() !== null;
-    }
-
-    /**
-     * Fluent interface method for removing a VariableProperty reference.
-     *
-     * @throws InvalidArgumentException If a VariableProperty of that name is not defined.
-     *
-     * @param  string $name Property name
-     */
-    public function offsetUnset($name)
-    {
-        $this->getProperty($name)->setValue(null);
-    }
 }
