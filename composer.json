@@ -12,9 +12,13 @@
     },
     "autoload": {
         "psr-0": {
-            "Ruler": "src",
+            "Ruler": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
             "Ruler\\Test": "tests"
-            }
+        }
     },
     "authors": [
         {
