@@ -162,6 +162,18 @@ class Variable extends BaseVariable implements \ArrayAccess
     {
         return new Operator\StringDoesNotContain($this, $this->asVariable($variable));
     }
+    
+    /**
+     * Fluent interface helper to create a insensitive contains comparison operator.
+     *
+     * @param mixed $variable Right side of comparison operator
+     *
+     * @return Operator\StringContainsInsensitive
+     */
+    public function stringContainsInsensitive($variable)
+    {
+        return new Operator\StringContainsInsensitive($this, $this->asVariable($variable));
+    }
 
     /**
      * Fluent interface helper to create a GreaterThan comparison operator.
