@@ -16,7 +16,5 @@ matrix:
   include:
     - php: 5.3
       dist: precise
-
-matrix:
   allow_failures:
     - php: hhvm # this should be the default, eh?
