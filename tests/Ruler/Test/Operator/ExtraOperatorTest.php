@@ -5,8 +5,9 @@ namespace Ruler\Test\Operator;
 use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Variable;
+use PHPUnit\Framework\TestCase;
 
-class ExtraOperatorTest extends \PHPUnit_Framework_TestCase
+class ExtraOperatorTest extends TestCase
 {
     public function testConstructorAndEvaluation()
     {

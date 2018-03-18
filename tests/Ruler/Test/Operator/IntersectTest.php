@@ -5,8 +5,9 @@ namespace Ruler\Test\Operator;
 use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Variable;
+use PHPUnit\Framework\TestCase;
 
-class IntersectTest extends \PHPUnit_Framework_TestCase
+class IntersectTest extends TestCase
 {
     public function testInterface()
     {

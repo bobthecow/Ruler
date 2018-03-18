@@ -27,6 +27,7 @@ namespace Ruler\Test;
 use Ruler\Context;
 use Ruler\Test\Fixtures\Invokable;
 use Ruler\Test\Fixtures\Fact;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Ruler Context test
@@ -38,7 +39,7 @@ use Ruler\Test\Fixtures\Fact;
  * @author Igor Wiedler <igor@wiedler.ch>
  * @author Justin Hileman <justin@justinhileman.info>
  */
-class ContextTest extends \PHPUnit_Framework_TestCase
+class ContextTest extends TestCase
 {
     public function testConstructor()
     {
