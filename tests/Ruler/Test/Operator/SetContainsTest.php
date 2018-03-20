@@ -5,8 +5,9 @@ namespace Ruler\Test\Operator;
 use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Variable;
+use PHPUnit\Framework\TestCase;
 
-class SetContainsTest extends \PHPUnit_Framework_TestCase
+class SetContainsTest extends TestCase
 {
     public function testInterface()
     {

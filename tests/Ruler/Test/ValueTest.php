@@ -3,8 +3,9 @@
 namespace Ruler\Test;
 
 use Ruler\Value;
+use PHPUnit\Framework\TestCase;
 
-class ValueTest extends \PHPUnit_Framework_TestCase
+class ValueTest extends TestCase
 {
     public function testConstructor()
     {

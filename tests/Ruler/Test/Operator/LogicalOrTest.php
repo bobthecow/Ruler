@@ -6,8 +6,9 @@ use Ruler\Operator;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
 use Ruler\Test\Fixtures\FalseProposition;
+use PHPUnit\Framework\TestCase;
 
-class LogicalOrTest extends \PHPUnit_Framework_TestCase
+class LogicalOrTest extends TestCase
 {
     public function testInterface()
     {

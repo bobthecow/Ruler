@@ -6,8 +6,9 @@ use Ruler\Context;
 use Ruler\Value;
 use Ruler\Variable;
 use Ruler\VariableProperty;
+use PHPUnit\Framework\TestCase;
 
-class VariablePropertyTest extends \PHPUnit_Framework_TestCase
+class VariablePropertyTest extends TestCase
 {
     public function testConstructor()
     {

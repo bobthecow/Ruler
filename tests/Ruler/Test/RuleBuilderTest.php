@@ -6,8 +6,9 @@ use Ruler\RuleBuilder;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
 use Ruler\Test\Fixtures\FalseProposition;
+use PHPUnit\Framework\TestCase;
 
-class RuleBuilderTest extends \PHPUnit_Framework_TestCase
+class RuleBuilderTest extends TestCase
 {
     public function testInterface()
     {
@@ -120,9 +121,9 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider testLogicExceptionOnRegisteringOperatorNamespaceProvider
+     * @dataProvider logicExceptionOnRegisteringOperatorNamespaceProvider
      *
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Namespace argument must be a string
      */
     public function testInvalidArgumentExceptionOnRegisteringOperatorNamespace($input)
@@ -131,7 +132,7 @@ class RuleBuilderTest extends \PHPUnit_Framework_TestCase
         $rb->registerOperatorNamespace($input);
     }
 
-    public function testLogicExceptionOnRegisteringOperatorNamespaceProvider()
+    public function logicExceptionOnRegisteringOperatorNamespaceProvider()
     {
         return array(
             array(

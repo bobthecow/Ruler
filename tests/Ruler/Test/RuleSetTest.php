@@ -6,8 +6,9 @@ use Ruler\RuleSet;
 use Ruler\Rule;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
+use PHPUnit\Framework\TestCase;
 
-class RuleSetTest extends \PHPUnit_Framework_TestCase
+class RuleSetTest extends TestCase
 {
     public function testRulesetCreationUpdateAndExecution()
     {

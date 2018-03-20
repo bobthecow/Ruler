@@ -5,8 +5,9 @@ namespace Ruler\Test\Operator;
 use Ruler\Context;
 use Ruler\Operator;
 use Ruler\Variable;
+use PHPUnit\Framework\TestCase;
 
-class EndsWithInsensitiveTest extends \PHPUnit_Framework_TestCase
+class EndsWithInsensitiveTest extends TestCase
 {
     public function testInterface()
     {
