@@ -7,8 +7,9 @@ use Ruler\Value;
 use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
 use Ruler\RuleBuilder\VariableProperty;
+use PHPUnit\Framework\TestCase;
 
-class VariablePropertyTest extends \PHPUnit_Framework_TestCase
+class VariablePropertyTest extends TestCase
 {
     public function testConstructor()
     {
@@ -156,7 +157,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedException PHPUnit\Framework\Error\Deprecated
      * @expectedExceptionMessage Contains operator is deprecated, please use SetContains
      */
     public function testDeprecationNoticeForContainsWithSet()
@@ -171,7 +172,7 @@ class VariablePropertyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
+     * @expectedException PHPUnit\Framework\Error\Deprecated
      * @expectedExceptionMessage Contains operator is deprecated, please use StringContains
      */
     public function testDeprecationNoticeForContainsWithString()

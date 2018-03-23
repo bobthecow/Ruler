@@ -4,8 +4,9 @@ namespace Ruler\Test\Functional;
 
 use Ruler\RuleBuilder;
 use Ruler\Context;
+use PHPUnit\Framework\TestCase;
 
-class RulerTest extends \PHPUnit_Framework_TestCase
+class RulerTest extends TestCase
 {
     /**
      * @dataProvider truthTableTwo

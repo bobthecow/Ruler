@@ -7,8 +7,9 @@ use Ruler\Proposition;
 use Ruler\Context;
 use Ruler\Test\Fixtures\TrueProposition;
 use Ruler\Test\Fixtures\CallbackProposition;
+use PHPUnit\Framework\TestCase;
 
-class RuleTest extends \PHPUnit_Framework_TestCase
+class RuleTest extends TestCase
 {
     public function testInterface()
     {
