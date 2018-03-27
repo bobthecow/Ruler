@@ -69,10 +69,12 @@ class VariableProperty extends Variable
 
         if (is_object($value) && !$value instanceof \Closure) {
             if (method_exists($value, $name)) {
-                return $this->asValue(call_user_func(array($value, $name)));
-            } elseif (isset($value->$name)) {
-                return $this->asValue($value->$name);
-            } elseif ($value instanceof \ArrayAccess && $value->offsetExists($name)) {
+                return $this->asValue($value->{$name}());
+            }
+            if (isset($value->{$name})) {
+                return $this->asValue($value->{$name});
+            }
+            if ($value instanceof \ArrayAccess && $value->offsetExists($name)) {
                 return $this->asValue($value->offsetGet($name));
             }
         } elseif (is_array($value) && array_key_exists($name, $value)) {

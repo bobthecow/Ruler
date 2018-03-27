@@ -33,7 +33,7 @@ use Ruler\VariableOperand;
 class Variable extends BaseVariable implements \ArrayAccess
 {
     private $ruleBuilder;
-    private $properties = array();
+    private $properties = [];
 
     /**
      * RuleBuilder Variable constructor.
@@ -252,7 +252,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param mixed $variable Right side of comparison operator
      *
-     * @return Operator\SameAs
+     * @return Operator\NotSameAs
      */
     public function notSameAs($variable)
     {
@@ -362,7 +362,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Addition
+     * @return Variable
      */
     public function add($variable)
     {
@@ -372,7 +372,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Division
+     * @return Variable
      */
     public function divide($variable)
     {
@@ -382,7 +382,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Modulo
+     * @return Variable
      */
     public function modulo($variable)
     {
@@ -392,7 +392,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Multiplication
+     * @return Variable
      */
     public function multiply($variable)
     {
@@ -402,7 +402,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Subtraction
+     * @return Variable
      */
     public function subtract($variable)
     {
@@ -410,7 +410,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Negation
+     * @return Variable
      */
     public function negate()
     {
@@ -418,7 +418,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Ceil
+     * @return Variable
      */
     public function ceil()
     {
@@ -426,7 +426,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Floor
+     * @return Variable
      */
     public function floor()
     {
@@ -436,7 +436,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Exponentiate
+     * @return Variable
      */
     public function exponentiate($variable)
     {
@@ -462,6 +462,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param array  $args
      *
      * @return Variable
+     * @throws \ReflectionException
      */
     private function applySetOperator($name, array $args)
     {
@@ -542,6 +543,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param array  $args
      *
      * @return Operator
+     * @throws \ReflectionException
      */
     public function __call($name, array $args)
     {

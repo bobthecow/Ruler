@@ -31,8 +31,8 @@ class VariableMethod extends Variable
      */
     public function prepareValue(Context $context)
     {
-        $params = array();
-        foreach ($this->value as $param) {
+        $params = [];
+        foreach ((array)$this->value as $param) {
             $params[] = ($param instanceof Variable) ? $param->prepareValue($context)->getValue() : $param;
         }
         $func = $context[$this->name];

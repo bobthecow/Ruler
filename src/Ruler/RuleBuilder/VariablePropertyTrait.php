@@ -16,12 +16,8 @@ use Ruler\Value;
 use Ruler\Variable;
 
 /**
- * All the guts of the VariableProperty, but none of the PHP 5.3ness.
- *
- * PHP 5.4+ users: Use this trait when creating custom Variable and
- * VariableProperty classes for extending the RuleBuilder DSL.
- *
- * Everyone else: Ignore this, it's too cool for you.
+ * Use this trait when creating custom Variable and VariableProperty classes
+ * for extending the RuleBuilder DSL.
  *
  * Apparently too cool for me, too, otherwise the VariableProperty classes in
  * this library would be using this trait.
@@ -35,6 +31,7 @@ use Ruler\Variable;
  */
 trait VariablePropertyTrait
 {
+    /** @var Variable */
     private $parent;
 
     /**
@@ -78,10 +75,12 @@ trait VariablePropertyTrait
 
         if (is_object($value) && !$value instanceof \Closure) {
             if (method_exists($value, $name)) {
-                return $this->asValue(call_user_func(array($value, $name)));
-            } elseif (isset($value->$name)) {
-                return $this->asValue($value->$name);
-            } elseif ($value instanceof \ArrayAccess && $value->offsetExists($name)) {
+                return $this->asValue($value->{$name}());
+            }
+            if (isset($value->{$name})) {
+                return $this->asValue($value->{$name});
+            }
+            if ($value instanceof \ArrayAccess && $value->offsetExists($name)) {
                 return $this->asValue($value->offsetGet($name));
             }
         } elseif (is_array($value) && array_key_exists($name, $value)) {
@@ -102,4 +101,18 @@ trait VariablePropertyTrait
     {
         return ($value instanceof Value) ? $value : new Value($value);
     }
+
+    /**
+     * Return the Variable name.
+     *
+     * @return string Variable name
+     */
+    abstract public function getName();
+
+    /**
+     * Get the default Variable value.
+     *
+     * @return mixed Variable value
+     */
+    abstract public function getValue();
 }

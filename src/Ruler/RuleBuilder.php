@@ -21,8 +21,8 @@ namespace Ruler;
  */
 class RuleBuilder implements \ArrayAccess
 {
-    private $variables          = array();
-    private $operatorNamespaces = array();
+    private $variables          = [];
+    private $operatorNamespaces = [];
 
     /**
      * Create a Rule with the given propositional condition.
@@ -155,8 +155,6 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name  The Variable name
      * @param mixed  $value The Variable default value
-     *
-     * @return Variable
      */
     public function offsetSet($name, $value)
     {

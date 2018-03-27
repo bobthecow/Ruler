@@ -87,6 +87,9 @@ class Variable implements VariableOperand
         return $this->asValue($value);
     }
 
+    // TODO: Check out RuleBuilder\Variable class, these functions are now there. We may need to combine the logic to
+    // allow VariableMethods to work properly.
+
     /**
      * Fluent interface helper to create a contains comparison operator.
      *

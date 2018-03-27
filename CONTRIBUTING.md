@@ -5,7 +5,7 @@
 
  1. [Fork the repo on GitHub](https://github.com/bobthecow/Ruler).
 
- 2. Run the test suite. We only take pull requests with passing tests, and it's great to know that you have a clean slate. Make sure you have PHPUnit 3.5+, then run `phpunit` from the project directory.
+ 2. Run the test suite. We only take pull requests with passing tests, and it's great to know that you have a clean slate. Make sure you have PHPUnit 5.6+, then run `phpunit` from the project directory.
 
  3. Add tests for your change. Only refactoring and documentation changes require no new tests. If you are adding functionality or fixing a bug, add a test!
 
