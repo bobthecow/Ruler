@@ -3,7 +3,7 @@ namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
 use Ruler\Value;
-use Ruler\Variable;
+use Ruler\Variable as BaseVariable;
 
 /**
  * Use this interface when creating custom Variable and VariableProperty
@@ -38,9 +38,9 @@ interface VariablePropertyInterface
     /**
      * Set the parent Variable reference.
      *
-     * @param Variable $parent Parent Variable instance
+     * @param BaseVariable $parent Parent Variable instance
      */
-    public function setParent(Variable $parent);
+    public function setParent(BaseVariable $parent);
 
     /**
      * Prepare a Value for this VariableProperty given the current Context.
