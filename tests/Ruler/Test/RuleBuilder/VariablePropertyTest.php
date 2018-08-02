@@ -74,7 +74,8 @@ class VariablePropertyTest extends TestCase
                 ),
                 'e' => 'string',
                 'f' => 'ring',
-                'g' => 'stuff'
+                'g' => 'stuff',
+                'h' => 'STRING',
             ),
         ));
 
@@ -87,6 +88,7 @@ class VariablePropertyTest extends TestCase
         $varE = $root['e'];
         $varF = $root['f'];
         $varG = $root['g'];
+        $varH = $root['h'];
 
         $this->assertInstanceOf('Ruler\Operator\GreaterThan', $varA->greaterThan(0));
         $this->assertTrue($varA->greaterThan(0)->evaluate($context));
@@ -121,6 +123,9 @@ class VariablePropertyTest extends TestCase
 
         $this->assertInstanceOf('Ruler\Operator\StringContains', $varE->stringContains('ring'));
         $this->assertTrue($varE->stringContains($varF)->evaluate($context));
+
+        $this->assertInstanceOf('Ruler\Operator\StringContainsInsensitive', $varE->stringContainsInsensitive('STRING'));
+        $this->assertTrue($varE->stringContainsInsensitive($varH)->evaluate($context));
 
         $this->assertInstanceOf('Ruler\Operator\StringDoesNotContain', $varE->stringDoesNotContain('cheese'));
         $this->assertTrue($varE->stringDoesNotContain($varG)->evaluate($context));

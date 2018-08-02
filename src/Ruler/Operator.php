@@ -20,7 +20,7 @@ abstract class Operator
     const BINARY = 'BINARY';
     const MULTIPLE = 'MULTIPLE';
 
-    protected $operands;
+    protected $operands = array();
 
     /**
      * @param array $operands
