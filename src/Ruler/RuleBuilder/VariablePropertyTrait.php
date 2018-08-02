@@ -13,7 +13,7 @@ namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
 use Ruler\Value;
-use Ruler\Variable;
+use Ruler\Variable as RulerVariable;
 
 /**
  * Use this trait when creating custom Variable and VariableProperty classes
@@ -31,15 +31,15 @@ use Ruler\Variable;
  */
 trait VariablePropertyTrait
 {
-    /** @var Variable */
+    /** @var RulerVariable */
     private $parent;
 
     /**
      * Set the parent Variable reference.
      *
-     * @param Variable $parent Parent Variable instance
+     * @param RulerVariable $parent Parent Variable instance
      */
-    public function setParent(Variable $parent)
+    public function setParent(RulerVariable $parent)
     {
         $this->parent = $parent;
     }
