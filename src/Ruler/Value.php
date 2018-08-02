@@ -128,6 +128,11 @@ class Value
         return $this->value < $value->getValue();
     }
 
+    /**
+     * @param Value $value
+     * @return float|int
+     * @throws \RuntimeException
+     */
     public function add(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
@@ -137,18 +142,28 @@ class Value
         return $this->value + $value->getValue();
     }
 
+    /**
+     * @param Value $value
+     * @return float|int
+     * @throws \RuntimeException
+     */
     public function divide(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
-        if (0 == $value->getValue()) {
+        if (0 === $value->getValue()) {
             throw new \RuntimeException("Division by zero");
         }
 
         return $this->value / $value->getValue();
     }
 
+    /**
+     * @param Value $value
+     * @throws \RuntimeException
+     * @return int
+     */
     public function modulo(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
@@ -161,6 +176,11 @@ class Value
         return $this->value % $value->getValue();
     }
 
+    /**
+     * @param Value $value
+     * @throws \RuntimeException
+     * @return float|int
+     */
     public function multiply(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
@@ -170,6 +190,11 @@ class Value
         return $this->value * $value->getValue();
     }
 
+    /**
+     * @param Value $value
+     * @throws \RuntimeException
+     * @return float|int
+     */
     public function subtract(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
@@ -179,6 +204,10 @@ class Value
         return $this->value - $value->getValue();
     }
 
+    /**
+     * @return int
+     * @throws \RuntimeException
+     */
     public function negate()
     {
         if (!is_numeric($this->value)) {
@@ -188,6 +217,10 @@ class Value
         return -$this->value;
     }
 
+    /**
+     * @return int
+     * @throws \RuntimeException
+     */
     public function ceil()
     {
         if (!is_numeric($this->value)) {
@@ -197,6 +230,10 @@ class Value
         return (int) ceil($this->value);
     }
 
+    /**
+     * @return int
+     * @throws \RuntimeException
+     */
     public function floor()
     {
         if (!is_numeric($this->value)) {
@@ -206,6 +243,11 @@ class Value
         return (int) floor($this->value);
     }
 
+    /**
+     * @param Value $value
+     * @return float|int
+     * @throws \RuntimeException
+     */
     public function exponentiate(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {

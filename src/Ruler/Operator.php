@@ -25,28 +25,32 @@ abstract class Operator
     /**
      * @param array $operands
      */
-    public function __construct()
+    public function __construct(...$operands)
     {
-        foreach (func_get_args() as $operand) {
+        foreach ($operands as $operand) {
             $this->addOperand($operand);
         }
     }
 
+    /**
+     * @return mixed
+     * @throws \LogicException
+     */
     public function getOperands()
     {
         switch ($this->getOperandCardinality()) {
             case self::UNARY:
-                if (1 != count($this->operands)) {
+                if (1 !== count($this->operands)) {
                     throw new \LogicException(get_class($this) . ' takes only 1 operand');
                 }
                 break;
             case self::BINARY:
-                if (2 != count($this->operands)) {
+                if (2 !== count($this->operands)) {
                     throw new \LogicException(get_class($this) . ' takes 2 operands');
                 }
                 break;
             case self::MULTIPLE:
-                if (0 == count($this->operands)) {
+                if (0 === count($this->operands)) {
                     throw new \LogicException(get_class($this) . ' takes at least 1 operand');
                 }
                 break;

@@ -33,10 +33,10 @@ class Set extends Value
     {
         parent::__construct($set);
         if (!is_array($this->value)) {
-            if (is_null($this->value)) {
-                $this->value = array();
+            if (null === $this->value) {
+                $this->value = [];
             } else {
-                $this->value = array($this->value);
+                $this->value = [$this->value];
             }
         }
         foreach ($this->value as &$value) {
@@ -44,6 +44,7 @@ class Set extends Value
                 $value = new Set($value);
             }
         }
+        unset($value);
 
         $this->value = array_unique($this->value);
     }
@@ -72,8 +73,7 @@ class Set extends Value
     {
         if (is_array($value->getValue())) {
             foreach ($this->value as $val) {
-                if ($val instanceof Set
-                    && $val == $value->getSet()) {
+                if ($val instanceof Set && $val == $value->getSet()) {
                     return true;
                 }
             }
@@ -81,7 +81,7 @@ class Set extends Value
             return false;
         }
 
-        return in_array($value->getValue(), $this->value);
+        return \in_array($value->getValue(), $this->value);
     }
 
     /**
@@ -236,6 +236,6 @@ class Set extends Value
      */
     protected function isValidNumericSet()
     {
-        return count($this->value) == array_sum(array_map('is_numeric', $this->value));
+        return count($this->value) === array_sum(array_map('is_numeric', $this->value));
     }
 }

@@ -40,10 +40,10 @@ namespace Ruler;
  */
 class Context implements \ArrayAccess
 {
-    private $keys   = array();
-    private $values = array();
-    private $frozen = array();
-    private $raw    = array();
+    private $keys   = [];
+    private $values = [];
+    private $frozen = [];
+    private $raw    = [];
 
     private $shared;
     private $protected;
@@ -55,6 +55,7 @@ class Context implements \ArrayAccess
      * values.
      *
      * @param array $values (default: array())
+     * @throws \RuntimeException
      */
     public function __construct(array $values = array())
     {
@@ -85,7 +86,7 @@ class Context implements \ArrayAccess
      *
      * @return mixed The resolved value of the fact
      *
-     * @throws InvalidArgumentException if the name is not defined
+     * @throws \InvalidArgumentException if the name is not defined
      */
     public function offsetGet($name)
     {
@@ -93,7 +94,7 @@ class Context implements \ArrayAccess
             throw new \InvalidArgumentException(sprintf('Fact "%s" is not defined.', $name));
         }
 
-        $value = $this->values[$name];
+        $value =& $this->values[$name];
 
         // If the value is already frozen, or if it's not callable, or if it's protected, return the raw value
         if (isset($this->frozen[$name]) || !is_object($value) || $this->protected->contains($value) || !$this->isCallable($value)) {
@@ -121,7 +122,7 @@ class Context implements \ArrayAccess
      * @param string $name  The unique name for the fact
      * @param mixed  $value The value or a closure to lazily define the value
      *
-     * @throws RuntimeException if a frozen fact overridden
+     * @throws \RuntimeException if a frozen fact overridden
      */
     public function offsetSet($name, $value)
     {
@@ -160,7 +161,7 @@ class Context implements \ArrayAccess
      *
      * @return callable The passed callable
      *
-     * @throws InvalidArgumentException if the callable is not a Closure or invokable object
+     * @throws \InvalidArgumentException if the callable is not a Closure or invokable object
      */
     public function share($callable)
     {
@@ -183,7 +184,7 @@ class Context implements \ArrayAccess
      *
      * @return callable The passed callable
      *
-     * @throws InvalidArgumentException if the callable is not a Closure or invokable object
+     * @throws \InvalidArgumentException if the callable is not a Closure or invokable object
      */
     public function protect($callable)
     {
@@ -203,7 +204,7 @@ class Context implements \ArrayAccess
      *
      * @return mixed The value of the fact or the closure defining the fact
      *
-     * @throws InvalidArgumentException if the name is not defined
+     * @throws \InvalidArgumentException if the name is not defined
      */
     public function raw($name)
     {

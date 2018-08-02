@@ -1,7 +1,7 @@
 Ruler
 =====
 
-Ruler is a simple stateless production rules engine for PHP 5.3+.
+Ruler is a simple stateless production rules engine for PHP 5.6+.
 
 [![Package version](http://img.shields.io/packagist/v/ruler/ruler.svg?style=flat-square)](https://packagist.org/packages/ruler/ruler)
 [![Build status](http://img.shields.io/travis/bobthecow/Ruler/develop.svg?style=flat-square)](http://travis-ci.org/bobthecow/Ruler)
