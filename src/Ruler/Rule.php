@@ -52,7 +52,7 @@ class Rule implements Proposition
      * Execute the Rule with the given Context.
      *
      * The Rule will be evaluated, and if successful, will execute its
-     * $action callback.
+     * $action callback and pass the context to the action.
      *
      * @param  Context         $context Context with which to execute this Rule
      * @throws \LogicException
@@ -64,7 +64,7 @@ class Rule implements Proposition
                 throw new \LogicException('Rule actions must be callable.');
             }
 
-            call_user_func($this->action);
+            call_user_func($this->action, $context);
         }
     }
 }
