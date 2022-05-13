@@ -83,7 +83,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @return bool
      */
-    public function offsetExists($name)
+    public function offsetExists($name): bool
     {
         return isset($this->properties[$name]);
     }
@@ -97,7 +97,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @return VariableProperty
      */
-    public function offsetGet($name)
+    public function offsetGet($name): VariableProperty
     {
         return $this->getProperty($name);
     }
@@ -110,7 +110,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param string $name  Property name
      * @param mixed  $value The default Variable value
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($name, $value): void
     {
         $this->getProperty($name)->setValue($value);
     }
@@ -120,7 +120,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param string $name Property name
      */
-    public function offsetUnset($name)
+    public function offsetUnset($name): void
     {
         unset($this->properties[$name]);
     }

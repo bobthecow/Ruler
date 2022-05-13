@@ -73,7 +73,7 @@ class Context implements \ArrayAccess
      *
      * @return boolean
      */
-    public function offsetExists($name)
+    public function offsetExists($name): bool
     {
         return isset($this->keys[$name]);
     }
@@ -87,7 +87,7 @@ class Context implements \ArrayAccess
      *
      * @throws InvalidArgumentException if the name is not defined
      */
-    public function offsetGet($name)
+    public function offsetGet($name): mixed
     {
         if (!$this->offsetExists($name)) {
             throw new \InvalidArgumentException(sprintf('Fact "%s" is not defined.', $name));
@@ -123,7 +123,7 @@ class Context implements \ArrayAccess
      *
      * @throws RuntimeException if a frozen fact overridden
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($name, $value): void
     {
         if (isset($this->frozen[$name])) {
             throw new \RuntimeException(sprintf('Cannot override frozen fact "%s".', $name));
@@ -138,7 +138,7 @@ class Context implements \ArrayAccess
      *
      * @param string $name The unique name for the fact
      */
-    public function offsetUnset($name)
+    public function offsetUnset($name): void
     {
         if ($this->offsetExists($name)) {
             $value = $this->values[$name];
