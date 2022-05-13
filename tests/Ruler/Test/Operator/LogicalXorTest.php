@@ -49,11 +49,9 @@ class LogicalXorTest extends TestCase
         $this->assertFalse($op->evaluate($context));
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExecutingALogicalXorWithoutPropositionsThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalXor();
         $op->evaluate(new Context());
     }

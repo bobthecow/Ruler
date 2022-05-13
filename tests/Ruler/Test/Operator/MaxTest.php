@@ -19,11 +19,11 @@ class MaxTest extends TestCase
 
     /**
      * @dataProvider invalidData
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage max: all values must be numeric
      */
     public function testInvalidData($datum)
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('max: all values must be numeric');
         $var = new Variable('a', $datum);
         $context = new Context();
 

@@ -19,11 +19,11 @@ class MinTest extends TestCase
 
     /**
      * @dataProvider invalidData
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage min: all values must be numeric
      */
     public function testInvalidData($datum)
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('min: all values must be numeric');
         $var = new Variable('a', $datum);
         $context = new Context();
 

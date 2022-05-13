@@ -46,11 +46,9 @@ class LogicalOrTest extends TestCase
         $this->assertTrue($op->evaluate($context));
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExecutingALogicalOrWithoutPropositionsThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalOr();
         $op->evaluate(new Context());
     }

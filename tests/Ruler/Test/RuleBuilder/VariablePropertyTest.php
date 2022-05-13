@@ -161,12 +161,9 @@ class VariablePropertyTest extends TestCase
         $this->assertTrue($varE->startsWithInsensitive($varE)->evaluate($context));
     }
 
-    /**
-     * @expectedException PHPUnit\Framework\Error\Deprecated
-     * @expectedExceptionMessage Contains operator is deprecated, please use SetContains
-     */
     public function testDeprecationNoticeForContainsWithSet()
     {
+        $this->expectDeprecationMessage('Contains operator is deprecated, please use SetContains');
         $context = new Context(array(
             'var' => array('foo', 'bar', 'baz'),
         ));
@@ -176,12 +173,10 @@ class VariablePropertyTest extends TestCase
         $this->assertTrue($var->contains('bar')->evaluate($context));
     }
 
-    /**
-     * @expectedException PHPUnit\Framework\Error\Deprecated
-     * @expectedExceptionMessage Contains operator is deprecated, please use StringContains
-     */
     public function testDeprecationNoticeForContainsWithString()
     {
+        $this->expectDeprecation();
+        $this->expectDeprecationMessage('Contains operator is deprecated, please use StringContains');
         $context = new Context(array(
             'var' => 'string',
         ));

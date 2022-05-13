@@ -18,12 +18,10 @@ class ModuloTest extends TestCase
         $this->assertInstanceOf('Ruler\\VariableOperand', $op);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Arithmetic: values must be numeric
-     */
     public function testInvalidData()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Arithmetic: values must be numeric');
         $varA    = new Variable('a', "string");
         $varB    = new Variable('b', "blah");
         $context = new Context();
@@ -32,12 +30,10 @@ class ModuloTest extends TestCase
         $op->prepareValue($context);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Division by zero
-     */
     public function testDivideByZero()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Division by zero');
         $varA    = new Variable('a', rand(1, 100));
         $varB    = new Variable('b', 0);
         $context = new Context();
