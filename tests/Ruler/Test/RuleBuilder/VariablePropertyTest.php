@@ -160,34 +160,4 @@ class VariablePropertyTest extends TestCase
         $this->assertInstanceOf('Ruler\Operator\StartsWithInsensitive', $varE->startsWithInsensitive('STRING'));
         $this->assertTrue($varE->startsWithInsensitive($varE)->evaluate($context));
     }
-
-    /**
-     * @expectedException PHPUnit\Framework\Error\Deprecated
-     * @expectedExceptionMessage Contains operator is deprecated, please use SetContains
-     */
-    public function testDeprecationNoticeForContainsWithSet()
-    {
-        $context = new Context(array(
-            'var' => array('foo', 'bar', 'baz'),
-        ));
-
-        $var = new Variable(new RuleBuilder(), 'var');
-
-        $this->assertTrue($var->contains('bar')->evaluate($context));
-    }
-
-    /**
-     * @expectedException PHPUnit\Framework\Error\Deprecated
-     * @expectedExceptionMessage Contains operator is deprecated, please use StringContains
-     */
-    public function testDeprecationNoticeForContainsWithString()
-    {
-        $context = new Context(array(
-            'var' => 'string',
-        ));
-
-        $var = new Variable(new RuleBuilder(), 'var');
-
-        $this->assertTrue($var->contains('ring')->evaluate($context));
-    }
 }

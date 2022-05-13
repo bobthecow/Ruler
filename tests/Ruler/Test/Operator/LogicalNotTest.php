@@ -32,28 +32,22 @@ class LogicalNotTest extends TestCase
         $this->assertFalse($op->evaluate(new Context()));
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExecutingALogicalNotWithoutPropositionsThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalNot();
         $op->evaluate(new Context());
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalNot(array(new TrueProposition(), new FalseProposition()));
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testAddingASecondPropositionToLogicalNotThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalNot();
         $op->addProposition(new TrueProposition());
         $op->addProposition(new TrueProposition());

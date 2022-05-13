@@ -122,12 +122,11 @@ class RuleBuilderTest extends TestCase
 
     /**
      * @dataProvider logicExceptionOnRegisteringOperatorNamespaceProvider
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Namespace argument must be a string
      */
     public function testInvalidArgumentExceptionOnRegisteringOperatorNamespace($input)
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Namespace argument must be a string');
         $rb = new RuleBuilder();
         $rb->registerOperatorNamespace($input);
     }
@@ -150,12 +149,10 @@ class RuleBuilderTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException LogicException
-     * @expectedExceptionMessage Unknown operator: "aLotBiggerThan"
-     */
     public function testLogicExceptionOnUnknownOperator()
     {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Unknown operator: "aLotBiggerThan"');
         $rb = new RuleBuilder();
         $rb->registerOperatorNamespace('\Ruler\Test\Fixtures');
         $varA = $rb['a'];

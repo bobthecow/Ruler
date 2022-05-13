@@ -64,11 +64,9 @@ class RuleTest extends TestCase
         $this->assertTrue($actionExecuted);
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testNonCallableActionsWillThrowAnException()
     {
+        $this->expectException(\LogicException::class);
         $context = new Context();
         $rule = new Rule(new TrueProposition(), 'this is not callable');
         $rule->execute($context);

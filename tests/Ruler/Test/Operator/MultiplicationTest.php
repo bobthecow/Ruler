@@ -18,12 +18,10 @@ class MultiplicationTest extends TestCase
         $this->assertInstanceOf('Ruler\\VariableOperand', $op);
     }
 
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Arithmetic: values must be numeric
-     */
     public function testInvalidData()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Arithmetic: values must be numeric');
         $varA    = new Variable('a', "string");
         $varB    = new Variable('b', "blah");
         $context = new Context();
