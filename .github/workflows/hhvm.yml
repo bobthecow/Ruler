@@ -1,0 +1,45 @@
+name: Unit Tests HHVM
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        hhvm: ['hhvm/hhvm:3.30.0']
+
+    container: ${{ matrix.hhvm }}
+
+    steps:
+    - name: Install composer
+      shell: bash
+      run: |
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+        php composer-setup.php
+        php -r "unlink('composer-setup.php');"
+        mv composer.phar /bin/composer
+
+    - uses: actions/checkout@v2
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-${{ matrix.hhvm }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.hhvm }}-php-
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+
+    - name: Run test suite
+      run: hhvm vendor/bin/phpunit
