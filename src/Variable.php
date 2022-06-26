@@ -31,7 +31,7 @@ class Variable implements VariableOperand
      * @param string $name  Variable name (default: null)
      * @param mixed  $value Default Variable value (default: null)
      */
-    public function __construct($name = null, $value = null)
+    public function __construct(string $name = null, $value = null)
     {
         $this->name = $name;
         $this->value = $value;
@@ -39,10 +39,8 @@ class Variable implements VariableOperand
 
     /**
      * Return the Variable name.
-     *
-     * @return string Variable name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -52,7 +50,7 @@ class Variable implements VariableOperand
      *
      * @param mixed $value The default Variable value
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }
@@ -71,10 +69,8 @@ class Variable implements VariableOperand
      * Prepare a Value for this Variable given the current Context.
      *
      * @param Context $context The current Context
-     *
-     * @return Value
      */
-    public function prepareValue(Context $context)
+    public function prepareValue(Context $context): Value
     {
         if (isset($this->name) && isset($context[$this->name])) {
             $value = $context[$this->name];

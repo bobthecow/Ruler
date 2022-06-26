@@ -32,7 +32,7 @@ abstract class Operator
         }
     }
 
-    public function getOperands()
+    public function getOperands(): array
     {
         switch ($this->getOperandCardinality()) {
             case self::UNARY:

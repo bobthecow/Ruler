@@ -59,10 +59,8 @@ class VariableProperty extends Variable
      * Otherwise, return the default value for this VariableProperty.
      *
      * @param Context $context The current Context
-     *
-     * @return Value
      */
-    public function prepareValue(Context $context)
+    public function prepareValue(Context $context): Value
     {
         $name = $this->getName();
         $value = $this->parent->prepareValue($context)->getValue();
@@ -86,10 +84,8 @@ class VariableProperty extends Variable
      * Private helper to retrieve a Value instance for the given $value.
      *
      * @param mixed $value Value instance or value
-     *
-     * @return Value
      */
-    private function asValue($value)
+    private function asValue($value): Value
     {
         return ($value instanceof Value) ? $value : new Value($value);
     }

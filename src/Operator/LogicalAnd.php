@@ -23,10 +23,8 @@ class LogicalAnd extends LogicalOperator
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition
-     *
-     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         /** @var Proposition $operand */
         foreach ($this->getOperands() as $operand) {

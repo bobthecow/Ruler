@@ -411,7 +411,7 @@ use Ruler\Value;
 
 class ALotGreaterThan extends VariableOperator implements Proposition
 {
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         list($left, $right) = $this->getOperands();
         $value = $right->prepareValue($context)->getValue() * 10;

@@ -9,6 +9,9 @@ class CallbackProposition implements Proposition
 {
     private $callback;
 
+    /**
+     * @param callable $callback
+     */
     public function __construct($callback)
     {
         if (!\is_callable($callback)) {
@@ -18,7 +21,7 @@ class CallbackProposition implements Proposition
         $this->callback = $callback;
     }
 
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         return \call_user_func($this->callback, $context);
     }

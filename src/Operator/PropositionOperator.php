@@ -19,12 +19,12 @@ use Ruler\Proposition;
  */
 abstract class PropositionOperator extends BaseOperator
 {
-    public function addOperand($operand)
+    public function addOperand($operand): void
     {
         $this->addProposition($operand);
     }
 
-    public function addProposition(Proposition $operand)
+    public function addProposition(Proposition $operand): void
     {
         if (static::UNARY === $this->getOperandCardinality()
             && 0 < \count($this->operands)

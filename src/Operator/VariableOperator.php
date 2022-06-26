@@ -19,12 +19,12 @@ use Ruler\VariableOperand;
  */
 abstract class VariableOperator extends BaseOperator
 {
-    public function addOperand($operand)
+    public function addOperand($operand): void
     {
         $this->addVariable($operand);
     }
 
-    public function addVariable(VariableOperand $operand)
+    public function addVariable(VariableOperand $operand): void
     {
         if (static::UNARY === $this->getOperandCardinality()
             && 0 < \count($this->operands)

@@ -23,7 +23,7 @@ abstract class LogicalOperator extends PropositionOperator implements Propositio
     /**
      * array of propositions.
      *
-     * @param array $props
+     * @param Proposition[] $props
      */
     public function __construct(array $props = [])
     {

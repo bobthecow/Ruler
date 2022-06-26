@@ -13,6 +13,7 @@ namespace Ruler\Operator;
 
 use Ruler\Context;
 use Ruler\Set;
+use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
@@ -22,7 +23,7 @@ use Ruler\VariableOperand;
  */
 class SymmetricDifference extends VariableOperator implements VariableOperand
 {
-    public function prepareValue(Context $context)
+    public function prepareValue(Context $context): Value
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */

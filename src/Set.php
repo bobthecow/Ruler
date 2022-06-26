@@ -39,6 +39,7 @@ class Set extends Value implements \Countable
                 $this->value = [$this->value];
             }
         }
+
         foreach ($this->value as &$value) {
             if (\is_array($value)) {
                 $value = new self($value);
@@ -57,10 +58,7 @@ class Set extends Value implements \Countable
         }
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $returnValue = '';
         foreach ($this->value as $value) {
@@ -74,10 +72,8 @@ class Set extends Value implements \Countable
      * Set Contains comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function setContains(Value $value)
+    public function setContains(Value $value): bool
     {
         if (\is_array($value->getValue())) {
             foreach ($this->value as $val) {
@@ -98,10 +94,8 @@ class Set extends Value implements \Countable
      * Returns a Set which is the union of this Set with all passed Sets.
      *
      * @param Value $set,...
-     *
-     * @return Set
      */
-    public function union(Value $set)
+    public function union(Value $set): self
     {
         $union = $this->value;
 
@@ -121,10 +115,8 @@ class Set extends Value implements \Countable
      * Returns a Set which is the intersection of this Set with all passed sets.
      *
      * @param Value $set,...
-     *
-     * @return Set
      */
-    public function intersect(Value $set)
+    public function intersect(Value $set): self
     {
         $intersect = $this->value;
 
@@ -145,10 +137,8 @@ class Set extends Value implements \Countable
      * Returns a Set which is the complement of this Set with all passed Sets.
      *
      * @param Value $set,...
-     *
-     * @return Set
      */
-    public function complement(Value $set)
+    public function complement(Value $set): self
     {
         $complement = $this->value;
 
@@ -168,12 +158,8 @@ class Set extends Value implements \Countable
      *
      * Returns a Set which is the symmetric difference of this Set with the
      * passed Set.
-     *
-     * @param Value $set
-     *
-     * @return Set
      */
-    public function symmetricDifference(Value $set)
+    public function symmetricDifference(Value $set): self
     {
         $returnValue = new self([]);
 
@@ -223,12 +209,8 @@ class Set extends Value implements \Countable
 
     /**
      * Contains Subset comparison.
-     *
-     * @param Set $set
-     *
-     * @return bool
      */
-    public function containsSubset(self $set)
+    public function containsSubset(self $set): bool
     {
         if ((\is_countable($set->getValue()) ? \count($set->getValue()) : 0) > (\is_countable($this->getValue()) ? \count($this->getValue()) : 0)) {
             return false;
@@ -239,17 +221,12 @@ class Set extends Value implements \Countable
 
     /**
      * Helper function to validate that a set contains only numeric members.
-     *
-     * @return bool
      */
-    protected function isValidNumericSet()
+    protected function isValidNumericSet(): bool
     {
         return (\is_countable($this->value) ? \count($this->value) : 0) === \array_sum(\array_map('is_numeric', $this->value));
     }
 
-    /**
-     * @return int
-     */
     public function count(): int
     {
         return \is_countable($this->value) ? \count($this->value) : 0;

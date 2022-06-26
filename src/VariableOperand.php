@@ -16,10 +16,5 @@ namespace Ruler;
  */
 interface VariableOperand
 {
-    /**
-     * @param Context $context
-     *
-     * @return Value
-     */
-    public function prepareValue(Context $context);
+    public function prepareValue(Context $context): Value;
 }

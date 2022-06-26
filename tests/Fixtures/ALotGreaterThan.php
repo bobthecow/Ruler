@@ -28,10 +28,8 @@ class ALotGreaterThan extends VariableOperator implements Proposition
      * Evaluate whether the given variables are equal in the current Context.
      *
      * @param Context $context Context with which to evaluate this ComparisonOperator
-     *
-     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */

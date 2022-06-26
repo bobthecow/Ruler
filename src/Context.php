@@ -70,8 +70,6 @@ class Context implements \ArrayAccess
      * Check if a fact is defined.
      *
      * @param string $name The unique name for the fact
-     *
-     * @return bool
      */
     public function offsetExists($name): bool
     {
@@ -221,10 +219,8 @@ class Context implements \ArrayAccess
 
     /**
      * Get all defined fact names.
-     *
-     * @return array An array of fact names
      */
-    public function keys()
+    public function keys(): array
     {
         return \array_keys($this->keys);
     }
@@ -233,10 +229,8 @@ class Context implements \ArrayAccess
      * Check whether a value is a Closure or invokable object.
      *
      * @param mixed $callable
-     *
-     * @return bool
      */
-    protected function isCallable($callable)
+    protected function isCallable($callable): bool
     {
         return \is_object($callable) && \is_callable($callable);
     }

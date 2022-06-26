@@ -40,10 +40,8 @@ class Rule implements Proposition
      * Evaluate the Rule with the given Context.
      *
      * @param Context $context Context with which to evaluate this Rule
-     *
-     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         return $this->condition->evaluate($context);
     }
@@ -58,7 +56,7 @@ class Rule implements Proposition
      *
      * @throws \LogicException
      */
-    public function execute(Context $context)
+    public function execute(Context $context): void
     {
         if ($this->evaluate($context) && isset($this->action)) {
             if (!\is_callable($this->action)) {

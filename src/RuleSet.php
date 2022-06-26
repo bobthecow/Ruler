@@ -39,7 +39,7 @@ class RuleSet
      *
      * @param Rule $rule Rule to add to the set
      */
-    public function addRule(Rule $rule)
+    public function addRule(Rule $rule): void
     {
         $this->rules[\spl_object_hash($rule)] = $rule;
     }
@@ -49,7 +49,7 @@ class RuleSet
      *
      * @param Context $context Context with which to execute each Rule
      */
-    public function executeRules(Context $context)
+    public function executeRules(Context $context): void
     {
         foreach ($this->rules as $rule) {
             $rule->execute($context);

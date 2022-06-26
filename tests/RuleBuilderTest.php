@@ -121,35 +121,6 @@ class RuleBuilderTest extends TestCase
         $this->assertFalse($varA->aLotGreaterThan(1)->evaluate($context));
     }
 
-    /**
-     * @dataProvider logicExceptionOnRegisteringOperatorNamespaceProvider
-     */
-    public function testInvalidArgumentExceptionOnRegisteringOperatorNamespace($input)
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Namespace argument must be a string');
-        $rb = new RuleBuilder();
-        $rb->registerOperatorNamespace($input);
-    }
-
-    public function logicExceptionOnRegisteringOperatorNamespaceProvider()
-    {
-        return [
-            [
-                ['ExceptionRisen'],
-            ],
-            [
-                new \stdClass(),
-            ],
-            [
-                0,
-            ],
-            [
-                null,
-            ],
-        ];
-    }
-
     public function testLogicExceptionOnUnknownOperator()
     {
         $this->expectException(\LogicException::class);

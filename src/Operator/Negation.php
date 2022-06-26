@@ -22,7 +22,7 @@ use Ruler\VariableOperand;
  */
 class Negation extends VariableOperator implements VariableOperand
 {
-    public function prepareValue(Context $context)
+    public function prepareValue(Context $context): Value
     {
         /** @var VariableOperand $operand */
         [$operand] = $this->getOperands();

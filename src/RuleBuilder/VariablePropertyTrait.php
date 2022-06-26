@@ -42,7 +42,7 @@ trait VariablePropertyTrait
      *
      * @param Variable $parent Parent Variable instance
      */
-    public function setParent(Variable $parent)
+    public function setParent(Variable $parent): void
     {
         $this->parent = $parent;
     }
@@ -68,10 +68,8 @@ trait VariablePropertyTrait
      * Otherwise, return the default value for this VariableProperty.
      *
      * @param Context $context The current Context
-     *
-     * @return Value
      */
-    public function prepareValue(Context $context)
+    public function prepareValue(Context $context): Value
     {
         $name = $this->getName();
         $value = $this->parent->prepareValue($context)->getValue();
@@ -95,10 +93,8 @@ trait VariablePropertyTrait
      * Private helper to retrieve a Value instance for the given $value.
      *
      * @param mixed $value Value instance or value
-     *
-     * @return Value
      */
-    private function asValue($value)
+    private function asValue($value): Value
     {
         return ($value instanceof Value) ? $value : new Value($value);
     }

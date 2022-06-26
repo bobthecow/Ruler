@@ -36,10 +36,7 @@ class Value
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         if (\is_object($this->value)) {
             return \spl_object_hash($this->value);
@@ -60,10 +57,8 @@ class Value
 
     /**
      * Get a Set containing this Value.
-     *
-     * @return Set
      */
-    public function getSet()
+    public function getSet(): Set
     {
         return new Set($this->value);
     }
@@ -72,10 +67,8 @@ class Value
      * Equal To comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function equalTo(self $value)
+    public function equalTo(self $value): bool
     {
         return $this->value === $value->getValue();
     }
@@ -84,10 +77,8 @@ class Value
      * Identical To comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function sameAs(self $value)
+    public function sameAs(self $value): bool
     {
         return $this->value === $value->getValue();
     }
@@ -96,10 +87,8 @@ class Value
      * String Contains comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function stringContains(self $value)
+    public function stringContains(self $value): bool
     {
         return \strpos($this->value, (string) $value->getValue()) !== false;
     }
@@ -108,10 +97,8 @@ class Value
      * String Contains case-insensitive comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function stringContainsInsensitive(self $value)
+    public function stringContainsInsensitive(self $value): bool
     {
         return \stripos($this->value, (string) $value->getValue()) !== false;
     }
@@ -120,10 +107,8 @@ class Value
      * Greater Than comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function greaterThan(self $value)
+    public function greaterThan(self $value): bool
     {
         return $this->value > $value->getValue();
     }
@@ -132,10 +117,8 @@ class Value
      * Less Than comparison.
      *
      * @param Value $value Value object to compare against
-     *
-     * @return bool
      */
-    public function lessThan(self $value)
+    public function lessThan(self $value): bool
     {
         return $this->value < $value->getValue();
     }
@@ -232,10 +215,8 @@ class Value
      *
      * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
-     *
-     * @return bool
      */
-    public function startsWith(self $value, $insensitive = false)
+    public function startsWith(self $value, bool $insensitive = false): bool
     {
         $value = $value->getValue();
         $valueLength = \strlen($value);
@@ -252,10 +233,8 @@ class Value
      *
      * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
-     *
-     * @return bool
      */
-    public function endsWith(self $value, $insensitive = false)
+    public function endsWith(self $value, bool $insensitive = false): bool
     {
         $value = $value->getValue();
         $valueLength = \strlen($value);

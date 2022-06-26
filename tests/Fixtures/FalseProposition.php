@@ -7,7 +7,7 @@ use Ruler\Proposition;
 
 class FalseProposition implements Proposition
 {
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         return false;
     }

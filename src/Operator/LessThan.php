@@ -24,10 +24,8 @@ class LessThan extends VariableOperator implements Proposition
 {
     /**
      * @param Context $context Context with which to evaluate this Proposition
-     *
-     * @return bool
      */
-    public function evaluate(Context $context)
+    public function evaluate(Context $context): bool
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */

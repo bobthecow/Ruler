@@ -22,8 +22,6 @@ interface Proposition
      * Evaluate the Proposition with the given Context.
      *
      * @param Context $context Context with which to evaluate this Proposition
-     *
-     * @return bool
      */
-    public function evaluate(Context $context);
+    public function evaluate(Context $context): bool;
 }

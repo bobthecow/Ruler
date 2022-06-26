@@ -29,10 +29,8 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param Proposition $condition Propositional condition for this Rule
      * @param callable    $action    Action (callable) to take upon successful Rule execution (default: null)
-     *
-     * @return Rule
      */
-    public function create(Proposition $condition, $action = null)
+    public function create(Proposition $condition, $action = null): Rule
     {
         return new Rule($condition, $action);
     }
@@ -42,13 +40,9 @@ class RuleBuilder implements \ArrayAccess
      *
      * Note that, depending on your filesystem, operator namespaces are most likely case sensitive.
      *
-     * @param string $namespace Operator namespace
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return RuleBuilder
      */
-    public function registerOperatorNamespace($namespace)
+    public function registerOperatorNamespace(string $namespace): self
     {
         if (!\is_string($namespace)) {
             throw new \InvalidArgumentException('Namespace argument must be a string');
@@ -64,10 +58,8 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
-     *
-     * @return Operator\LogicalAnd
      */
-    public function logicalAnd(Proposition $prop, Proposition $prop2 = null)
+    public function logicalAnd(Proposition $prop, Proposition $prop2 = null): Operator\LogicalAnd
     {
         return new Operator\LogicalAnd(\func_get_args());
     }
@@ -77,10 +69,8 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
-     *
-     * @return Operator\LogicalOr
      */
-    public function logicalOr(Proposition $prop, Proposition $prop2 = null)
+    public function logicalOr(Proposition $prop, Proposition $prop2 = null): Operator\LogicalOr
     {
         return new Operator\LogicalOr(\func_get_args());
     }
@@ -89,10 +79,8 @@ class RuleBuilder implements \ArrayAccess
      * Create a logical NOT operator proposition.
      *
      * @param Proposition $prop Exactly one Proposition
-     *
-     * @return Operator\LogicalNot
      */
-    public function logicalNot(Proposition $prop)
+    public function logicalNot(Proposition $prop): Operator\LogicalNot
     {
         return new Operator\LogicalNot([$prop]);
     }
@@ -102,10 +90,8 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param Proposition $prop      Initial Proposition
      * @param Proposition $prop2,... Optional unlimited number of additional Propositions
-     *
-     * @return Operator\LogicalXor
      */
-    public function logicalXor(Proposition $prop, Proposition $prop2 = null)
+    public function logicalXor(Proposition $prop, Proposition $prop2 = null): Operator\LogicalXor
     {
         return new Operator\LogicalXor(\func_get_args());
     }
@@ -114,8 +100,6 @@ class RuleBuilder implements \ArrayAccess
      * Check whether a Variable is already set.
      *
      * @param string $name The Variable name
-     *
-     * @return bool
      */
     public function offsetExists($name): bool
     {
@@ -126,8 +110,6 @@ class RuleBuilder implements \ArrayAccess
      * Retrieve a Variable by name.
      *
      * @param string $name The Variable name
-     *
-     * @return RuleBuilder\Variable
      */
     public function offsetGet($name): RuleBuilder\Variable
     {
@@ -162,13 +144,9 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Find an operator in the registered operator namespaces.
      *
-     * @param string $name
-     *
      * @throws \LogicException if a matching operator is not found
-     *
-     * @return string
      */
-    public function findOperator($name)
+    public function findOperator(string $name): string
     {
         $operator = \ucfirst($name);
         foreach (\array_keys($this->operatorNamespaces) as $namespace) {
