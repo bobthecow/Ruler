@@ -2,10 +2,10 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class NegationTest extends TestCase
 {
@@ -21,7 +21,7 @@ class NegationTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Arithmetic: values must be numeric');
-        $varA    = new Variable('a', "string");
+        $varA = new Variable('a', 'string');
         $context = new Context();
 
         $op = new Operator\Negation($varA);
@@ -33,7 +33,7 @@ class NegationTest extends TestCase
      */
     public function testSubtract($a, $result)
     {
-        $varA    = new Variable('a', $a);
+        $varA = new Variable('a', $a);
         $context = new Context();
 
         $op = new Operator\Negation($varA);
@@ -42,11 +42,11 @@ class NegationTest extends TestCase
 
     public function negateData()
     {
-        return array(
-            array(1, -1),
-            array(0.0, 0.0),
-            array("0", 0),
-            array(-62834, 62834),
-        );
+        return [
+            [1, -1],
+            [0.0, 0.0],
+            ['0', 0],
+            [-62834, 62834],
+        ];
     }
 }

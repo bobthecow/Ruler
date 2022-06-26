@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class StringContainsInsensitiveTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\StringContainsInsensitive($varA, $varB);
         $this->assertInstanceOf(\Ruler\Proposition::class, $op);
@@ -23,8 +23,8 @@ class StringContainsInsensitiveTest extends TestCase
      */
     public function testContains($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\StringContainsInsensitive($varA, $varB);
@@ -36,8 +36,8 @@ class StringContainsInsensitiveTest extends TestCase
      */
     public function testDoesNotContain($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\StringDoesNotContainInsensitive($varA, $varB);
@@ -46,21 +46,21 @@ class StringContainsInsensitiveTest extends TestCase
 
     public function containsData()
     {
-        return array(
-            array('supercalifragilistic', 'super', true),
-            array('supercalifragilistic', 'fragil', true),
-            array('supercalifragilistic', 'a', true),
-            array('supercalifragilistic', 'stic', true),
-            array('timmy', 'bob', false),
-            array('timmy', 'tim', true),
-            array('supercalifragilistic', 'SUPER', true),
-            array('supercalifragilistic', 'frAgil', true),
-            array('supercalifragilistic', 'A', true),
-            array('supercalifragilistic', 'sTiC', true),
-            array('timmy', 'bob', false),
-            array('timmy', 'TIM', true),
-            array('tim', 'TIM', true),
-            array('tim', 'TiM', true),
-        );
+        return [
+            ['supercalifragilistic', 'super', true],
+            ['supercalifragilistic', 'fragil', true],
+            ['supercalifragilistic', 'a', true],
+            ['supercalifragilistic', 'stic', true],
+            ['timmy', 'bob', false],
+            ['timmy', 'tim', true],
+            ['supercalifragilistic', 'SUPER', true],
+            ['supercalifragilistic', 'frAgil', true],
+            ['supercalifragilistic', 'A', true],
+            ['supercalifragilistic', 'sTiC', true],
+            ['timmy', 'bob', false],
+            ['timmy', 'TIM', true],
+            ['tim', 'TIM', true],
+            ['tim', 'TiM', true],
+        ];
     }
 }

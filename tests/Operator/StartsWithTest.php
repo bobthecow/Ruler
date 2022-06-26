@@ -2,10 +2,10 @@
 
 namespace Ruler\Test\Operator;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\Context;
 use Ruler\Operator;
 use Ruler\Variable;
-use PHPUnit\Framework\TestCase;
 
 class StartsWithTest extends TestCase
 {
@@ -23,8 +23,8 @@ class StartsWithTest extends TestCase
      */
     public function testStartsWith($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\StartsWith($varA, $varB);
@@ -33,12 +33,12 @@ class StartsWithTest extends TestCase
 
     public function startsWithData()
     {
-        return array(
-            array('supercalifragilistic', 'supercalifragilistic', true),
-            array('supercalifragilistic','super', true),
-            array('supercalifragilistic','SUPER', false),
-            array('supercalifragilistic', 'stic', false),
-            array('supercalifragilistic', '', false),
-        );
+        return [
+            ['supercalifragilistic', 'supercalifragilistic', true],
+            ['supercalifragilistic', 'super', true],
+            ['supercalifragilistic', 'SUPER', false],
+            ['supercalifragilistic', 'stic', false],
+            ['supercalifragilistic', '', false],
+        ];
     }
 }

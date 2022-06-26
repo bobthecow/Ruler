@@ -2,18 +2,17 @@
 
 namespace Ruler\Test;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\Context;
-use Ruler\Value;
 use Ruler\Variable;
 use Ruler\VariableProperty;
-use PHPUnit\Framework\TestCase;
 
 class VariablePropertyTest extends TestCase
 {
     public function testConstructor()
     {
         $name = 'evil';
-        $prop = new VariableProperty(new Variable, $name);
+        $prop = new VariableProperty(new Variable(), $name);
         $this->assertEquals($name, $prop->getName());
         $this->assertNull($prop->getValue());
     }
@@ -22,7 +21,7 @@ class VariablePropertyTest extends TestCase
     {
         $values = explode(', ', 'Plug it, play it, burn it, rip it, drag and drop it, zip, unzip it');
 
-        $prop = new VariableProperty(new Variable, 'technologic');
+        $prop = new VariableProperty(new Variable(), 'technologic');
         foreach ($values as $valueString) {
             $prop->setValue($valueString);
             $this->assertEquals($valueString, $prop->getValue());
@@ -31,12 +30,12 @@ class VariablePropertyTest extends TestCase
 
     public function testPrepareValue()
     {
-        $values = array(
-            'root' => array(
+        $values = [
+            'root' => [
                 'one' => 'Foo',
                 'two' => 'BAR',
-            ),
-        );
+            ],
+        ];
 
         $context = new Context($values);
 

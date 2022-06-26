@@ -2,12 +2,11 @@
 
 namespace Ruler\Test\RuleBuilder;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\Context;
-use Ruler\Value;
 use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
 use Ruler\RuleBuilder\VariableProperty;
-use PHPUnit\Framework\TestCase;
 
 class VariablePropertyTest extends TestCase
 {
@@ -32,12 +31,12 @@ class VariablePropertyTest extends TestCase
 
     public function testPrepareValue()
     {
-        $values = array(
-            'root' => array(
+        $values = [
+            'root' => [
                 'one' => 'Foo',
                 'two' => 'BAR',
-            ),
-        );
+            ],
+        ];
 
         $context = new Context($values);
 
@@ -60,24 +59,24 @@ class VariablePropertyTest extends TestCase
 
     public function testFluentInterfaceHelpersAndAnonymousVariables()
     {
-        $context = new Context(array(
-            'root' => array(
+        $context = new Context([
+            'root' => [
                 'a' => 1,
                 'b' => 2,
-                'c' => array(1, 4),
-                'd' => array(
+                'c' => [1, 4],
+                'd' => [
                     'foo' => 1,
                     'bar' => 2,
-                    'baz' => array(
+                    'baz' => [
                         'qux' => 3,
-                    ),
-                ),
+                    ],
+                ],
                 'e' => 'string',
                 'f' => 'ring',
                 'g' => 'stuff',
                 'h' => 'STRING',
-            ),
-        ));
+            ],
+        ]);
 
         $root = new Variable(new RuleBuilder(), 'root');
 

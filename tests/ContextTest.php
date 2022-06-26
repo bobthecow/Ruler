@@ -25,13 +25,13 @@
 namespace Ruler\Test;
 
 use InvalidArgumentException;
-use Ruler\Context;
-use Ruler\Test\Fixtures\Invokable;
-use Ruler\Test\Fixtures\Fact;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Test\Fixtures\Fact;
+use Ruler\Test\Fixtures\Invokable;
 
 /**
- * Ruler Context test
+ * Ruler Context test.
  *
  * Derived from Pimple, by Fabien Potencier:
  *
@@ -44,13 +44,13 @@ class ContextTest extends TestCase
 {
     public function testConstructor()
     {
-        $facts = array(
-            'name' => 'Mint Chip',
-            'type' => 'Ice Cream',
+        $facts = [
+            'name'      => 'Mint Chip',
+            'type'      => 'Ice Cream',
             'delicious' => function () {
                 return true;
-            }
-        );
+            },
+        ];
 
         $context = new Context($facts);
 
@@ -130,7 +130,7 @@ class ContextTest extends TestCase
 
     public function testConstructorInjection()
     {
-        $params = array("param" => "value");
+        $params = ['param' => 'value'];
         $context = new Context($params);
 
         $this->assertSame($params['param'], $context['param']);
@@ -227,7 +227,7 @@ class ContextTest extends TestCase
         $context['foo'] = 123;
         $context['bar'] = 123;
 
-        $this->assertEquals(array('foo', 'bar'), $context->keys());
+        $this->assertEquals(['foo', 'bar'], $context->keys());
     }
 
     /** @test */
@@ -271,29 +271,29 @@ class ContextTest extends TestCase
     }
 
     /**
-     * Provider for invalid fact definitions
+     * Provider for invalid fact definitions.
      */
     public function badFactDefinitionProvider()
     {
-        return array(
-          array(123),
-          array(new Fact())
-        );
+        return [
+            [123],
+            [new Fact()],
+        ];
     }
 
     /**
-     * Provider for fact definitions
+     * Provider for fact definitions.
      */
     public function factDefinitionProvider()
     {
-        return array(
-            array(function ($value) {
+        return [
+            [function ($value) {
                 $fact = new Fact();
                 $fact->value = $value;
 
                 return $fact;
-            }),
-            array(new Invokable())
-        );
+            }],
+            [new Invokable()],
+        ];
     }
 }

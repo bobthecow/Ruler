@@ -40,10 +40,10 @@ namespace Ruler;
  */
 class Context implements \ArrayAccess
 {
-    private array $keys   = array();
-    private array $values = array();
-    private array $frozen = array();
-    private array $raw    = array();
+    private array $keys = [];
+    private array $values = [];
+    private array $frozen = [];
+    private array $raw = [];
 
     private $shared;
     private $protected;
@@ -56,10 +56,10 @@ class Context implements \ArrayAccess
      *
      * @param array $values (default: array())
      */
-    public function __construct(array $values = array())
+    public function __construct(array $values = [])
     {
-        $this->shared    = new \SplObjectStorage;
-        $this->protected = new \SplObjectStorage;
+        $this->shared = new \SplObjectStorage();
+        $this->protected = new \SplObjectStorage();
 
         foreach ($values as $key => $value) {
             $this->offsetSet($key, $value);
@@ -71,7 +71,7 @@ class Context implements \ArrayAccess
      *
      * @param string $name The unique name for the fact
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name): bool
     {
@@ -83,9 +83,9 @@ class Context implements \ArrayAccess
      *
      * @param string $name The unique name for the fact
      *
-     * @return mixed The resolved value of the fact
-     *
      * @throws \InvalidArgumentException if the name is not defined
+     *
+     * @return mixed The resolved value of the fact
      */
     #[\ReturnTypeWillChange]
     public function offsetGet($name)
@@ -104,7 +104,7 @@ class Context implements \ArrayAccess
         // If this is a shared value, resolve, freeze, and return the result
         if ($this->shared->contains($value)) {
             $this->frozen[$name] = true;
-            $this->raw[$name]    = $value;
+            $this->raw[$name] = $value;
 
             return $this->values[$name] = $value($this);
         }
@@ -130,12 +130,12 @@ class Context implements \ArrayAccess
             throw new \RuntimeException(sprintf('Cannot override frozen fact "%s".', $name));
         }
 
-        $this->keys[$name]   = true;
+        $this->keys[$name] = true;
         $this->values[$name] = $value;
     }
 
     /**
-     * Unset a fact
+     * Unset a fact.
      *
      * @param string $name The unique name for the fact
      */
@@ -159,9 +159,9 @@ class Context implements \ArrayAccess
      *
      * @param callable $callable A fact callable to share
      *
-     * @return callable The passed callable
-     *
      * @throws \InvalidArgumentException if the callable is not a Closure or invokable object
+     *
+     * @return callable The passed callable
      */
     public function share($callable)
     {
@@ -182,9 +182,9 @@ class Context implements \ArrayAccess
      *
      * @param callable $callable A callable to protect from being evaluated
      *
-     * @return callable The passed callable
-     *
      * @throws \InvalidArgumentException if the callable is not a Closure or invokable object
+     *
+     * @return callable The passed callable
      */
     public function protect($callable)
     {
@@ -202,9 +202,9 @@ class Context implements \ArrayAccess
      *
      * @param string $name The unique name for the fact
      *
-     * @return mixed The value of the fact or the closure defining the fact
-     *
      * @throws \InvalidArgumentException if the name is not defined
+     *
+     * @return mixed The value of the fact or the closure defining the fact
      */
     public function raw($name)
     {
@@ -234,7 +234,7 @@ class Context implements \ArrayAccess
      *
      * @param mixed $callable
      *
-     * @return boolean
+     * @return bool
      */
     protected function isCallable($callable)
     {

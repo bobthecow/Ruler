@@ -2,11 +2,11 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Test\Fixtures\TrueProposition;
-use Ruler\Test\Fixtures\FalseProposition;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Test\Fixtures\FalseProposition;
+use Ruler\Test\Fixtures\TrueProposition;
 
 class LogicalNotTest extends TestCase
 {
@@ -14,13 +14,13 @@ class LogicalNotTest extends TestCase
     {
         $true = new TrueProposition();
 
-        $op = new Operator\LogicalNot(array($true));
+        $op = new Operator\LogicalNot([$true]);
         $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructor()
     {
-        $op = new Operator\LogicalNot(array(new FalseProposition()));
+        $op = new Operator\LogicalNot([new FalseProposition()]);
         $this->assertTrue($op->evaluate(new Context()));
     }
 
@@ -42,7 +42,7 @@ class LogicalNotTest extends TestCase
     public function testInstantiatingALogicalNotWithTooManyArgumentsThrowsAnException()
     {
         $this->expectException(\LogicException::class);
-        $op = new Operator\LogicalNot(array(new TrueProposition(), new FalseProposition()));
+        $op = new Operator\LogicalNot([new TrueProposition(), new FalseProposition()]);
     }
 
     public function testAddingASecondPropositionToLogicalNotThrowsAnException()

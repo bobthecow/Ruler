@@ -16,7 +16,7 @@ use Ruler\Set;
 use Ruler\VariableOperand;
 
 /**
- * A Complement Set Operator
+ * A Complement Set Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

@@ -34,9 +34,9 @@ class Set extends Value implements \Countable
         parent::__construct($set);
         if (!is_array($this->value)) {
             if (is_null($this->value)) {
-                $this->value = array();
+                $this->value = [];
             } else {
-                $this->value = array($this->value);
+                $this->value = [$this->value];
             }
         }
         foreach ($this->value as &$value) {
@@ -75,7 +75,7 @@ class Set extends Value implements \Countable
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function setContains(Value $value)
     {
@@ -176,7 +176,7 @@ class Set extends Value implements \Countable
      */
     public function symmetricDifference(Value $set)
     {
-        $returnValue = new Set(array());
+        $returnValue = new Set([]);
 
         return $returnValue->union(
             $this->complement($set),
@@ -249,7 +249,7 @@ class Set extends Value implements \Countable
     }
 
     /**
-     * @return integer
+     * @return int
      */
     public function count(): int
     {

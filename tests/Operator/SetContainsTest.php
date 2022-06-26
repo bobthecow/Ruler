@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class SetContainsTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\SetContains($varA, $varB);
         $this->assertInstanceOf(\Ruler\Proposition::class, $op);
@@ -23,8 +23,8 @@ class SetContainsTest extends TestCase
      */
     public function testContains($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\SetContains($varA, $varB);
@@ -36,8 +36,8 @@ class SetContainsTest extends TestCase
      */
     public function testDoesNotContain($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\SetDoesNotContain($varA, $varB);
@@ -46,17 +46,17 @@ class SetContainsTest extends TestCase
 
     public function containsData()
     {
-        return array(
-            array(array(1), 1, true),
-            array(array(1, 2, 3), 1, true),
-            array(array(1, 2, 3), 4, false),
-            array(array('foo', 'bar', 'baz'), 'pow', false),
-            array(array('foo', 'bar', 'baz'), 'bar', true),
-            array(null, 'bar', false),
-            array(null, null, false),
-            array(array(1, 2, 3), array(2), false),
-            array(array(1, 2, array('foo')), array('foo'), true),
-            array(array(1), array(1), false),
-        );
+        return [
+            [[1], 1, true],
+            [[1, 2, 3], 1, true],
+            [[1, 2, 3], 4, false],
+            [['foo', 'bar', 'baz'], 'pow', false],
+            [['foo', 'bar', 'baz'], 'bar', true],
+            [null, 'bar', false],
+            [null, null, false],
+            [[1, 2, 3], [2], false],
+            [[1, 2, ['foo']], ['foo'], true],
+            [[1], [1], false],
+        ];
     }
 }

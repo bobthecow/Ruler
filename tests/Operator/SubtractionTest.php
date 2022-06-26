@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class SubtractionTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\Subtraction($varA, $varB);
         $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
@@ -22,8 +22,8 @@ class SubtractionTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Arithmetic: values must be numeric');
-        $varA    = new Variable('a', "string");
-        $varB    = new Variable('b', "blah");
+        $varA = new Variable('a', 'string');
+        $varB = new Variable('b', 'blah');
         $context = new Context();
 
         $op = new Operator\Subtraction($varA, $varB);
@@ -35,8 +35,8 @@ class SubtractionTest extends TestCase
      */
     public function testSubtract($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\Subtraction($varA, $varB);
@@ -45,10 +45,10 @@ class SubtractionTest extends TestCase
 
     public function subtractData()
     {
-        return array(
-            array(6, 2, 4),
-            array(7, -3, 10),
-            array(2.5, 1.4, 1.1),
-        );
+        return [
+            [6, 2, 4],
+            [7, -3, 10],
+            [2.5, 1.4, 1.1],
+        ];
     }
 }

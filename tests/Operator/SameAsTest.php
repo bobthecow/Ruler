@@ -2,10 +2,10 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class SameAsTest extends TestCase
 {
@@ -20,8 +20,8 @@ class SameAsTest extends TestCase
 
     public function testConstructorAndEvaluation()
     {
-        $varA    = new Variable('a', 1);
-        $varB    = new Variable('b', 2);
+        $varA = new Variable('a', 1);
+        $varB = new Variable('b', 2);
         $context = new Context();
 
         $op = new Operator\SameAs($varA, $varB);
@@ -40,9 +40,9 @@ class SameAsTest extends TestCase
         $context['b'] = '3';
         $this->assertFalse($op->evaluate($context));
 
-        $context['a'] = new \StdClass();
+        $context['a'] = new \stdClass();
         $context['a']->attributes = 1;
-        $context['b'] = new \StdClass();
+        $context['b'] = new \stdClass();
         $context['b']->attributes = 1;
         $this->assertFalse($op->evaluate($context));
 

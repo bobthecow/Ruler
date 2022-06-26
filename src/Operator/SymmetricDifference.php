@@ -16,7 +16,7 @@ use Ruler\Set;
 use Ruler\VariableOperand;
 
 /**
- * A Symmetric Difference Set Operator
+ * A Symmetric Difference Set Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

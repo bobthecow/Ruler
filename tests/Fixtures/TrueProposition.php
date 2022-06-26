@@ -2,8 +2,8 @@
 
 namespace Ruler\Test\Fixtures;
 
-use Ruler\Proposition;
 use Ruler\Context;
+use Ruler\Proposition;
 
 class TrueProposition implements Proposition
 {

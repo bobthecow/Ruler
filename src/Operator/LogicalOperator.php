@@ -14,18 +14,18 @@ namespace Ruler\Operator;
 use Ruler\Proposition;
 
 /**
- * Logical operator base class
+ * Logical operator base class.
  *
  * @author Justin Hileman <justin@justinhileman.info>
  */
 abstract class LogicalOperator extends PropositionOperator implements Proposition
 {
     /**
-     * array of propositions
+     * array of propositions.
      *
      * @param array $props
      */
-    public function __construct(array $props = array())
+    public function __construct(array $props = [])
     {
         foreach ($props as $operand) {
             $this->addOperand($operand);

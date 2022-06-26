@@ -33,7 +33,7 @@ class Rule implements Proposition
     public function __construct(Proposition $condition, $action = null)
     {
         $this->condition = $condition;
-        $this->action    = $action;
+        $this->action = $action;
     }
 
     /**
@@ -41,7 +41,7 @@ class Rule implements Proposition
      *
      * @param Context $context Context with which to evaluate this Rule
      *
-     * @return boolean
+     * @return bool
      */
     public function evaluate(Context $context)
     {
@@ -54,7 +54,8 @@ class Rule implements Proposition
      * The Rule will be evaluated, and if successful, will execute its
      * $action callback.
      *
-     * @param  Context         $context Context with which to execute this Rule
+     * @param Context $context Context with which to execute this Rule
+     *
      * @throws \LogicException
      */
     public function execute(Context $context)

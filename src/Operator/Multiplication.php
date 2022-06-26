@@ -12,11 +12,11 @@
 namespace Ruler\Operator;
 
 use Ruler\Context;
-use Ruler\VariableOperand;
 use Ruler\Value;
+use Ruler\VariableOperand;
 
 /**
- * A Multiplication Arithmetic Operator
+ * A Multiplication Arithmetic Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

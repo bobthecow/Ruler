@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A Floor Math Operator
+ * A Floor Math Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

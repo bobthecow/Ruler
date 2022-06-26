@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class UnionTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\Union($varA, $varB);
         $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
@@ -20,17 +20,17 @@ class UnionTest extends TestCase
 
     public function testInvalidData()
     {
-        $varA    = new Variable('a', "string");
-        $varB    = new Variable('b', "blah");
+        $varA = new Variable('a', 'string');
+        $varB = new Variable('b', 'blah');
         $context = new Context();
 
         $op = new Operator\Union($varA, $varB);
         $this->assertEquals(
             $op->prepareValue($context)->getValue(),
-            array(
+            [
                 'string',
-                'blah'
-            )
+                'blah',
+            ]
         );
     }
 
@@ -39,8 +39,8 @@ class UnionTest extends TestCase
      */
     public function testUnion($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\Union($varA, $varB);
@@ -49,48 +49,48 @@ class UnionTest extends TestCase
 
     public function unionData()
     {
-        return array(
-            array(6, 2, array(6, 2)),
-            array(
+        return [
+            [6, 2, [6, 2]],
+            [
                 'a',
-                array('b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array(),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array(),
-                array('a', 'b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array(),
-                array(),
-                array(),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('d', 'e', 'f'),
-                array('a', 'b', 'c', 'd', 'e', 'f'),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('a', 'b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array('b', 'c'),
-                array('b', 'd'),
-                array('b', 'c', 'd'),
-            ),
-        );
+                ['b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                ['a', 'b', 'c'],
+                [],
+                ['a', 'b', 'c'],
+            ],
+            [
+                [],
+                ['a', 'b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                [],
+                [],
+                [],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['d', 'e', 'f'],
+                ['a', 'b', 'c', 'd', 'e', 'f'],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['a', 'b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                ['b', 'c'],
+                ['b', 'd'],
+                ['b', 'c', 'd'],
+            ],
+        ];
     }
 }

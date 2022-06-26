@@ -2,18 +2,17 @@
 
 namespace Ruler\Test\RuleBuilder;
 
+use PHPUnit\Framework\TestCase;
+use Ruler\Context;
 use Ruler\RuleBuilder;
 use Ruler\RuleBuilder\Variable;
-use Ruler\Context;
-use Ruler\Value;
-use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase
 {
     public function testConstructor()
     {
         $name = 'evil';
-        $var  = new Variable(new RuleBuilder(), $name);
+        $var = new Variable(new RuleBuilder(), $name);
         $this->assertEquals($name, $var->getName());
         $this->assertNull($var->getValue());
     }
@@ -31,17 +30,17 @@ class VariableTest extends TestCase
 
     public function testPrepareValue()
     {
-        $values = array(
-            'one' => 'Foo',
-            'two' => 'BAR',
+        $values = [
+            'one'   => 'Foo',
+            'two'   => 'BAR',
             'three' => function () {
                 return 'baz';
-            }
-        );
+            },
+        ];
 
         $context = new Context($values);
 
-        $rb   = new RuleBuilder();
+        $rb = new RuleBuilder();
         $varA = new Variable($rb, 'four', 'qux');
         $this->assertInstanceOf(\Ruler\Value::class, $varA->prepareValue($context));
         $this->assertEquals(
@@ -74,19 +73,19 @@ class VariableTest extends TestCase
     public function testFluentInterfaceHelpersAndAnonymousVariables()
     {
         $rb = new RuleBuilder();
-        $context = new Context(array(
+        $context = new Context([
             'a' => 1,
             'b' => 2,
-            'c' => array(1, 4),
-            'd' => array(
+            'c' => [1, 4],
+            'd' => [
                 'foo' => 1,
                 'bar' => 2,
-                'baz' => array(
+                'baz' => [
                     'qux' => 3,
-                ),
-            ),
+                ],
+            ],
             'e' => 1.5,
-        ));
+        ]);
 
         $varA = new Variable($rb, 'a');
         $varB = new Variable($rb, 'b');

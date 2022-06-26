@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * An Addition Arithmetic Operator
+ * An Addition Arithmetic Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

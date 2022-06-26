@@ -73,7 +73,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function equalTo(Value $value)
     {
@@ -85,7 +85,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function sameAs(Value $value)
     {
@@ -97,7 +97,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function stringContains(Value $value)
     {
@@ -109,7 +109,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function stringContainsInsensitive(Value $value)
     {
@@ -121,7 +121,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function greaterThan(Value $value)
     {
@@ -133,7 +133,7 @@ class Value
      *
      * @param Value $value Value object to compare against
      *
-     * @return boolean
+     * @return bool
      */
     public function lessThan(Value $value)
     {
@@ -143,7 +143,7 @@ class Value
     public function add(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return $this->value + $value->getValue();
@@ -152,10 +152,10 @@ class Value
     public function divide(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
         if (0 == $value->getValue()) {
-            throw new \RuntimeException("Division by zero");
+            throw new \RuntimeException('Division by zero');
         }
 
         return $this->value / $value->getValue();
@@ -164,10 +164,10 @@ class Value
     public function modulo(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
         if (0 == $value->getValue()) {
-            throw new \RuntimeException("Division by zero");
+            throw new \RuntimeException('Division by zero');
         }
 
         return $this->value % $value->getValue();
@@ -176,7 +176,7 @@ class Value
     public function multiply(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return $this->value * $value->getValue();
@@ -185,7 +185,7 @@ class Value
     public function subtract(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return $this->value - $value->getValue();
@@ -194,7 +194,7 @@ class Value
     public function negate()
     {
         if (!is_numeric($this->value)) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return -$this->value;
@@ -203,7 +203,7 @@ class Value
     public function ceil()
     {
         if (!is_numeric($this->value)) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return (int) ceil($this->value);
@@ -212,7 +212,7 @@ class Value
     public function floor()
     {
         if (!is_numeric($this->value)) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return (int) floor($this->value);
@@ -221,7 +221,7 @@ class Value
     public function exponentiate(Value $value)
     {
         if (!is_numeric($this->value) || !is_numeric($value->getValue())) {
-            throw new \RuntimeException("Arithmetic: values must be numeric");
+            throw new \RuntimeException('Arithmetic: values must be numeric');
         }
 
         return $this->value ** $value->getValue();
@@ -233,7 +233,7 @@ class Value
      * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
      *
-     * @return boolean
+     * @return bool
      */
     public function startsWith(Value $value, $insensitive = false)
     {
@@ -253,7 +253,7 @@ class Value
      * @param Value $value       Value object to compare against
      * @param bool  $insensitive Perform a case-insensitive comparison (default: false)
      *
-     * @return boolean
+     * @return bool
      */
     public function endsWith(Value $value, $insensitive = false)
     {

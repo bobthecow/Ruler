@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class ContainsSubsetTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\ContainsSubset($varA, $varB);
         $this->assertInstanceOf(\Ruler\Proposition::class, $op);
@@ -23,8 +23,8 @@ class ContainsSubsetTest extends TestCase
      */
     public function testContains($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\ContainsSubset($varA, $varB);
@@ -36,8 +36,8 @@ class ContainsSubsetTest extends TestCase
      */
     public function testDoesNotContain($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\DoesNotContainSubset($varA, $varB);
@@ -46,20 +46,20 @@ class ContainsSubsetTest extends TestCase
 
     public function containsData()
     {
-        return array(
-            array(array(1), array(1), true),
-            array(array(1), 1, true),
-            array(array(1, 2, 3), array(1, 2), true),
-            array(array(1, 2, 3), array(2, 4), false),
-            array(array('foo', 'bar', 'baz'), array('pow'), false),
-            array(array('foo', 'bar', 'baz'), array('bar'), true),
-            array(array('foo', 'bar', 'baz'), array('bar', 'baz'), true),
-            array(null, 'bar', false),
-            array(null, array('bar'), false),
-            array(null, array('bar', 'baz'), false),
-            array(null, null, true),
-            array(array(), array(), true),
-            array(array(1, 2, 3), array(2), true),
-        );
+        return [
+            [[1], [1], true],
+            [[1], 1, true],
+            [[1, 2, 3], [1, 2], true],
+            [[1, 2, 3], [2, 4], false],
+            [['foo', 'bar', 'baz'], ['pow'], false],
+            [['foo', 'bar', 'baz'], ['bar'], true],
+            [['foo', 'bar', 'baz'], ['bar', 'baz'], true],
+            [null, 'bar', false],
+            [null, ['bar'], false],
+            [null, ['bar', 'baz'], false],
+            [null, null, true],
+            [[], [], true],
+            [[1, 2, 3], [2], true],
+        ];
     }
 }

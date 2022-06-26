@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * An Exponentiate Math Operator
+ * An Exponentiate Math Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

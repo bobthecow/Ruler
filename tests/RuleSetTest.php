@@ -2,18 +2,18 @@
 
 namespace Ruler\Test;
 
-use Ruler\RuleSet;
-use Ruler\Rule;
-use Ruler\Context;
-use Ruler\Test\Fixtures\TrueProposition;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Rule;
+use Ruler\RuleSet;
+use Ruler\Test\Fixtures\TrueProposition;
 
 class RuleSetTest extends TestCase
 {
     public function testRulesetCreationUpdateAndExecution()
     {
         $context = new Context();
-        $true    = new TrueProposition();
+        $true = new TrueProposition();
 
         $executedActionA = false;
         $ruleA = new Rule($true, function () use (&$executedActionA) {
@@ -30,7 +30,7 @@ class RuleSetTest extends TestCase
             $executedActionC = true;
         });
 
-        $ruleset = new RuleSet(array($ruleA));
+        $ruleset = new RuleSet([$ruleA]);
 
         $ruleset->executeRules($context);
 

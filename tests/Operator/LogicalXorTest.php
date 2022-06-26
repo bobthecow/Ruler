@@ -2,11 +2,11 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Test\Fixtures\TrueProposition;
-use Ruler\Test\Fixtures\FalseProposition;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Test\Fixtures\FalseProposition;
+use Ruler\Test\Fixtures\TrueProposition;
 
 class LogicalXorTest extends TestCase
 {
@@ -14,24 +14,24 @@ class LogicalXorTest extends TestCase
     {
         $true = new TrueProposition();
 
-        $op = new Operator\LogicalXor(array($true));
+        $op = new Operator\LogicalXor([$true]);
         $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructor()
     {
-        $true    = new TrueProposition();
-        $false   = new FalseProposition();
+        $true = new TrueProposition();
+        $false = new FalseProposition();
         $context = new Context();
 
-        $op = new Operator\LogicalXor(array($true, $false));
+        $op = new Operator\LogicalXor([$true, $false]);
         $this->assertTrue($op->evaluate($context));
     }
 
     public function testAddPropositionAndEvaluate()
     {
-        $true    = new TrueProposition();
-        $false   = new FalseProposition();
+        $true = new TrueProposition();
+        $false = new FalseProposition();
         $context = new Context();
 
         $op = new Operator\LogicalXor();

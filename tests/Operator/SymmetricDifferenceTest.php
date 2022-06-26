@@ -2,17 +2,17 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class SymmetricDifferenceTest extends TestCase
 {
     public function testInterface()
     {
         $varA = new Variable('a', 1);
-        $varB = new Variable('b', array(2));
+        $varB = new Variable('b', [2]);
 
         $op = new Operator\SymmetricDifference($varA, $varB);
         $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
@@ -20,13 +20,13 @@ class SymmetricDifferenceTest extends TestCase
 
     public function testInvalidData()
     {
-        $varA    = new Variable('a', "string");
-        $varB    = new Variable('b', "blah");
+        $varA = new Variable('a', 'string');
+        $varB = new Variable('b', 'blah');
         $context = new Context();
 
         $op = new Operator\SymmetricDifference($varA, $varB);
         $this->assertEquals(
-            array('string', 'blah'),
+            ['string', 'blah'],
             $op->prepareValue($context)->getValue()
         );
     }
@@ -36,8 +36,8 @@ class SymmetricDifferenceTest extends TestCase
      */
     public function testSymmetricDifference($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\SymmetricDifference($varA, $varB);
@@ -49,58 +49,58 @@ class SymmetricDifferenceTest extends TestCase
 
     public function symmetricDifferenceData()
     {
-        return array(
-            array(6, 2, array(6, 2)),
-            array(
-                array('a', 'b', 'c'),
+        return [
+            [6, 2, [6, 2]],
+            [
+                ['a', 'b', 'c'],
                 'a',
-                array('b', 'c'),
-            ),
-            array(
+                ['b', 'c'],
+            ],
+            [
                 'a',
-                array('a', 'b', 'c'),
-                array('b', 'c'),
-            ),
-            array(
+                ['a', 'b', 'c'],
+                ['b', 'c'],
+            ],
+            [
                 'a',
-                array('b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array(),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array(),
-                array('a', 'b', 'c'),
-                array('a', 'b', 'c'),
-            ),
-            array(
-                array(),
-                array(),
-                array(),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('d', 'e', 'f'),
-                array('a', 'b', 'c', 'd', 'e', 'f'),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('a', 'b', 'c'),
-                array(),
-            ),
-            array(
-                array('a', 'b', 'c'),
-                array('b', 'c'),
-                array('a'),
-            ),
-            array(
-                array('b', 'c'),
-                array('b', 'd'),
-                array('c', 'd'),
-            ),
-        );
+                ['b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                ['a', 'b', 'c'],
+                [],
+                ['a', 'b', 'c'],
+            ],
+            [
+                [],
+                ['a', 'b', 'c'],
+                ['a', 'b', 'c'],
+            ],
+            [
+                [],
+                [],
+                [],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['d', 'e', 'f'],
+                ['a', 'b', 'c', 'd', 'e', 'f'],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['a', 'b', 'c'],
+                [],
+            ],
+            [
+                ['a', 'b', 'c'],
+                ['b', 'c'],
+                ['a'],
+            ],
+            [
+                ['b', 'c'],
+                ['b', 'd'],
+                ['c', 'd'],
+            ],
+        ];
     }
 }

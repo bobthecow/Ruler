@@ -2,10 +2,10 @@
 
 namespace Ruler\Test\Operator;
 
+use PHPUnit\Framework\TestCase;
 use Ruler\Context;
 use Ruler\Operator;
 use Ruler\Variable;
-use PHPUnit\Framework\TestCase;
 
 class EndsWithTest extends TestCase
 {
@@ -23,8 +23,8 @@ class EndsWithTest extends TestCase
      */
     public function testEndsWith($a, $b, $result)
     {
-        $varA    = new Variable('a', $a);
-        $varB    = new Variable('b', $b);
+        $varA = new Variable('a', $a);
+        $varB = new Variable('b', $b);
         $context = new Context();
 
         $op = new Operator\EndsWith($varA, $varB);
@@ -33,12 +33,12 @@ class EndsWithTest extends TestCase
 
     public function endsWithData()
     {
-        return array(
-            array('supercalifragilistic', 'supercalifragilistic', true),
-            array('supercalifragilistic', 'stic', true),
-            array('supercalifragilistic', 'STIC', false),
-            array('supercalifragilistic', 'super', false),
-            array('supercalifragilistic', '', false),
-        );
+        return [
+            ['supercalifragilistic', 'supercalifragilistic', true],
+            ['supercalifragilistic', 'stic', true],
+            ['supercalifragilistic', 'STIC', false],
+            ['supercalifragilistic', 'super', false],
+            ['supercalifragilistic', '', false],
+        ];
     }
 }

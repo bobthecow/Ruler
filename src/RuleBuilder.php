@@ -21,8 +21,8 @@ namespace Ruler;
  */
 class RuleBuilder implements \ArrayAccess
 {
-    private array $variables          = array();
-    private array $operatorNamespaces = array();
+    private array $variables = [];
+    private array $operatorNamespaces = [];
 
     /**
      * Create a Rule with the given propositional condition.
@@ -42,9 +42,10 @@ class RuleBuilder implements \ArrayAccess
      *
      * Note that, depending on your filesystem, operator namespaces are most likely case sensitive.
      *
-     * @throws \InvalidArgumentException
      *
      * @param string $namespace Operator namespace
+     *
+     * @throws \InvalidArgumentException
      *
      * @return RuleBuilder
      */
@@ -94,7 +95,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalNot(Proposition $prop)
     {
-        return new Operator\LogicalNot(array($prop));
+        return new Operator\LogicalNot([$prop]);
     }
 
     /**
@@ -115,7 +116,7 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name The Variable name
      *
-     * @return boolean
+     * @return bool
      */
     public function offsetExists($name): bool
     {
@@ -162,9 +163,10 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Find an operator in the registered operator namespaces.
      *
-     * @throws \LogicException If a matching operator is not found.
      *
      * @param string $name
+     *
+     * @throws \LogicException If a matching operator is not found.
      *
      * @return string
      */
@@ -172,7 +174,7 @@ class RuleBuilder implements \ArrayAccess
     {
         $operator = ucfirst($name);
         foreach (array_keys($this->operatorNamespaces) as $namespace) {
-            $class = $namespace . '\\' . $operator;
+            $class = $namespace.'\\'.$operator;
             if (class_exists($class)) {
                 return $class;
             }

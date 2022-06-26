@@ -33,7 +33,7 @@ use Ruler\VariableOperand;
 class Variable extends BaseVariable implements \ArrayAccess
 {
     private $ruleBuilder;
-    private array $properties = array();
+    private array $properties = [];
 
     /**
      * RuleBuilder Variable constructor.
@@ -463,7 +463,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     private function applySetOperator($name, array $args)
     {
-        $reflection = new \ReflectionClass('\\Ruler\\Operator\\' . $name);
+        $reflection = new \ReflectionClass('\\Ruler\\Operator\\'.$name);
         array_unshift($args, $this);
 
         return $this->wrap($reflection->newInstanceArgs($args));
@@ -534,17 +534,17 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @see RuleBuilder::registerOperatorNamespace
      *
-     * @throws \LogicException if operator is not registered.
-     *
      * @param string $name
      * @param array  $args
+     *
+     * @throws \LogicException if operator is not registered.
      *
      * @return Operator|self
      */
     public function __call($name, array $args)
     {
         $reflection = new \ReflectionClass($this->ruleBuilder->findOperator($name));
-        $args = array_map(array($this, 'asVariable'), $args);
+        $args = array_map([$this, 'asVariable'], $args);
         array_unshift($args, $this);
 
         $op = $reflection->newInstanceArgs($args);

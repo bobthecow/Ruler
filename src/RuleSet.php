@@ -18,14 +18,14 @@ namespace Ruler;
  */
 class RuleSet
 {
-    protected $rules = array();
+    protected $rules = [];
 
     /**
      * RuleSet constructor.
      *
      * @param array $rules Rules to add to RuleSet
      */
-    public function __construct(array $rules = array())
+    public function __construct(array $rules = [])
     {
         foreach ($rules as $rule) {
             $this->addRule($rule);

@@ -18,13 +18,12 @@ namespace Ruler;
  */
 interface Proposition
 {
-
     /**
      * Evaluate the Proposition with the given Context.
      *
      * @param Context $context Context with which to evaluate this Proposition
      *
-     * @return boolean
+     * @return bool
      */
     public function evaluate(Context $context);
 }

@@ -11,8 +11,8 @@
 
 namespace Ruler\Operator;
 
-use Ruler\VariableOperand;
 use Ruler\Operator as BaseOperator;
+use Ruler\VariableOperand;
 
 /**
  * @author Jordan Raub <jordan@raub.me>
@@ -29,7 +29,7 @@ abstract class VariableOperator extends BaseOperator
         if (static::UNARY == $this->getOperandCardinality()
             && 0 < count($this->operands)
         ) {
-            throw new \LogicException(get_class($this) . " can only have 1 operand");
+            throw new \LogicException(get_class($this).' can only have 1 operand');
         }
         $this->operands[] = $operand;
     }

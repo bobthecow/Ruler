@@ -16,7 +16,7 @@ use Ruler\Set;
 use Ruler\VariableOperand;
 
 /**
- * A Set Union Operator
+ * A Set Union Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */
@@ -24,7 +24,7 @@ class Union extends VariableOperator implements VariableOperand
 {
     public function prepareValue(Context $context)
     {
-        $union = new Set(array());
+        $union = new Set([]);
         /** @var VariableOperand $operand */
         foreach ($this->getOperands() as $operand) {
             $set = $operand->prepareValue($context)->getSet();

@@ -2,9 +2,9 @@
 
 namespace Ruler\Test\Functional;
 
-use Ruler\RuleBuilder;
-use Ruler\Context;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\RuleBuilder;
 
 class RulerTest extends TestCase
 {
@@ -65,6 +65,7 @@ class RulerTest extends TestCase
             )->evaluate($context)
         );
     }
+
     /**
      * @dataProvider truthTableTwo
      */
@@ -338,33 +339,33 @@ class RulerTest extends TestCase
 
     public function truthTableOne()
     {
-        return array(
-            array(true),
-            array(false),
-        );
+        return [
+            [true],
+            [false],
+        ];
     }
 
     public function truthTableTwo()
     {
-        return array(
-            array(true,  true),
-            array(true,  false),
-            array(false, true),
-            array(false, false),
-        );
+        return [
+            [true,  true],
+            [true,  false],
+            [false, true],
+            [false, false],
+        ];
     }
 
     public function truthTableThree()
     {
-        return array(
-            array(true,  true,  true),
-            array(true,  true,  false),
-            array(true,  false, true),
-            array(true,  false, false),
-            array(false, true,  true),
-            array(false, true,  false),
-            array(false, false, true),
-            array(false, false, false),
-        );
+        return [
+            [true,  true,  true],
+            [true,  true,  false],
+            [true,  false, true],
+            [true,  false, false],
+            [false, true,  true],
+            [false, true,  false],
+            [false, false, true],
+            [false, false, false],
+        ];
     }
 }

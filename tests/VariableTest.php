@@ -2,10 +2,9 @@
 
 namespace Ruler\Test;
 
-use Ruler\Variable;
-use Ruler\Context;
-use Ruler\Value;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Variable;
 
 class VariableTest extends TestCase
 {
@@ -30,13 +29,13 @@ class VariableTest extends TestCase
 
     public function testPrepareValue()
     {
-        $values = array(
-            'one' => 'Foo',
-            'two' => 'BAR',
+        $values = [
+            'one'   => 'Foo',
+            'two'   => 'BAR',
             'three' => function () {
                 return 'baz';
-            }
-        );
+            },
+        ];
 
         $context = new Context($values);
 

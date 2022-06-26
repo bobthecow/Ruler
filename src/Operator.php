@@ -20,7 +20,7 @@ abstract class Operator
     public const BINARY = 'BINARY';
     public const MULTIPLE = 'MULTIPLE';
 
-    protected $operands = array();
+    protected $operands = [];
 
     /**
      * @param array $operands
@@ -37,17 +37,17 @@ abstract class Operator
         switch ($this->getOperandCardinality()) {
             case self::UNARY:
                 if (1 != count($this->operands)) {
-                    throw new \LogicException(get_class($this) . ' takes only 1 operand');
+                    throw new \LogicException(get_class($this).' takes only 1 operand');
                 }
                 break;
             case self::BINARY:
                 if (2 != count($this->operands)) {
-                    throw new \LogicException(get_class($this) . ' takes 2 operands');
+                    throw new \LogicException(get_class($this).' takes 2 operands');
                 }
                 break;
             case self::MULTIPLE:
                 if (0 == count($this->operands)) {
-                    throw new \LogicException(get_class($this) . ' takes at least 1 operand');
+                    throw new \LogicException(get_class($this).' takes at least 1 operand');
                 }
                 break;
         }
@@ -56,5 +56,6 @@ abstract class Operator
     }
 
     abstract public function addOperand($operand);
+
     abstract protected function getOperandCardinality();
 }

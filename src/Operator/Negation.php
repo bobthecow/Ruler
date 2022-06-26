@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A Negation Math Operator
+ * A Negation Math Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

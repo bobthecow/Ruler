@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A set min operator
+ * A set min operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

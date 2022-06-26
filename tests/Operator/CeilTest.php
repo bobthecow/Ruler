@@ -2,10 +2,10 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class CeilTest extends TestCase
 {
@@ -21,7 +21,7 @@ class CeilTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Arithmetic: values must be numeric');
-        $varA    = new Variable('a', "string");
+        $varA = new Variable('a', 'string');
         $context = new Context();
 
         $op = new Operator\Ceil($varA);
@@ -33,7 +33,7 @@ class CeilTest extends TestCase
      */
     public function testCeiling($a, $result)
     {
-        $varA    = new Variable('a', $a);
+        $varA = new Variable('a', $a);
         $context = new Context();
 
         $op = new Operator\Ceil($varA);
@@ -42,12 +42,12 @@ class CeilTest extends TestCase
 
     public function ceilingData()
     {
-        return array(
-            array(1.2, 2),
-            array(1.0, 1),
-            array(1, 1),
-            array(-0.5, 0),
-            array(-1.5, -1),
-        );
+        return [
+            [1.2, 2],
+            [1.0, 1],
+            [1, 1],
+            [-0.5, 0],
+            [-1.5, -1],
+        ];
     }
 }

@@ -16,7 +16,7 @@ use Ruler\Set;
 use Ruler\VariableOperand;
 
 /**
- * A Set Intersection Operator
+ * A Set Intersection Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A Division Arithmetic Operator
+ * A Division Arithmetic Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

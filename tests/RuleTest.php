@@ -2,12 +2,11 @@
 
 namespace Ruler\Test;
 
-use Ruler\Rule;
-use Ruler\Proposition;
-use Ruler\Context;
-use Ruler\Test\Fixtures\TrueProposition;
-use Ruler\Test\Fixtures\CallbackProposition;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Rule;
+use Ruler\Test\Fixtures\CallbackProposition;
+use Ruler\Test\Fixtures\TrueProposition;
 
 class RuleTest extends TestCase
 {
@@ -19,9 +18,9 @@ class RuleTest extends TestCase
 
     public function testConstructorEvaluationAndExecution()
     {
-        $test           = $this;
-        $context        = new Context();
-        $executed       = false;
+        $test = $this;
+        $context = new Context();
+        $executed = false;
         $actionExecuted = false;
 
         $ruleOne = new Rule(
@@ -31,7 +30,7 @@ class RuleTest extends TestCase
 
                 return false;
             }),
-            function () use ($test, &$actionExecuted) {
+            function () use (&$actionExecuted) {
                 $actionExecuted = true;
             }
         );
@@ -42,7 +41,7 @@ class RuleTest extends TestCase
         $ruleOne->execute($context);
         $this->assertFalse($actionExecuted);
 
-        $executed       = false;
+        $executed = false;
         $actionExecuted = false;
 
         $ruleTwo = new Rule(
@@ -52,7 +51,7 @@ class RuleTest extends TestCase
 
                 return true;
             }),
-            function () use ($test, &$actionExecuted) {
+            function () use (&$actionExecuted) {
                 $actionExecuted = true;
             }
         );

@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A set max operator
+ * A set max operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

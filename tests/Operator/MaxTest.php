@@ -2,16 +2,16 @@
 
 namespace Ruler\Test\Operator;
 
-use Ruler\Operator;
-use Ruler\Context;
-use Ruler\Variable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\Operator;
+use Ruler\Variable;
 
 class MaxTest extends TestCase
 {
     public function testInterface()
     {
-        $var = new Variable('a', array(5, 2, 9));
+        $var = new Variable('a', [5, 2, 9]);
 
         $op = new Operator\Max($var);
         $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
@@ -33,12 +33,12 @@ class MaxTest extends TestCase
 
     public function invalidData()
     {
-        return array(
-            array('string'),
-            array(array('string')),
-            array(array(1, 2, 3, 'string')),
-            array(array('string', 1, 2, 3)),
-        );
+        return [
+            ['string'],
+            [['string']],
+            [[1, 2, 3, 'string']],
+            [['string', 1, 2, 3]],
+        ];
     }
 
     /**
@@ -58,12 +58,12 @@ class MaxTest extends TestCase
 
     public function maxData()
     {
-        return array(
-            array(5, 5),
-            array(array(), null),
-            array(array(5), 5),
-            array(array(-2, -5, -242), -2),
-            array(array(2, 5, 242), 242),
-        );
+        return [
+            [5, 5],
+            [[], null],
+            [[5], 5],
+            [[-2, -5, -242], -2],
+            [[2, 5, 242], 242],
+        ];
     }
 }

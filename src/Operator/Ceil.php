@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A Ceil Math Operator
+ * A Ceil Math Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

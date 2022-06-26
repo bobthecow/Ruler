@@ -2,19 +2,19 @@
 
 namespace Ruler\Test;
 
-use Ruler\Set;
-use Ruler\Value;
-use Ruler\Test\Fixtures\toStringable;
 use PHPUnit\Framework\TestCase;
+use Ruler\Set;
+use Ruler\Test\Fixtures\toStringable;
+use Ruler\Value;
 
 class SetTest extends TestCase
 {
     public function testNonStringableObject()
     {
-        $setExpected = array(
+        $setExpected = [
             new \stdClass(),
-            new \stdClass()
-        );
+            new \stdClass(),
+        ];
         $set = new Set($setExpected);
         $this->assertEquals(2, count($set));
     }
@@ -26,10 +26,10 @@ class SetTest extends TestCase
         $objectB = new \stdClass();
         $objectB->foo = 'bar';
 
-        $set = new Set(array(
+        $set = new Set([
             $objectA,
-            $objectB
-        ));
+            $objectB,
+        ]);
 
         $this->assertEquals(2, count($set));
         $this->assertTrue($set->setContains(new Value($objectA)));
@@ -39,11 +39,11 @@ class SetTest extends TestCase
 
     public function testStringable()
     {
-        $set = new Set(array(
+        $set = new Set([
             $one = new toStringable(1),
             $two = new toStringable(2),
-            $too = new toStringable(2)
-        ));
+            $too = new toStringable(2),
+        ]);
 
         $this->assertEquals(2, count($set));
         $this->assertTrue($set->setContains(new Value($one)));

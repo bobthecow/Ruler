@@ -16,7 +16,7 @@ use Ruler\Value;
 use Ruler\VariableOperand;
 
 /**
- * A Modulo Arithmetic Operator
+ * A Modulo Arithmetic Operator.
  *
  * @author Jordan Raub <jordan@raub.me>
  */

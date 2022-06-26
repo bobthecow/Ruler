@@ -2,11 +2,11 @@
 
 namespace Ruler\Test;
 
-use Ruler\RuleBuilder;
-use Ruler\Context;
-use Ruler\Test\Fixtures\TrueProposition;
-use Ruler\Test\Fixtures\FalseProposition;
 use PHPUnit\Framework\TestCase;
+use Ruler\Context;
+use Ruler\RuleBuilder;
+use Ruler\Test\Fixtures\FalseProposition;
+use Ruler\Test\Fixtures\TrueProposition;
 
 class RuleBuilderTest extends TestCase
 {
@@ -44,10 +44,10 @@ class RuleBuilderTest extends TestCase
 
     public function testLogicalOperatorGeneration()
     {
-        $rb      = new RuleBuilder();
+        $rb = new RuleBuilder();
         $context = new Context();
 
-        $true  = new TrueProposition();
+        $true = new TrueProposition();
         $false = new FalseProposition();
 
         $this->assertInstanceOf(\Ruler\Operator\LogicalAnd::class, $rb->logicalAnd($true, $false));
@@ -65,10 +65,10 @@ class RuleBuilderTest extends TestCase
 
     public function testRuleCreation()
     {
-        $rb      = new RuleBuilder();
+        $rb = new RuleBuilder();
         $context = new Context();
 
-        $true  = new TrueProposition();
+        $true = new TrueProposition();
         $false = new FalseProposition();
 
         $this->assertInstanceOf(\Ruler\Rule::class, $rb->create($true));
@@ -88,11 +88,11 @@ class RuleBuilderTest extends TestCase
     public function testNotAddEqualTo()
     {
         $rb = new RuleBuilder();
-        $context = new Context(array(
+        $context = new Context([
             'A2' => 8,
             'A3' => 4,
-            'B2' => 13
-        ));
+            'B2' => 13,
+        ]);
 
         $rule = $rb->logicalNot(
             $rb['A2']->equalTo($rb['B2'])
@@ -112,7 +112,7 @@ class RuleBuilderTest extends TestCase
         $rb = new RuleBuilder();
         $rb->registerOperatorNamespace('\Ruler\Test\Fixtures');
 
-        $context = new Context(array('a' => 100));
+        $context = new Context(['a' => 100]);
         $varA = $rb['a'];
 
         $this->assertTrue($varA->aLotGreaterThan(1)->evaluate($context));
@@ -134,20 +134,20 @@ class RuleBuilderTest extends TestCase
 
     public function logicExceptionOnRegisteringOperatorNamespaceProvider()
     {
-        return array(
-            array(
-                array('ExceptionRisen')
-            ),
-            array(
-                new \StdClass()
-            ),
-            array(
-                0
-            ),
-            array(
-                null
-            )
-        );
+        return [
+            [
+                ['ExceptionRisen'],
+            ],
+            [
+                new \stdClass(),
+            ],
+            [
+                0,
+            ],
+            [
+                null,
+            ],
+        ];
     }
 
     public function testLogicExceptionOnUnknownOperator()
