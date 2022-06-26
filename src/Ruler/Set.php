@@ -251,7 +251,7 @@ class Set extends Value implements \Countable
     /**
      * @return integer
      */
-    public function count()
+    public function count(): int
     {
         return count($this->value);
     }
