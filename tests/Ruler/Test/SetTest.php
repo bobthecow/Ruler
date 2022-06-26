@@ -5,8 +5,9 @@ namespace Ruler\Test;
 use Ruler\Set;
 use Ruler\Value;
 use Ruler\Test\Fixtures\toStringable;
+use PHPUnit\Framework\TestCase;
 
-class SetTest extends \PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
     public function testNonStringableObject()
     {
