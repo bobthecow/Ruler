@@ -13,7 +13,6 @@ namespace Ruler\RuleBuilder;
 
 use Ruler\Context;
 use Ruler\Value;
-use Ruler\Variable as BaseVariable;
 
 /**
  * A propositional VariableProperty.
@@ -42,11 +41,11 @@ class VariableProperty extends Variable
     /**
      * VariableProperty class constructor.
      *
-     * @param BaseVariable $parent Parent Variable instance
-     * @param string       $name   Property name
-     * @param mixed        $value  Default Property value (default: null)
+     * @param Variable $parent Parent Variable instance
+     * @param string   $name   Property name
+     * @param mixed    $value  Default Property value (default: null)
      */
-    public function __construct(BaseVariable $parent, $name, $value = null)
+    public function __construct(Variable $parent, $name, $value = null)
     {
         $this->parent = $parent;
         parent::__construct($parent->getRuleBuilder(), $name, $value);

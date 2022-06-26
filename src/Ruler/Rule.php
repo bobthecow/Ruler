@@ -28,7 +28,7 @@ class Rule implements Proposition
      * Rule constructor.
      *
      * @param Proposition $condition Propositional condition for this Rule
-     * @param callback    $action    Action (callable) to take upon successful Rule execution (default: null)
+     * @param callable    $action    Action (callable) to take upon successful Rule execution (default: null)
      */
     public function __construct(Proposition $condition, $action = null)
     {

@@ -250,7 +250,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param mixed $variable Right side of comparison operator
      *
-     * @return Operator\SameAs
+     * @return Operator\NotSameAs
      */
     public function notSameAs($variable)
     {
@@ -260,7 +260,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Variable
+     * @return self
      */
     public function union($variable)
     {
@@ -270,7 +270,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Variable
+     * @return self
      */
     public function intersect($variable)
     {
@@ -280,7 +280,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Variable
+     * @return self
      */
     public function complement($variable)
     {
@@ -290,7 +290,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Variable
+     * @return self
      */
     public function symmetricDifference($variable)
     {
@@ -298,7 +298,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Variable
+     * @return self
      */
     public function min()
     {
@@ -306,7 +306,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Variable
+     * @return self
      */
     public function max()
     {
@@ -360,7 +360,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Addition
+     * @return self
      */
     public function add($variable)
     {
@@ -370,7 +370,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Division
+     * @return self
      */
     public function divide($variable)
     {
@@ -380,7 +380,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Modulo
+     * @return self
      */
     public function modulo($variable)
     {
@@ -390,7 +390,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Multiplication
+     * @return self
      */
     public function multiply($variable)
     {
@@ -400,7 +400,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Subtraction
+     * @return self
      */
     public function subtract($variable)
     {
@@ -408,7 +408,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Negation
+     * @return self
      */
     public function negate()
     {
@@ -416,7 +416,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Ceil
+     * @return self
      */
     public function ceil()
     {
@@ -424,7 +424,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * @return Operator\Floor
+     * @return self
      */
     public function floor()
     {
@@ -434,7 +434,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     /**
      * @param $variable
      *
-     * @return Operator\Exponentiate
+     * @return self
      */
     public function exponentiate($variable)
     {
@@ -459,7 +459,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param string $name
      * @param array  $args
      *
-     * @return Variable
+     * @return self
      */
     private function applySetOperator($name, array $args)
     {
@@ -474,7 +474,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      *
      * @param VariableOperator $op
      *
-     * @return Variable
+     * @return self
      */
     private function wrap(VariableOperator $op)
     {
@@ -539,7 +539,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param string $name
      * @param array  $args
      *
-     * @return Operator
+     * @return Operator|self
      */
     public function __call($name, array $args)
     {
