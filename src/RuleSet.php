@@ -41,7 +41,7 @@ class RuleSet
      */
     public function addRule(Rule $rule)
     {
-        $this->rules[spl_object_hash($rule)] = $rule;
+        $this->rules[\spl_object_hash($rule)] = $rule;
     }
 
     /**

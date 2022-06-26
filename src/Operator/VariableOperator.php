@@ -26,10 +26,10 @@ abstract class VariableOperator extends BaseOperator
 
     public function addVariable(VariableOperand $operand)
     {
-        if (static::UNARY == $this->getOperandCardinality()
-            && 0 < count($this->operands)
+        if (static::UNARY === $this->getOperandCardinality()
+            && 0 < \count($this->operands)
         ) {
-            throw new \LogicException(get_class($this).' can only have 1 operand');
+            throw new \LogicException(static::class.' can only have 1 operand');
         }
         $this->operands[] = $operand;
     }

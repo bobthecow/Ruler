@@ -80,15 +80,15 @@ class VariableProperty extends Variable
         $name = $this->getName();
         $value = $this->parent->prepareValue($context)->getValue();
 
-        if (is_object($value) && !$value instanceof \Closure) {
-            if (method_exists($value, $name)) {
-                return $this->asValue(call_user_func([$value, $name]));
+        if (\is_object($value) && !$value instanceof \Closure) {
+            if (\method_exists($value, $name)) {
+                return $this->asValue(\call_user_func([$value, $name]));
             } elseif (isset($value->$name)) {
                 return $this->asValue($value->$name);
             } elseif ($value instanceof \ArrayAccess && $value->offsetExists($name)) {
                 return $this->asValue($value->offsetGet($name));
             }
-        } elseif (is_array($value) && array_key_exists($name, $value)) {
+        } elseif (\is_array($value) && \array_key_exists($name, $value)) {
             return $this->asValue($value[$name]);
         }
 

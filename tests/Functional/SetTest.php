@@ -83,7 +83,7 @@ class SetTest extends TestCase
     public function testUnion($a, $b, $expected)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('a', 'b', 'expected'));
+        $context = new Context(\compact('a', 'b', 'expected'));
         $this->assertTrue(
             $rb->create(
                 $rb['expected']->equalTo(
@@ -140,7 +140,7 @@ class SetTest extends TestCase
     public function testIntersect($a, $b, $expected)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('a', 'b', 'expected'));
+        $context = new Context(\compact('a', 'b', 'expected'));
         $this->assertTrue(
             $rb->create(
                 $rb['expected']->equalTo(
@@ -197,7 +197,7 @@ class SetTest extends TestCase
     public function testComplement($a, $b, $expected)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('a', 'b', 'expected'));
+        $context = new Context(\compact('a', 'b', 'expected'));
         $this->assertTrue(
             $rb->create(
                 $rb['expected']->equalTo(
@@ -254,7 +254,7 @@ class SetTest extends TestCase
     public function testSymmetricDifference($a, $b, $expected)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('a', 'b', 'expected'));
+        $context = new Context(\compact('a', 'b', 'expected'));
         $this->assertTrue(
             $rb->create(
                 $rb['expected']->equalTo(

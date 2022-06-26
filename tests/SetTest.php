@@ -16,7 +16,7 @@ class SetTest extends TestCase
             new \stdClass(),
         ];
         $set = new Set($setExpected);
-        $this->assertEquals(2, count($set));
+        $this->assertEquals(2, \count($set));
     }
 
     public function testObjectUniqueness()
@@ -31,7 +31,7 @@ class SetTest extends TestCase
             $objectB,
         ]);
 
-        $this->assertEquals(2, count($set));
+        $this->assertEquals(2, \count($set));
         $this->assertTrue($set->setContains(new Value($objectA)));
         $this->assertTrue($set->setContains(new Value($objectB)));
         $this->assertFalse($set->setContains(new Value(false)));
@@ -45,7 +45,7 @@ class SetTest extends TestCase
             $too = new toStringable(2),
         ]);
 
-        $this->assertEquals(2, count($set));
+        $this->assertEquals(2, \count($set));
         $this->assertTrue($set->setContains(new Value($one)));
         $this->assertTrue($set->setContains(new Value($two)));
         $this->assertFalse($set->setContains(new Value($too)));

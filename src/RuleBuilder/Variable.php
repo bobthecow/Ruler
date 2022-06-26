@@ -264,7 +264,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function union($variable)
     {
-        return $this->applySetOperator('Union', func_get_args());
+        return $this->applySetOperator('Union', \func_get_args());
     }
 
     /**
@@ -274,7 +274,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function intersect($variable)
     {
-        return $this->applySetOperator('Intersect', func_get_args());
+        return $this->applySetOperator('Intersect', \func_get_args());
     }
 
     /**
@@ -284,7 +284,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function complement($variable)
     {
-        return $this->applySetOperator('Complement', func_get_args());
+        return $this->applySetOperator('Complement', \func_get_args());
     }
 
     /**
@@ -294,7 +294,7 @@ class Variable extends BaseVariable implements \ArrayAccess
      */
     public function symmetricDifference($variable)
     {
-        return $this->applySetOperator('SymmetricDifference', func_get_args());
+        return $this->applySetOperator('SymmetricDifference', \func_get_args());
     }
 
     /**
@@ -464,7 +464,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     private function applySetOperator($name, array $args)
     {
         $reflection = new \ReflectionClass('\\Ruler\\Operator\\'.$name);
-        array_unshift($args, $this);
+        \array_unshift($args, $this);
 
         return $this->wrap($reflection->newInstanceArgs($args));
     }
@@ -537,15 +537,15 @@ class Variable extends BaseVariable implements \ArrayAccess
      * @param string $name
      * @param array  $args
      *
-     * @throws \LogicException if operator is not registered.
+     * @throws \LogicException if operator is not registered
      *
      * @return Operator|self
      */
     public function __call($name, array $args)
     {
         $reflection = new \ReflectionClass($this->ruleBuilder->findOperator($name));
-        $args = array_map([$this, 'asVariable'], $args);
-        array_unshift($args, $this);
+        $args = \array_map([$this, 'asVariable'], $args);
+        \array_unshift($args, $this);
 
         $op = $reflection->newInstanceArgs($args);
 

@@ -91,13 +91,13 @@ class Context implements \ArrayAccess
     public function offsetGet($name)
     {
         if (!$this->offsetExists($name)) {
-            throw new \InvalidArgumentException(sprintf('Fact "%s" is not defined.', $name));
+            throw new \InvalidArgumentException(\sprintf('Fact "%s" is not defined.', $name));
         }
 
         $value = $this->values[$name];
 
         // If the value is already frozen, or if it's not callable, or if it's protected, return the raw value
-        if (isset($this->frozen[$name]) || !is_object($value) || $this->protected->contains($value) || !$this->isCallable($value)) {
+        if (isset($this->frozen[$name]) || !\is_object($value) || $this->protected->contains($value) || !$this->isCallable($value)) {
             return $value;
         }
 
@@ -127,7 +127,7 @@ class Context implements \ArrayAccess
     public function offsetSet($name, $value): void
     {
         if (isset($this->frozen[$name])) {
-            throw new \RuntimeException(sprintf('Cannot override frozen fact "%s".', $name));
+            throw new \RuntimeException(\sprintf('Cannot override frozen fact "%s".', $name));
         }
 
         $this->keys[$name] = true;
@@ -144,7 +144,7 @@ class Context implements \ArrayAccess
         if ($this->offsetExists($name)) {
             $value = $this->values[$name];
 
-            if (is_object($value)) {
+            if (\is_object($value)) {
                 $this->shared->detach($value);
                 $this->protected->detach($value);
             }
@@ -209,7 +209,7 @@ class Context implements \ArrayAccess
     public function raw($name)
     {
         if (!$this->offsetExists($name)) {
-            throw new \InvalidArgumentException(sprintf('Fact "%s" is not defined.', $name));
+            throw new \InvalidArgumentException(\sprintf('Fact "%s" is not defined.', $name));
         }
 
         if (isset($this->frozen[$name])) {
@@ -226,7 +226,7 @@ class Context implements \ArrayAccess
      */
     public function keys()
     {
-        return array_keys($this->keys);
+        return \array_keys($this->keys);
     }
 
     /**
@@ -238,6 +238,6 @@ class Context implements \ArrayAccess
      */
     protected function isCallable($callable)
     {
-        return is_object($callable) && is_callable($callable);
+        return \is_object($callable) && \is_callable($callable);
     }
 }

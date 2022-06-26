@@ -14,7 +14,7 @@ class RulerTest extends TestCase
     public function testDeMorgan($p, $q)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q'));
+        $context = new Context(\compact('p', 'q'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalNot(
@@ -43,7 +43,7 @@ class RulerTest extends TestCase
     public function testDeMorganTwo($p, $q)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q'));
+        $context = new Context(\compact('p', 'q'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalNot(
@@ -72,7 +72,7 @@ class RulerTest extends TestCase
     public function testCommutation($p, $q)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q'));
+        $context = new Context(\compact('p', 'q'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalOr(
@@ -95,7 +95,7 @@ class RulerTest extends TestCase
     public function testCommutationTwo($p, $q)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q'));
+        $context = new Context(\compact('p', 'q'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalAnd(
@@ -118,7 +118,7 @@ class RulerTest extends TestCase
     public function testAssociation($p, $q, $r)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q', 'r'));
+        $context = new Context(\compact('p', 'q', 'r'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalOr(
@@ -147,7 +147,7 @@ class RulerTest extends TestCase
     public function testAssociationTwo($p, $q, $r)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q', 'r'));
+        $context = new Context(\compact('p', 'q', 'r'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalAnd(
@@ -176,7 +176,7 @@ class RulerTest extends TestCase
     public function testDistribution($p, $q, $r)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q', 'r'));
+        $context = new Context(\compact('p', 'q', 'r'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalAnd(
@@ -208,7 +208,7 @@ class RulerTest extends TestCase
     public function testDistributionTwo($p, $q, $r)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p', 'q', 'r'));
+        $context = new Context(\compact('p', 'q', 'r'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalOr(
@@ -240,7 +240,7 @@ class RulerTest extends TestCase
     public function testDoubleNegation($p)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p'));
+        $context = new Context(\compact('p'));
         $this->assertEquals(
             $rb->create(
                 $rb['p']->equalTo(true)
@@ -261,7 +261,7 @@ class RulerTest extends TestCase
     public function testTautology($p)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p'));
+        $context = new Context(\compact('p'));
         $this->assertEquals(
             $rb->create(
                 $rb['p']->equalTo(true)
@@ -281,7 +281,7 @@ class RulerTest extends TestCase
     public function testTautologyTwo($p)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p'));
+        $context = new Context(\compact('p'));
         $this->assertEquals(
             $rb->create(
                 $rb['p']->equalTo(true)
@@ -301,7 +301,7 @@ class RulerTest extends TestCase
     public function testExcludedMiddle($p)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p'));
+        $context = new Context(\compact('p'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalOr(
@@ -321,7 +321,7 @@ class RulerTest extends TestCase
     public function testNonContradiction($p)
     {
         $rb = new RuleBuilder();
-        $context = new Context(compact('p'));
+        $context = new Context(\compact('p'));
         $this->assertEquals(
             $rb->create(
                 $rb->logicalNot(

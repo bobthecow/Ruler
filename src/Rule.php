@@ -61,11 +61,11 @@ class Rule implements Proposition
     public function execute(Context $context)
     {
         if ($this->evaluate($context) && isset($this->action)) {
-            if (!is_callable($this->action)) {
+            if (!\is_callable($this->action)) {
                 throw new \LogicException('Rule actions must be callable.');
             }
 
-            call_user_func($this->action);
+            \call_user_func($this->action);
         }
     }
 }
