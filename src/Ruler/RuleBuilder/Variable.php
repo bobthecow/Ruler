@@ -126,20 +126,6 @@ class Variable extends BaseVariable implements \ArrayAccess
     }
 
     /**
-     * Contains comparison.
-     *
-     * @deprecated Use `stringContains` or `setContains` instead.
-     *
-     * @param mixed $variable Right side of comparison operator
-     *
-     * @return Operator\Contains
-     */
-    public function contains($variable)
-    {
-        return new Operator\Contains($this, $this->asVariable($variable));
-    }
-
-    /**
      * Fluent interface helper to create a contains comparison operator.
      *
      * @param mixed $variable Right side of comparison operator
@@ -162,7 +148,7 @@ class Variable extends BaseVariable implements \ArrayAccess
     {
         return new Operator\StringDoesNotContain($this, $this->asVariable($variable));
     }
-    
+
     /**
      * Fluent interface helper to create a insensitive contains comparison operator.
      *
