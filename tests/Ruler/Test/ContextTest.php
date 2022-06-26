@@ -24,6 +24,7 @@
 
 namespace Ruler\Test;
 
+use InvalidArgumentException;
 use Ruler\Context;
 use Ruler\Test\Fixtures\Invokable;
 use Ruler\Test\Fixtures\Fact;
@@ -135,12 +136,10 @@ class ContextTest extends TestCase
         $this->assertSame($params['param'], $context['param']);
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Fact "foo" is not defined.
-     */
     public function testOffsetGetValidatesKeyIsPresent()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Fact "foo" is not defined.');
         $context = new Context();
         echo $context['foo'];
     }
@@ -214,12 +213,10 @@ class ContextTest extends TestCase
         $this->assertNull($context->raw('foo'));
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Fact "foo" is not defined.
-     */
     public function testRawValidatesKeyIsPresent()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Fact "foo" is not defined.');
         $context = new Context();
         $context->raw('foo');
     }
@@ -253,22 +250,22 @@ class ContextTest extends TestCase
 
     /**
      * @dataProvider badFactDefinitionProvider
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Value is not a Closure or invokable object.
      */
     public function testShareFailsForInvalidFactDefinitions($fact)
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Value is not a Closure or invokable object.');
         $context = new Context();
         $context->share($fact);
     }
 
     /**
      * @dataProvider badFactDefinitionProvider
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Callable is not a Closure or invokable object.
      */
     public function testProtectFailsForInvalidFactDefinitions($fact)
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Callable is not a Closure or invokable object.');
         $context = new Context();
         $context->protect($fact);
     }

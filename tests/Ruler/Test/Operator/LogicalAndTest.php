@@ -46,11 +46,9 @@ class LogicalAndTest extends TestCase
         $this->assertFalse($op->evaluate($context));
     }
 
-    /**
-     * @expectedException \LogicException
-     */
     public function testExecutingALogicalAndWithoutPropositionsThrowsAnException()
     {
+        $this->expectException(\LogicException::class);
         $op = new Operator\LogicalAnd();
         $op->evaluate(new Context());
     }
