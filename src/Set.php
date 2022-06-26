@@ -32,26 +32,26 @@ class Set extends Value implements \Countable
     public function __construct($set)
     {
         parent::__construct($set);
-        if (!is_array($this->value)) {
-            if (is_null($this->value)) {
+        if (!\is_array($this->value)) {
+            if (null === $this->value) {
                 $this->value = [];
             } else {
                 $this->value = [$this->value];
             }
         }
         foreach ($this->value as &$value) {
-            if (is_array($value)) {
-                $value = new Set($value);
-            } elseif (is_object($value)) {
-                if (!method_exists($value, '__toString')) {
+            if (\is_array($value)) {
+                $value = new self($value);
+            } elseif (\is_object($value)) {
+                if (!\method_exists($value, '__toString')) {
                     $value = new Value($value);
                 }
             }
         }
 
-        $this->value = array_unique($this->value);
+        $this->value = \array_unique($this->value);
         foreach ($this->value as &$value) {
-            if ($value instanceof Value && !$value instanceof Set) {
+            if ($value instanceof Value && !$value instanceof self) {
                 $value = $value->getValue();
             }
         }
@@ -79,10 +79,10 @@ class Set extends Value implements \Countable
      */
     public function setContains(Value $value)
     {
-        if (is_array($value->getValue())) {
+        if (\is_array($value->getValue())) {
             foreach ($this->value as $val) {
-                if ($val instanceof Set
-                    && $val == $value->getSet()) {
+                if ($val instanceof self
+                    && $val === $value->getSet()) {
                     return true;
                 }
             }
@@ -90,7 +90,7 @@ class Set extends Value implements \Countable
             return false;
         }
 
-        return in_array($value->getValue(), $this->value, true);
+        return \in_array($value->getValue(), $this->value, true);
     }
 
     /**
@@ -107,10 +107,10 @@ class Set extends Value implements \Countable
         $union = $this->value;
 
         /** @var Value $arg */
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
-            $union = array_merge($union, array_diff($convertedArg, $union));
+            $union = \array_merge($union, \array_diff($convertedArg, $union));
         }
 
         return new self($union);
@@ -130,11 +130,11 @@ class Set extends Value implements \Countable
         $intersect = $this->value;
 
         /** @var Value $arg */
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
-            //array_values is needed to make sure the indexes are ordered from 0
-            $intersect = array_values(array_intersect($intersect, $convertedArg));
+            // array_values is needed to make sure the indexes are ordered from 0
+            $intersect = \array_values(\array_intersect($intersect, $convertedArg));
         }
 
         return new self($intersect);
@@ -154,11 +154,11 @@ class Set extends Value implements \Countable
         $complement = $this->value;
 
         /** @var Value $arg */
-        foreach (func_get_args() as $arg) {
+        foreach (\func_get_args() as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
-            //array_values is needed to make sure the indexes are ordered from 0
-            $complement = array_values(array_diff($complement, $convertedArg));
+            // array_values is needed to make sure the indexes are ordered from 0
+            $complement = \array_values(\array_diff($complement, $convertedArg));
         }
 
         return new self($complement);
@@ -176,7 +176,7 @@ class Set extends Value implements \Countable
      */
     public function symmetricDifference(Value $set)
     {
-        $returnValue = new Set([]);
+        $returnValue = new self([]);
 
         return $returnValue->union(
             $this->complement($set),
@@ -187,7 +187,7 @@ class Set extends Value implements \Countable
     /**
      * Numeric minimum value in this Set.
      *
-     * @throws \RuntimeException if this Set contains non-numeric members.
+     * @throws \RuntimeException if this Set contains non-numeric members
      *
      * @return mixed
      */
@@ -200,13 +200,13 @@ class Set extends Value implements \Countable
             return null;
         }
 
-        return min($this->value);
+        return \min($this->value);
     }
 
     /**
      * Numeric maximum value in this Set.
      *
-     * @throws \RuntimeException if this Set contains non-numeric members.
+     * @throws \RuntimeException if this Set contains non-numeric members
      *
      * @return mixed
      */
@@ -219,7 +219,7 @@ class Set extends Value implements \Countable
             return null;
         }
 
-        return max($this->value);
+        return \max($this->value);
     }
 
     /**
@@ -229,13 +229,13 @@ class Set extends Value implements \Countable
      *
      * @return bool
      */
-    public function containsSubset(Set $set)
+    public function containsSubset(self $set)
     {
-        if ((is_countable($set->getValue()) ? count($set->getValue()) : 0) > (is_countable($this->getValue()) ? count($this->getValue()) : 0)) {
+        if ((\is_countable($set->getValue()) ? \count($set->getValue()) : 0) > (\is_countable($this->getValue()) ? \count($this->getValue()) : 0)) {
             return false;
         }
 
-        return array_intersect($set->getValue(), $this->getValue()) == $set->getValue();
+        return \array_intersect($set->getValue(), $this->getValue()) === $set->getValue();
     }
 
     /**
@@ -245,7 +245,7 @@ class Set extends Value implements \Countable
      */
     protected function isValidNumericSet()
     {
-        return (is_countable($this->value) ? count($this->value) : 0) == array_sum(array_map('is_numeric', $this->value));
+        return (\is_countable($this->value) ? \count($this->value) : 0) === \array_sum(\array_map('is_numeric', $this->value));
     }
 
     /**
@@ -253,6 +253,6 @@ class Set extends Value implements \Countable
      */
     public function count(): int
     {
-        return is_countable($this->value) ? count($this->value) : 0;
+        return \is_countable($this->value) ? \count($this->value) : 0;
     }
 }

@@ -42,7 +42,6 @@ class RuleBuilder implements \ArrayAccess
      *
      * Note that, depending on your filesystem, operator namespaces are most likely case sensitive.
      *
-     *
      * @param string $namespace Operator namespace
      *
      * @throws \InvalidArgumentException
@@ -51,7 +50,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function registerOperatorNamespace($namespace)
     {
-        if (!is_string($namespace)) {
+        if (!\is_string($namespace)) {
             throw new \InvalidArgumentException('Namespace argument must be a string');
         }
 
@@ -70,7 +69,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalAnd(Proposition $prop, Proposition $prop2 = null)
     {
-        return new Operator\LogicalAnd(func_get_args());
+        return new Operator\LogicalAnd(\func_get_args());
     }
 
     /**
@@ -83,7 +82,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalOr(Proposition $prop, Proposition $prop2 = null)
     {
-        return new Operator\LogicalOr(func_get_args());
+        return new Operator\LogicalOr(\func_get_args());
     }
 
     /**
@@ -108,7 +107,7 @@ class RuleBuilder implements \ArrayAccess
      */
     public function logicalXor(Proposition $prop, Proposition $prop2 = null)
     {
-        return new Operator\LogicalXor(func_get_args());
+        return new Operator\LogicalXor(\func_get_args());
     }
 
     /**
@@ -163,23 +162,22 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Find an operator in the registered operator namespaces.
      *
-     *
      * @param string $name
      *
-     * @throws \LogicException If a matching operator is not found.
+     * @throws \LogicException if a matching operator is not found
      *
      * @return string
      */
     public function findOperator($name)
     {
-        $operator = ucfirst($name);
-        foreach (array_keys($this->operatorNamespaces) as $namespace) {
+        $operator = \ucfirst($name);
+        foreach (\array_keys($this->operatorNamespaces) as $namespace) {
             $class = $namespace.'\\'.$operator;
-            if (class_exists($class)) {
+            if (\class_exists($class)) {
                 return $class;
             }
         }
 
-        throw new \LogicException(sprintf('Unknown operator: "%s"', $name));
+        throw new \LogicException(\sprintf('Unknown operator: "%s"', $name));
     }
 }

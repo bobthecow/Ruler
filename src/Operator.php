@@ -36,18 +36,18 @@ abstract class Operator
     {
         switch ($this->getOperandCardinality()) {
             case self::UNARY:
-                if (1 != count($this->operands)) {
-                    throw new \LogicException(get_class($this).' takes only 1 operand');
+                if (1 !== \count($this->operands)) {
+                    throw new \LogicException(static::class.' takes only 1 operand');
                 }
                 break;
             case self::BINARY:
-                if (2 != count($this->operands)) {
-                    throw new \LogicException(get_class($this).' takes 2 operands');
+                if (2 !== \count($this->operands)) {
+                    throw new \LogicException(static::class.' takes 2 operands');
                 }
                 break;
             case self::MULTIPLE:
-                if (0 == count($this->operands)) {
-                    throw new \LogicException(get_class($this).' takes at least 1 operand');
+                if (0 === \count($this->operands)) {
+                    throw new \LogicException(static::class.' takes at least 1 operand');
                 }
                 break;
         }

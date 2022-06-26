@@ -20,7 +20,7 @@ class VariablePropertyTest extends TestCase
 
     public function testGetSetValue()
     {
-        $values = explode(', ', 'Plug it, play it, burn it, rip it, drag and drop it, zip, unzip it');
+        $values = \explode(', ', 'Plug it, play it, burn it, rip it, drag and drop it, zip, unzip it');
 
         $prop = new VariableProperty(new Variable(new RuleBuilder()), 'technologic');
         foreach ($values as $valueString) {

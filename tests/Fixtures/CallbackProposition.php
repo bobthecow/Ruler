@@ -11,7 +11,7 @@ class CallbackProposition implements Proposition
 
     public function __construct($callback)
     {
-        if (!is_callable($callback)) {
+        if (!\is_callable($callback)) {
             throw new \InvalidArgumentException('CallbackProposition expects a callable argument');
         }
 
@@ -20,6 +20,6 @@ class CallbackProposition implements Proposition
 
     public function evaluate(Context $context)
     {
-        return call_user_func($this->callback, $context);
+        return \call_user_func($this->callback, $context);
     }
 }
