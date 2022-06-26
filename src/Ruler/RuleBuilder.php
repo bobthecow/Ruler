@@ -127,9 +127,9 @@ class RuleBuilder implements \ArrayAccess
      *
      * @param string $name The Variable name
      *
-     * @return Variable
+     * @return RuleBuilder\Variable
      */
-    public function offsetGet($name): Variable
+    public function offsetGet($name): RuleBuilder\Variable
     {
         if (!isset($this->variables[$name])) {
             $this->variables[$name] = new RuleBuilder\Variable($this, $name);

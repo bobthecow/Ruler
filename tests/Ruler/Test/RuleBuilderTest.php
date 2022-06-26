@@ -28,6 +28,7 @@ class RuleBuilderTest extends TestCase
         $this->assertTrue(isset($rb[$name]));
 
         $this->assertInstanceOf(\Ruler\Variable::class, $var);
+        $this->assertInstanceOf(\Ruler\RuleBuilder\Variable::class, $var);
         $this->assertEquals($name, $var->getName());
 
         $this->assertSame($var, $rb[$name]);
