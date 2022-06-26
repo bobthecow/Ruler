@@ -1,6 +1,6 @@
 {
     "name": "ruler/ruler",
-    "description": "A simple stateless production rules engine for PHP 5.3.",
+    "description": "A simple stateless production rules engine for modern PHP.",
     "keywords": ["rules", "engine"],
     "homepage": "https://github.com/bobthecow/Ruler",
     "license": "MIT",
