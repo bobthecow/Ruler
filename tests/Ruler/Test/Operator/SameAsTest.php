@@ -15,7 +15,7 @@ class SameAsTest extends TestCase
         $varB = new Variable('b', 1);
 
         $op = new Operator\SameAs($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructorAndEvaluation()

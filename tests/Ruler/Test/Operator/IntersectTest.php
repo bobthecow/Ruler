@@ -15,7 +15,7 @@ class IntersectTest extends TestCase
         $varB = new Variable('b', array(2));
 
         $op = new Operator\Intersect($varA, $varB);
-        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
+        $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
     }
 
     public function testInvalidData()

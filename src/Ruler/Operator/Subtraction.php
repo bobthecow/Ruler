@@ -26,7 +26,7 @@ class Subtraction extends VariableOperator implements VariableOperand
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
-        list($left, $right) = $this->getOperands();
+        [$left, $right] = $this->getOperands();
 
         return new Value($left->prepareValue($context)->subtract($right->prepareValue($context)));
     }

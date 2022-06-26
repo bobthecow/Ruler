@@ -101,7 +101,7 @@ class Value
      */
     public function stringContains(Value $value)
     {
-        return strpos($this->value, $value->getValue()) !== false;
+        return strpos($this->value, (string) $value->getValue()) !== false;
     }
 
     /**
@@ -113,7 +113,7 @@ class Value
      */
     public function stringContainsInsensitive(Value $value)
     {
-        return stripos($this->value, $value->getValue()) !== false;
+        return stripos($this->value, (string) $value->getValue()) !== false;
     }
 
     /**
@@ -224,7 +224,7 @@ class Value
             throw new \RuntimeException("Arithmetic: values must be numeric");
         }
 
-        return pow($this->value, $value->getValue());
+        return $this->value ** $value->getValue();
     }
 
     /**

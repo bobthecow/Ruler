@@ -231,7 +231,7 @@ class Set extends Value implements \Countable
      */
     public function containsSubset(Set $set)
     {
-        if (count($set->getValue()) > count($this->getValue())) {
+        if ((is_countable($set->getValue()) ? count($set->getValue()) : 0) > (is_countable($this->getValue()) ? count($this->getValue()) : 0)) {
             return false;
         }
 
@@ -245,7 +245,7 @@ class Set extends Value implements \Countable
      */
     protected function isValidNumericSet()
     {
-        return count($this->value) == array_sum(array_map('is_numeric', $this->value));
+        return (is_countable($this->value) ? count($this->value) : 0) == array_sum(array_map('is_numeric', $this->value));
     }
 
     /**
@@ -253,6 +253,6 @@ class Set extends Value implements \Countable
      */
     public function count(): int
     {
-        return count($this->value);
+        return is_countable($this->value) ? count($this->value) : 0;
     }
 }

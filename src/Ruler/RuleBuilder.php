@@ -21,8 +21,8 @@ namespace Ruler;
  */
 class RuleBuilder implements \ArrayAccess
 {
-    private $variables          = array();
-    private $operatorNamespaces = array();
+    private array $variables          = array();
+    private array $operatorNamespaces = array();
 
     /**
      * Create a Rule with the given propositional condition.

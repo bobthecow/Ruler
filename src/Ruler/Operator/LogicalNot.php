@@ -29,7 +29,7 @@ class LogicalNot extends LogicalOperator
     public function evaluate(Context $context)
     {
         /** @var Proposition $operand */
-        list($operand) = $this->getOperands();
+        [$operand] = $this->getOperands();
 
         return !$operand->evaluate($context);
     }

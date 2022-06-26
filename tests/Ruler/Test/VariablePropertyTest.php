@@ -43,7 +43,7 @@ class VariablePropertyTest extends TestCase
         $var = new Variable('root');
 
         $propA = new VariableProperty($var, 'undefined', 'default');
-        $this->assertInstanceOf('Ruler\Value', $propA->prepareValue($context));
+        $this->assertInstanceOf(\Ruler\Value::class, $propA->prepareValue($context));
         $this->assertEquals(
             'default',
             $propA->prepareValue($context)->getValue(),

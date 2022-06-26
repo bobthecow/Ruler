@@ -15,7 +15,7 @@ class StartsWithInsensitiveTest extends TestCase
         $varB = new Variable('b', 'foo');
 
         $op = new Operator\StartsWith($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     /**

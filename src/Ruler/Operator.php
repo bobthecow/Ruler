@@ -16,18 +16,18 @@ namespace Ruler;
  */
 abstract class Operator
 {
-    const UNARY = 'UNARY';
-    const BINARY = 'BINARY';
-    const MULTIPLE = 'MULTIPLE';
+    public const UNARY = 'UNARY';
+    public const BINARY = 'BINARY';
+    public const MULTIPLE = 'MULTIPLE';
 
     protected $operands = array();
 
     /**
      * @param array $operands
      */
-    public function __construct()
+    public function __construct(...$operands)
     {
-        foreach (func_get_args() as $operand) {
+        foreach ($operands as $operand) {
             $this->addOperand($operand);
         }
     }

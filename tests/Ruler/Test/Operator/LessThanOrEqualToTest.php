@@ -15,7 +15,7 @@ class LessThanOrEqualToTest extends TestCase
         $varB = new Variable('b', 2);
 
         $op = new Operator\GreaterThanOrEqualTo($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructorAndEvaluation()

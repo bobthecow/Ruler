@@ -15,7 +15,7 @@ class LogicalNotTest extends TestCase
         $true = new TrueProposition();
 
         $op = new Operator\LogicalNot(array($true));
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructor()

@@ -26,7 +26,7 @@ class SymmetricDifference extends VariableOperator implements VariableOperand
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
-        list($left, $right) = $this->getOperands();
+        [$left, $right] = $this->getOperands();
 
         return $left->prepareValue($context)->getSet()
             ->symmetricDifference($right->prepareValue($context)->getSet());

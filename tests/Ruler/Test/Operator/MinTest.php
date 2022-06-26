@@ -14,7 +14,7 @@ class MinTest extends TestCase
         $var = new Variable('a', array(5, 2, 9));
 
         $op = new Operator\Min($var);
-        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
+        $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
     }
 
     /**

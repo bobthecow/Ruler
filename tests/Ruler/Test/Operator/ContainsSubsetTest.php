@@ -15,7 +15,7 @@ class ContainsSubsetTest extends TestCase
         $varB = new Variable('b', array(2));
 
         $op = new Operator\ContainsSubset($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     /**

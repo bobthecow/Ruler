@@ -33,7 +33,7 @@ use Ruler\VariableOperand;
 class Variable extends BaseVariable implements \ArrayAccess
 {
     private $ruleBuilder;
-    private $properties = array();
+    private array $properties = array();
 
     /**
      * RuleBuilder Variable constructor.

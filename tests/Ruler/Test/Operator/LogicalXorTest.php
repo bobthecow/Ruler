@@ -15,7 +15,7 @@ class LogicalXorTest extends TestCase
         $true = new TrueProposition();
 
         $op = new Operator\LogicalXor(array($true));
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     public function testConstructor()

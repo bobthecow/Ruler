@@ -15,7 +15,7 @@ class StringContainsInsensitiveTest extends TestCase
         $varB = new Variable('b', array(2));
 
         $op = new Operator\StringContainsInsensitive($varA, $varB);
-        $this->assertInstanceOf('Ruler\Proposition', $op);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $op);
     }
 
     /**

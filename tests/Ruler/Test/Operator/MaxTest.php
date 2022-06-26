@@ -14,7 +14,7 @@ class MaxTest extends TestCase
         $var = new Variable('a', array(5, 2, 9));
 
         $op = new Operator\Max($var);
-        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
+        $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
     }
 
     /**

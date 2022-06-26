@@ -14,7 +14,7 @@ class RuleTest extends TestCase
     public function testInterface()
     {
         $rule = new Rule(new TrueProposition());
-        $this->assertInstanceOf('Ruler\Proposition', $rule);
+        $this->assertInstanceOf(\Ruler\Proposition::class, $rule);
     }
 
     public function testConstructorEvaluationAndExecution()

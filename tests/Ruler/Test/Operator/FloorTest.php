@@ -14,7 +14,7 @@ class FloorTest extends TestCase
         $varA = new Variable('a', 1);
 
         $op = new Operator\Floor($varA);
-        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
+        $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
     }
 
     public function testInvalidData()

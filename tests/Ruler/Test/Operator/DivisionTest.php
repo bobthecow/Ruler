@@ -15,7 +15,7 @@ class DivisionTest extends TestCase
         $varB = new Variable('b', array(2));
 
         $op = new Operator\Division($varA, $varB);
-        $this->assertInstanceOf('Ruler\\VariableOperand', $op);
+        $this->assertInstanceOf(\Ruler\VariableOperand::class, $op);
     }
 
     public function testInvalidData()
@@ -34,7 +34,7 @@ class DivisionTest extends TestCase
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('Division by zero');
-        $varA    = new Variable('a', rand(1, 100));
+        $varA    = new Variable('a', random_int(1, 100));
         $varB    = new Variable('b', 0);
         $context = new Context();
 

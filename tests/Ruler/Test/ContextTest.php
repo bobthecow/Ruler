@@ -79,7 +79,7 @@ class ContextTest extends TestCase
             return new Fact();
         };
 
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $context['fact']);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $context['fact']);
     }
 
     public function testFactsShouldBeDifferent()
@@ -90,10 +90,10 @@ class ContextTest extends TestCase
         };
 
         $factOne = $context['fact'];
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $factOne);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $factOne);
 
         $factTwo = $context['fact'];
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $factTwo);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $factTwo);
 
         $this->assertNotSame($factOne, $factTwo);
     }
@@ -173,10 +173,10 @@ class ContextTest extends TestCase
         $context['shared_fact'] = $context->share($fact);
 
         $factOne = $context['shared_fact'];
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $factOne);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $factOne);
 
         $factTwo = $context['shared_fact'];
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $factTwo);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $factTwo);
 
         $this->assertSame($factOne, $factTwo);
     }
@@ -236,7 +236,7 @@ class ContextTest extends TestCase
         $context = new Context();
         $context['invokable'] = new Invokable();
 
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $context['invokable']);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $context['invokable']);
     }
 
     /** @test */
@@ -245,7 +245,7 @@ class ContextTest extends TestCase
         $context = new Context();
         $context['non_invokable'] = new Fact();
 
-        $this->assertInstanceOf('Ruler\Test\Fixtures\Fact', $context['non_invokable']);
+        $this->assertInstanceOf(\Ruler\Test\Fixtures\Fact::class, $context['non_invokable']);
     }
 
     /**

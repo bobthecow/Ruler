@@ -31,7 +31,7 @@ class StringContainsInsensitive extends VariableOperator implements Proposition
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
-        list($left, $right) = $this->getOperands();
+        [$left, $right] = $this->getOperands();
 
         return $left->prepareValue($context)->stringContainsInsensitive($right->prepareValue($context));
     }

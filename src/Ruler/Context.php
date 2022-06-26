@@ -40,10 +40,10 @@ namespace Ruler;
  */
 class Context implements \ArrayAccess
 {
-    private $keys   = array();
-    private $values = array();
-    private $frozen = array();
-    private $raw    = array();
+    private array $keys   = array();
+    private array $values = array();
+    private array $frozen = array();
+    private array $raw    = array();
 
     private $shared;
     private $protected;

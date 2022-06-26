@@ -35,7 +35,7 @@ class ALotGreaterThan extends VariableOperator implements Proposition
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
-        list($left, $right) = $this->getOperands();
+        [$left, $right] = $this->getOperands();
         $value = $right->prepareValue($context)->getValue() * 10;
 
         return $left->prepareValue($context)->greaterThan(new Value($value));

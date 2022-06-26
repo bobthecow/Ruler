@@ -31,7 +31,7 @@ class GreaterThanOrEqualTo extends VariableOperator implements Proposition
     {
         /** @var VariableOperand $left */
         /** @var VariableOperand $right */
-        list($left, $right) = $this->getOperands();
+        [$left, $right] = $this->getOperands();
 
         return $left->prepareValue($context)->lessThan($right->prepareValue($context)) === false;
     }

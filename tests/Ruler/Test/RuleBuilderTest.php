@@ -13,8 +13,8 @@ class RuleBuilderTest extends TestCase
     public function testInterface()
     {
         $rb = new RuleBuilder();
-        $this->assertInstanceOf('Ruler\RuleBuilder', $rb);
-        $this->assertInstanceOf('ArrayAccess', $rb);
+        $this->assertInstanceOf(\Ruler\RuleBuilder::class, $rb);
+        $this->assertInstanceOf(\ArrayAccess::class, $rb);
     }
 
     public function testManipulateVariablesViaArrayAccess()
@@ -27,7 +27,7 @@ class RuleBuilderTest extends TestCase
         $var = $rb[$name];
         $this->assertTrue(isset($rb[$name]));
 
-        $this->assertInstanceOf('Ruler\Variable', $var);
+        $this->assertInstanceOf(\Ruler\Variable::class, $var);
         $this->assertEquals($name, $var->getName());
 
         $this->assertSame($var, $rb[$name]);
@@ -49,16 +49,16 @@ class RuleBuilderTest extends TestCase
         $true  = new TrueProposition();
         $false = new FalseProposition();
 
-        $this->assertInstanceOf('Ruler\Operator\LogicalAnd', $rb->logicalAnd($true, $false));
+        $this->assertInstanceOf(\Ruler\Operator\LogicalAnd::class, $rb->logicalAnd($true, $false));
         $this->assertFalse($rb->logicalAnd($true, $false)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\LogicalOr', $rb->logicalOr($true, $false));
+        $this->assertInstanceOf(\Ruler\Operator\LogicalOr::class, $rb->logicalOr($true, $false));
         $this->assertTrue($rb->logicalOr($true, $false)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\LogicalNot', $rb->logicalNot($true));
+        $this->assertInstanceOf(\Ruler\Operator\LogicalNot::class, $rb->logicalNot($true));
         $this->assertFalse($rb->logicalNot($true)->evaluate($context));
 
-        $this->assertInstanceOf('Ruler\Operator\LogicalXor', $rb->logicalXor($true, $false));
+        $this->assertInstanceOf(\Ruler\Operator\LogicalXor::class, $rb->logicalXor($true, $false));
         $this->assertTrue($rb->logicalXor($true, $false)->evaluate($context));
     }
 
@@ -70,7 +70,7 @@ class RuleBuilderTest extends TestCase
         $true  = new TrueProposition();
         $false = new FalseProposition();
 
-        $this->assertInstanceOf('Ruler\Rule', $rb->create($true));
+        $this->assertInstanceOf(\Ruler\Rule::class, $rb->create($true));
         $this->assertTrue($rb->create($true)->evaluate($context));
         $this->assertFalse($rb->create($false)->evaluate($context));
 
