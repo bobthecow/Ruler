@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ruler\\": "src/Ruler"
+            "Ruler\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ruler\\Test\\": "tests/Ruler/Test"
+            "Ruler\\Test\\": "tests/"
         }
     },
     "authors": [
