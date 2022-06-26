@@ -87,7 +87,8 @@ class Context implements \ArrayAccess
      *
      * @throws \InvalidArgumentException if the name is not defined
      */
-    public function offsetGet($name): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($name)
     {
         if (!$this->offsetExists($name)) {
             throw new \InvalidArgumentException(sprintf('Fact "%s" is not defined.', $name));
