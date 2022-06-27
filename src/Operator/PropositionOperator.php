@@ -19,6 +19,9 @@ use Ruler\Proposition;
  */
 abstract class PropositionOperator extends BaseOperator
 {
+    /**
+     * @param Proposition $operand
+     */
     public function addOperand($operand): void
     {
         $this->addProposition($operand);

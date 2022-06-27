@@ -23,7 +23,7 @@ abstract class Operator
     protected $operands = [];
 
     /**
-     * @param array $operands
+     * @param Proposition|VariableOperand ...$operands
      */
     public function __construct(...$operands)
     {
@@ -55,7 +55,10 @@ abstract class Operator
         return $this->operands;
     }
 
-    abstract public function addOperand($operand);
+    /**
+     * @param Proposition|VariableOperand $operand
+     */
+    abstract public function addOperand($operand): void;
 
     abstract protected function getOperandCardinality();
 }

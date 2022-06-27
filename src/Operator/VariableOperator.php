@@ -19,6 +19,9 @@ use Ruler\VariableOperand;
  */
 abstract class VariableOperator extends BaseOperator
 {
+    /**
+     * @param VariableOperand $operand
+     */
     public function addOperand($operand): void
     {
         $this->addVariable($operand);
