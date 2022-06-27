@@ -1,0 +1,21 @@
+risky: true
+
+preset: symfony
+
+enabled:
+  - align_double_arrow
+  - native_function_invocation
+  - ordered_use
+  - strict
+
+disabled:
+  - native_function_invocation_symfony
+  - no_superfluous_phpdoc_tags_symfony
+  - pow_to_exponentiation
+  - pre_increment
+  - unalign_double_arrow
+  - yoda_style
+
+finder:
+  name:
+    - "*.php"
