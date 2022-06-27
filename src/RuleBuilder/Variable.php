@@ -227,24 +227,24 @@ class Variable extends BaseVariable implements \ArrayAccess
         return new Operator\NotSameAs($this, $this->asVariable($variable));
     }
 
-    public function union($variable): self
+    public function union(...$variables): self
     {
-        return $this->applySetOperator('Union', \func_get_args());
+        return $this->applySetOperator('Union', $variables);
     }
 
-    public function intersect($variable): self
+    public function intersect(...$variables): self
     {
-        return $this->applySetOperator('Intersect', \func_get_args());
+        return $this->applySetOperator('Intersect', $variables);
     }
 
-    public function complement($variable): self
+    public function complement(...$variables): self
     {
-        return $this->applySetOperator('Complement', \func_get_args());
+        return $this->applySetOperator('Complement', $variables);
     }
 
-    public function symmetricDifference($variable): self
+    public function symmetricDifference(...$variables): self
     {
-        return $this->applySetOperator('SymmetricDifference', \func_get_args());
+        return $this->applySetOperator('SymmetricDifference', $variables);
     }
 
     public function min(): self

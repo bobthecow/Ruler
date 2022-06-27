@@ -93,14 +93,14 @@ class Set extends Value implements \Countable
      *
      * Returns a Set which is the union of this Set with all passed Sets.
      *
-     * @param Value $set,...
+     * @param Value ...$sets One or more Sets
      */
-    public function union(Value $set): self
+    public function union(Value ...$sets): self
     {
         $union = $this->value;
 
         /** @var Value $arg */
-        foreach (\func_get_args() as $arg) {
+        foreach ($sets as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
             $union = \array_merge($union, \array_diff($convertedArg, $union));
@@ -114,14 +114,14 @@ class Set extends Value implements \Countable
      *
      * Returns a Set which is the intersection of this Set with all passed sets.
      *
-     * @param Value $set,...
+     * @param Value ...$sets One or more Sets
      */
-    public function intersect(Value $set): self
+    public function intersect(Value ...$sets): self
     {
         $intersect = $this->value;
 
         /** @var Value $arg */
-        foreach (\func_get_args() as $arg) {
+        foreach ($sets as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
             // array_values is needed to make sure the indexes are ordered from 0
@@ -136,14 +136,14 @@ class Set extends Value implements \Countable
      *
      * Returns a Set which is the complement of this Set with all passed Sets.
      *
-     * @param Value $set,...
+     * @param Value ...$sets One or more Sets
      */
-    public function complement(Value $set): self
+    public function complement(Value ...$sets): self
     {
         $complement = $this->value;
 
         /** @var Value $arg */
-        foreach (\func_get_args() as $arg) {
+        foreach ($sets as $arg) {
             /** @var array $convertedArg */
             $convertedArg = $arg->getSet()->getValue();
             // array_values is needed to make sure the indexes are ordered from 0

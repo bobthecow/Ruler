@@ -56,23 +56,21 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical AND operator proposition.
      *
-     * @param Proposition $prop      Initial Proposition
-     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
+     * @param Proposition ...$props One or more Propositions
      */
-    public function logicalAnd(Proposition $prop, Proposition $prop2 = null): Operator\LogicalAnd
+    public function logicalAnd(Proposition ...$props): Operator\LogicalAnd
     {
-        return new Operator\LogicalAnd(\func_get_args());
+        return new Operator\LogicalAnd($props);
     }
 
     /**
      * Create a logical OR operator proposition.
      *
-     * @param Proposition $prop      Initial Proposition
-     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
+     * @param Proposition ...$props One or more Propositions
      */
-    public function logicalOr(Proposition $prop, Proposition $prop2 = null): Operator\LogicalOr
+    public function logicalOr(Proposition ...$props): Operator\LogicalOr
     {
-        return new Operator\LogicalOr(\func_get_args());
+        return new Operator\LogicalOr($props);
     }
 
     /**
@@ -88,12 +86,11 @@ class RuleBuilder implements \ArrayAccess
     /**
      * Create a logical XOR operator proposition.
      *
-     * @param Proposition $prop      Initial Proposition
-     * @param Proposition $prop2,... Optional unlimited number of additional Propositions
+     * @param Proposition ...$props One or more Propositions
      */
-    public function logicalXor(Proposition $prop, Proposition $prop2 = null): Operator\LogicalXor
+    public function logicalXor(Proposition ...$props): Operator\LogicalXor
     {
-        return new Operator\LogicalXor(\func_get_args());
+        return new Operator\LogicalXor($props);
     }
 
     /**
