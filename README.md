@@ -24,13 +24,11 @@ $rule = $rb->create(
     }
 );
 
-$context = new Context(array(
+$context = new Context([
     'minNumPeople' => 5,
     'maxNumPeople' => 25,
-    'actualNumPeople' => function() {
-        return 6;
-    },
-));
+    'actualNumPeople' => fn() => 6,
+]);
 
 $rule->execute($context); // "Yay!"
 ```
@@ -43,22 +41,20 @@ $rule->execute($context); // "Yay!"
 ```php
 $actualNumPeople = new Variable('actualNumPeople');
 $rule = new Rule(
-    new Operator\LogicalAnd(array(
+    new Operator\LogicalAnd([
         new Operator\LessThanOrEqualTo(new Variable('minNumPeople'), $actualNumPeople),
         new Operator\GreaterThanOrEqualTo(new Variable('maxNumPeople'), $actualNumPeople)
-    )),
+    ]),
     function() {
         echo 'YAY!';
     }
 );
 
-$context = new Context(array(
+$context = new Context([
     'minNumPeople' => 5,
     'maxNumPeople' => 25,
-    'actualNumPeople' => function() {
-        return 6;
-    },
-));
+    'actualNumPeople' => fn() => 6,
+]);
 
 $rule->execute($context); // "Yay!"
 ```
@@ -166,10 +162,10 @@ $eitherOne = $rb->create($rb->logicalOr($aEqualsB, $aDoesNotEqualB));
 
 // Just to mix things up, we'll populate our evaluation context with completely
 // random values...
-$context = new Context(array(
+$context = new Context([
     'a' => rand(),
     'b' => rand(),
-));
+]);
 
 // Hint: this is always true!
 $eitherOne->evaluate($context);
@@ -191,11 +187,9 @@ $rb->logicalXor($aEqualsB, $aDoesNotEqualB); // True if only one condition is tr
 `evaluate()` a Rule with Context to figure out whether it is true.
 
 ```php
-$context = new Context(array(
-    'userName' => function() {
-        return isset($_SESSION['userName']) ? $_SESSION['userName'] : null;
-    }
-));
+$context = new Context([
+    'userName' => fn() => $_SESSION['userName'] ?? null,
+]);
 
 $userIsLoggedIn = $rb->create($rb['userName']->notEqualTo(null));
 
@@ -239,7 +233,7 @@ $hiEveryoneElse = $rb->create(
     }
 );
 
-$rules = new RuleSet(array($hiJustin, $hiJon, $hiEveryoneElse));
+$rules = new RuleSet([$hiJustin, $hiJon, $hiEveryoneElse]);
 
 // Let's add one more Rule, so non-authenticated users have a chance to log in
 $redirectForAuthentication = $rb->create($rb->logicalNot($userIsLoggedIn), function() {
@@ -272,12 +266,10 @@ Rules.
 $context = new Context;
 
 // Some static values...
-$context['reallyAnnoyingUsers'] = array('bobthecow', 'jwage');
+$context['reallyAnnoyingUsers'] = ['bobthecow', 'jwage'];
 
 // You'll remember this one from before
-$context['userName'] = function() {
-    return isset($_SESSION['userName']) ? $_SESSION['userName'] : null;
-};
+$context['userName'] = fn() => $_SESSION['userName'] ?? null;
 
 // Let's pretend you have an EntityManager named `$em`...
 $context['user'] = function() use ($em, $context) {
@@ -334,7 +326,7 @@ $context['userRoles'] = function() use ($em, $context) {
         return $user->roles();
     } else {
         // return a default "anonymous" role if there is no current user
-        return array('anonymous');
+        return ['anonymous'];
     }
 };
 
@@ -366,7 +358,7 @@ their convenient RuleBuilder interface:
 // We can skip over the Context Variable building above. We'll simply set our,
 // default roles on the VariableProperty itself, then go right to writing rules:
 
-$rb['user']['roles'] = array('anonymous');
+$rb['user']['roles'] = ['anonymous'];
 
 $rb->create(
     $rb->logicalAnd(
